@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darrin Wehser | Creative Technical Director</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030303;
+            --card-bg: #0a0a0a;
+            --border: #1f1f1f;
+            --text-main: #ededed;
+            --text-dim: #a1a1a1;
+            --accent: #5e6ad2; /* Linear Purple */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-color: var(--bg); 
+            color: var(--text-main); 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            border-bottom: 1px solid var(--border);
+            background: rgba(3, 3, 3, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { font-weight: 700; letter-spacing: -1px; font-size: 1.2rem; }
+        .nav-links a { 
+            color: var(--text-dim); 
+            text-decoration: none; 
+            margin-left: 2rem; 
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--text-main); }
+
+        /* Hero Section */
+        header {
+            padding: 8rem 5% 4rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        h1 { 
+            font-size: clamp(2.5rem, 8vw, 4rem); 
+            font-weight: 700; 
+            letter-spacing: -2px; 
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        .hero-desc { 
+            color: var(--text-dim); 
+            font-size: 1.2rem; 
+            margin-bottom: 2rem;
+        }
+
+        /* Technical Catalog Grid */
+        .section-title {
+            padding: 0 5%;
+            margin-bottom: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1px;
+            background-color: var(--border);
+            border: 1px solid var(--border);
+        }
+        .project-card {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            transition: background 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .project-card:hover { background-color: #111; }
+        .project-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent); margin-bottom: 1rem; }
+        .project-card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+        .project-card p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1; }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag { 
+            font-size: 0.7rem; 
+            background: #1a1a1a; 
+            padding: 2px 8px; 
+            border-radius: 4px; 
+            color: var(--text-dim); 
+            border: 1px solid var(--border);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 5%;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        .social-links a {
+            color: var(--text-dim);
+            margin: 0 1rem;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .social-links a:hover { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            header { padding-top: 4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">DARRIN WEHSER</div>
+        <div class="nav-links">
+            <a href="#portfolio">Portfolio</a>
+            <a href="#demo-reel">Demo Reel</a>
+            <a href="#resume">Resume</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="badge">EPIC GAMES // UNREAL ENGINE 5.7</div>
+        <h1>Technical Artist & Groom Supervisor</h1>
+        <p class="hero-desc">Bridging the gap between cinematic artistry and real-time engine toolsets. Specializing in high-fidelity grooming, lookdev, and engine tool releases.</p>
+    </header>
+
+    <div class="section-title" id="portfolio">Featured Technical Projects</div>
+    <section class="grid">
+        <!-- Project 1: Unreal Fest -->
+        <div class="project-card">
+            <div>
+                <div class="project-meta">UNREAL FEST 2025 // BALI & STOCKHOLM</div>
+                <h3>Parametric Hairstyles for MetaHumans</h3>
+                <p>Collaborated on the development of MetaHuman Groom tools and led technical presentations on crafting parametric hairstyles for real-time applications.</p>
+            </div>
+            <div class="tag-list">
+                <span class="tag">UE 5.6</span>
+                <span class="tag">MetaHuman</span>
+                <span class="tag">Technical Artist</span>
+            </div>
+        </div>
+
+        <!-- Project 2: The Matrix Awakens -->
+        <div class="project-card">
+            <div>
+                <div class="project-meta">EPIC GAMES // UE5 EXPERIENCE</div>
+                <h3>The Matrix Awakens</h3>
+                <p>Pioneering grooming work for the landmark Unreal Engine 5 technical demonstration, setting the standard for next-gen digital humans.</p>
+            </div>
+            <div class="tag-list">
+                <span class="tag">UE5</span>
+                <span class="tag">Grooming</span>
+                <span class="tag">Digital Humans</span>
+            </div>
+        </div>
+
+        <!-- Project 3: Film Career -->
+        <div class="project-card">
+            <div>
+                <div class="project-meta">VFX // ROGUE ONE, THOR: RAGNAROK</div>
+                <h3>Film Groom & LookDev</h3>
+                <p>20+ years of experience at ILM and Rhythm & Hues, contributing to Academy Award-winning franchises through high-end character grooming.</p>
+            </div>
+            <div class="tag-list">
+                <span class="tag">Houdini</span>
+                <span class="tag">Katana</span>
+                <span class="tag">RenderMan</span>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="hero-desc">Looking for a Technical Director or Groom Artist?</div>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/dwehser" target="_blank">LinkedIn</a>
+            <a href="https://www.artstation.com/dwehser" target="_blank">ArtStation</a>
+            <a href="http://vimeo.com/dwehser" target="_blank">Vimeo</a>
+            <a href="http://www.imdb.com/name/nm1277925/" target="_blank">IMDb</a>
+        </div>
+        <p style="margin-top: 2rem; font-size: 0.7rem; color: #333;">© 2026 Darrin Wehser. All work featured remains the property of their respective studios.</p>
+    </footer>
+
+</body>
+</html>
