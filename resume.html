@@ -51,7 +51,7 @@
         .nav-links a:hover { color: var(--accent); }
         
         .container {
-            max-width: 1000px; /* Wider for better layout */
+            max-width: 1000px;
             margin: 0 auto;
             padding: 6rem 8% 10rem;
         }
@@ -99,8 +99,26 @@
         .skill-title { font-size: 0.9rem; font-weight: 600; color: #fff; margin-bottom: 0.25rem; }
         .skill-desc { font-size: 0.85rem; color: var(--text-dim); }
 
+        .film-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        footer {
+            padding: 4rem 8%; 
+            border-top: 1px solid var(--border); 
+            text-align: center; 
+            font-size: 0.65rem; 
+            color: var(--meta); 
+            font-family: 'JetBrains Mono', monospace;
+        }
+
         @media (max-width: 768px) {
             .entry-header { flex-direction: column; gap: 0.5rem; }
+            .film-list { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -123,7 +141,7 @@
         </header>
 
         <section>
-            <div class="section-label">Summary</div>
+            <div class="section-label">Profile</div>
             <p class="summary">Creative and technical leader with 20+ years in the film industry, specializing in Hair/Fur Grooming and Look Development, primarily at the supervisory level. Over the past 6 years, transitioned from traditional film pipelines into real-time workflows in Unreal Engine, while developing custom grooming tools in SideFX's Houdini. Currently focused on combining deep 3D production experience with emerging AI technologies to advance next-generation pipelines.</p>
         </section>
 
@@ -167,7 +185,6 @@
         <section>
             <div class="section-label">Work Experience</div>
             
-            <!-- Epic Games -->
             <div class="experience-entry">
                 <div class="entry-header">
                     <div class="company">EPIC GAMES // MetaHuman Team</div>
@@ -198,7 +215,6 @@
                 </div>
             </div>
 
-            <!-- ILM -->
             <div class="experience-entry">
                 <div class="entry-header">
                     <div class="company">INDUSTRIAL LIGHT & MAGIC (ILM)</div>
@@ -221,7 +237,6 @@
                 </div>
             </div>
 
-            <!-- Rhythm & Hues -->
             <div class="experience-entry">
                 <div class="entry-header">
                     <div class="company">RHYTHM & HUES STUDIOS</div>
@@ -247,21 +262,26 @@
         </section>
 
         <section>
-            <div class="section-label">Education</div>
-            <div class="experience-entry">
-                <div class="company">Academy of Art College</div>
-                <div class="role">Master of Fine Arts, Computer Arts, 1999</div>
+            <div class="section-label">Selected Filmography (36 Titles)</div>
+            <div class="film-list">
+                <div>• Terminator: Dark Fate</div>
+                <div>• Aquaman</div>
+                <div>• Star Wars: Rogue One</div>
+                <div>• Thor: Ragnarok</div>
+                <div>• Transformers: Age of Extinction</div>
+                <div>• TMNT: Out of the Shadows</div>
+                <div>• Cirque du Freak: Vampire's Assistant</div>
+                <div>• Harry Potter & The Sorcerer's Stone</div>
+                <div>• The 6th Day</div>
+                <div>• Cats & Dogs</div>
             </div>
-            <div class="experience-entry">
-                <div class="company">San Francisco State University</div>
-                <div class="role">B.A. Interdisciplinary in Graphic Design, 1995</div>
-            </div>
+            <p style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--meta); font-family: 'JetBrains Mono', monospace;">FULL FILMOGRAPHY AVAILABLE ON IMDB.</p>
         </section>
 
     </div>
 
-    <footer style="padding: 4rem 8%; border-top: 1px solid var(--border); text-align: center; font-size: 0.65rem; color: var(--meta); font-family: 'JetBrains Mono', monospace;">
-        © 2026 DARRIN WEHSER // CONTENT REPRODUCED FROM PRODUCTION RECORD
+    <footer>
+        © 2026 DARRIN WEHSER // PRODUCED IN THE GENERATIVE FRONTIER
     </footer>
 
 </body>
