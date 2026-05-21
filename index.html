@@ -10,9 +10,9 @@
             --bg: #000000;
             --card-bg: #050505;
             --border: #27272a;
-            --text-main: #ffffff; /* Maximum contrast */
-            --text-dim: #d4d4d8;  /* Lighter grey for better readability */
-            --accent: #38bdf8;    /* Steel Blue technical accent */
+            --text-main: #ffffff;
+            --text-dim: #d4d4d8;
+            --accent: #38bdf8;
             --meta: #71717a;
         }
 
@@ -37,7 +37,7 @@
             backdrop-filter: blur(12px);
             z-index: 100;
         }
-        .logo { font-weight: 700; letter-spacing: 1px; font-size: 0.9rem; font-family: 'JetBrains Mono', monospace; }
+        .logo { font-weight: 700; letter-spacing: 0.5px; font-size: 1rem; }
         .nav-links a { 
             color: var(--text-dim); 
             text-decoration: none; 
@@ -58,7 +58,7 @@
             font-size: clamp(2.2rem, 5vw, 4rem); 
             font-weight: 700; 
             letter-spacing: -0.04em; 
-            line-height: 1.2; /* Better spacing for readability */
+            line-height: 1.2;
             margin-bottom: 2.5rem;
             color: #fff;
         }
@@ -95,7 +95,7 @@
             background: var(--card-bg);
             border: 1px solid var(--border);
             padding: 2.5rem;
-            border-radius: 4px; /* Sharper corners for a technical feel */
+            border-radius: 4px;
             transition: all 0.3s ease;
         }
         .project-card:hover {
@@ -154,7 +154,7 @@
 <body>
 
     <nav>
-        <div class="logo">D. WEHSER // CTD</div>
+        <div class="logo">Darrin Wehser</div>
         <div class="nav-links">
             <a href="#portfolio">Portfolio</a>
             <a href="https://www.youtube.com/watch?v=rPlgIsu7tXA" target="_blank">Demo Reel</a>
@@ -172,7 +172,6 @@
 
     <div class="section-label" id="portfolio">Technical Specialization</div>
     <section class="grid">
-        <!-- Card 1: Gen AI -->
         <div class="project-card">
             <div class="project-meta">ACTIVE DEVELOPMENT // 2026</div>
             <h3>Generative AI Artistry</h3>
@@ -184,7 +183,6 @@
             </div>
         </div>
 
-        <!-- Card 2: Epic Games -->
         <div class="project-card">
             <div class="project-meta">ENGINE ARCHITECTURE // EPIC GAMES</div>
             <h3>MetaHuman Groom Toolsets</h3>
@@ -196,7 +194,6 @@
             </div>
         </div>
 
-        <!-- Card 3: Film -->
         <div class="project-card">
             <div class="project-meta">FEATURE FILM // 36 TITLES</div>
             <h3>Technical Direction</h3>
