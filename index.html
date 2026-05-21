@@ -38,6 +38,7 @@
             z-index: 100;
         }
         .logo { font-weight: 700; letter-spacing: 0.5px; font-size: 1rem; }
+        .logo a { color: #fff; text-decoration: none; }
         .nav-links a { 
             color: var(--text-dim); 
             text-decoration: none; 
@@ -144,20 +145,15 @@
         }
         .social-links a:hover { color: var(--accent); }
         .copyright { font-size: 0.65rem; color: #52525b; margin-top: 5rem; text-align: center; font-family: 'JetBrains Mono', monospace; }
-
-        @media (max-width: 768px) {
-            header { padding-top: 8rem; }
-            .nav-links { display: none; }
-        }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">Darrin Wehser</div>
+        <div class="logo"><a href="index.html" style="color:#fff; text-decoration:none;">Darrin Wehser</a></div>
         <div class="nav-links">
             <a href="portfolio.html">Portfolio</a>
-            <a href="https://www.youtube.com/watch?v=rPlgIsu7tXA" target="_blank">Demo Reel</a>
+            <a href="demo-reel.html">Demo Reel</a>
             <a href="resume.html">Resume</a>
             <a href="#contact">Contact</a>
         </div>
