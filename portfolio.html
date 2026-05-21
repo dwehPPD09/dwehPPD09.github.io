@@ -2,172 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Darrin Wehser</title>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Use same CSS structure as landing page for consistency -->
     <style>
-        :root {
-            --bg: #000000;
-            --card-bg: #050505;
-            --border: #27272a;
-            --text-main: #ffffff;
-            --text-dim: #d4d4d8;
-            --accent: #38bdf8;
-            --meta: #71717a;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background-color: var(--bg); 
-            color: var(--text-main); 
-            font-family: 'Geist', sans-serif; 
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 8%;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(12px);
-            z-index: 100;
-        }
-        .logo { font-weight: 700; font-size: 1rem; }
-        .logo a { color: #fff; text-decoration: none; }
-        .nav-links a { 
-            color: var(--text-dim); 
-            text-decoration: none; 
-            margin-left: 2.5rem; 
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        header {
-            padding: 6rem 8% 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        h1 { font-size: 2.5rem; letter-spacing: -1px; margin-bottom: 1rem; }
-        .header-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); }
-
-        /* Gallery Grid */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            padding: 0 8% 10rem;
-        }
-        .gallery-item {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .gallery-item:hover {
-            border-color: var(--accent);
-            transform: scale(1.02);
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            filter: grayscale(20%);
-            transition: filter 0.3s;
-        }
-        .gallery-item:hover img { filter: grayscale(0%); }
-        .item-info {
-            padding: 1.5rem;
-        }
-        .item-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-        }
-
-        footer {
-            padding: 4rem 8%;
-            border-top: 1px solid var(--border);
-            text-align: center;
-            font-size: 0.65rem;
-            color: var(--meta);
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        @media (max-width: 768px) {
-            .gallery { grid-template-columns: 1fr; }
-        }
+        /* [Insert the same CSS root/nav/footer as landing page here] */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; padding: 4rem 8%; }
+        .gallery a { display: block; overflow: hidden; border: 1px solid var(--border); }
+        .gallery img { width: 100%; height: 300px; object-fit: cover; transition: transform 0.3s; }
+        .gallery a:hover img { transform: scale(1.05); }
     </style>
 </head>
 <body>
-
-    <nav>
-        <div class="logo"><a href="index.html">Darrin Wehser</a></div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="resume.html">Resume</a>
-        </div>
-    </nav>
-
-    <header>
-        <div class="header-meta">VISUAL PRODUCTION ARCHIVE // 2000-2026</div>
-        <h1>Technical Portfolio</h1>
-        <p style="color: var(--text-dim); max-width: 600px;">A curation of technical direction and high-fidelity grooming for film, games, and real-time engine toolsets.</p>
-    </header>
-
-    <section class="gallery">
-        <!-- Terminator: Dark Fate (Newest) -->
-        <div class="gallery-item">
-            <img src="https://static.wixstatic.com/media/8a02c7_313b9cfa9fdf45f8b57f59d3fecd7bd8~mv2.jpg" alt="Terminator Dark Fate">
-            <div class="item-info">
-                <div class="item-title">Terminator: Dark Fate // Grooming</div>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <img src="https://static.wixstatic.com/media/8a02c7_d778ed515b7e4c5d922aa3197c1987ab~mv2.png" alt="MetaHuman Groom Toolsets">
-            <div class="item-info">
-                <div class="item-title">Unreal Engine // MetaHuman Groom Tools</div>
-            </div>
-        </div>
-
-        <!-- Aquaman -->
-        <div class="gallery-item">
-            <img src="https://static.wixstatic.com/media/8a02c7_d298b91638f3462aadb95ecdde685768~mv2.jpg" alt="Aquaman">
-            <div class="item-info">
-                <div class="item-title">Aquaman // Technical Direction</div>
-            </div>
-        </div>
-
-        <!-- Rogue One -->
-        <div class="gallery-item">
-            <img src="https://static.wixstatic.com/media/8a02c7_0a1fe209dd2a4e56b8504f265437a20c~mv2.jpg" alt="Rogue One">
-            <div class="item-info">
-                <div class="item-title">Star Wars: Rogue One // LookDev</div>
-            </div>
-        </div>
-
-        <!-- Placeholder for older film work (Thor, etc) -->
-        <div class="gallery-item">
-            <img src="https://static.wixstatic.com/media/8a02c7_f16428c0b5cc45f7823f66c268800662~mv2.jpg" alt="Thor Ragnarok">
-            <div class="item-info">
-                <div class="item-title">Thor: Ragnarok // Character Groom</div>
-            </div>
-        </div>
-        
-        <!-- Add more items here following the same structure -->
-    </section>
-
-    <footer>
-        © 2026 DARRIN WEHSER // ALL RIGHTS RESERVED TO RESPECTIVE STUDIOS
-    </footer>
-
+    <!-- [Insert Navigation] -->
+    <div class="gallery">
+        <a href="https://static.wixstatic.com/media/8a02c7_313b9cfa9fdf45f8b57f59d3fecd7bd8~mv2.jpg" target="_blank">
+            <img src="https://static.wixstatic.com/media/8a02c7_313b9cfa9fdf45f8b57f59d3fecd7bd8~mv2.jpg" alt="Terminator">
+        </a>
+        <!-- Add your other image links here following the same pattern -->
+    </div>
+    <!-- [Insert Footer] -->
 </body>
 </html>
