@@ -4,138 +4,158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Darrin Wehser | Creative Technical Director</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #030303;
-            --card-bg: #0a0a0a;
-            --border: #1f1f1f;
-            --text-main: #ededed;
-            --text-dim: #a1a1a1;
-            --accent: #5e6ad2; /* Linear Purple */
+            --bg: #000000;
+            --card-bg: #09090b;
+            --border: #18181b;
+            --text-main: #fafafa;
+            --text-dim: #a1a1aa;
+            --accent: #ffffff;
+            --glow: rgba(94, 106, 210, 0.15);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             background-color: var(--bg); 
             color: var(--text-main); 
-            font-family: 'Inter', sans-serif; 
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: 'Geist', sans-serif; 
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Navigation */
+        /* Subtle background glow effect */
+        .background-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% -20%, #1e1b4b 0%, transparent 40%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 5%;
+            padding: 1.5rem 8%;
             border-bottom: 1px solid var(--border);
-            background: rgba(3, 3, 3, 0.8);
-            backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
             z-index: 100;
         }
-        .logo { font-weight: 700; letter-spacing: -1px; font-size: 1.2rem; }
+        .logo { font-weight: 700; letter-spacing: -0.5px; font-size: 1rem; }
         .nav-links a { 
             color: var(--text-dim); 
             text-decoration: none; 
             margin-left: 2rem; 
-            font-size: 0.9rem;
-            transition: color 0.2s;
+            font-size: 0.85rem;
+            transition: color 0.3s;
         }
         .nav-links a:hover { color: var(--text-main); }
 
-        /* Hero Section */
         header {
-            padding: 8rem 5% 4rem;
-            text-align: center;
-            max-width: 900px;
+            padding: 10rem 8% 6rem;
+            max-width: 1100px;
             margin: 0 auto;
         }
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-        }
         h1 { 
-            font-size: clamp(2.5rem, 8vw, 4rem); 
+            font-size: clamp(2rem, 6vw, 3.5rem); 
             font-weight: 700; 
             letter-spacing: -2px; 
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
+            line-height: 1;
+            margin-bottom: 2rem;
+            background: linear-gradient(to bottom right, #fff 50%, #71717a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .hero-desc { 
             color: var(--text-dim); 
-            font-size: 1.2rem; 
-            margin-bottom: 2rem;
+            font-size: 1.25rem; 
+            max-width: 600px;
+            font-weight: 400;
         }
 
-        /* Technical Catalog Grid */
-        .section-title {
-            padding: 0 5%;
-            margin-bottom: 2rem;
+        /* Technical Catalog - Floating Cards */
+        .section-label {
+            padding: 0 8%;
+            margin-bottom: 3rem;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--text-dim);
+            font-size: 0.75rem;
+            color: #52525b;
             text-transform: uppercase;
+            letter-spacing: 2px;
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1px;
-            background-color: var(--border);
-            border: 1px solid var(--border);
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            padding: 0 8% 10rem;
         }
         .project-card {
-            background-color: var(--card-bg);
-            padding: 2.5rem;
-            transition: background 0.3s;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
         }
-        .project-card:hover { background-color: #111; }
-        .project-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent); margin-bottom: 1rem; }
-        .project-card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
-        .project-card p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1; }
+        .project-card:hover {
+            border-color: #3f3f46;
+            transform: translateY(-4px);
+            background: #121214;
+        }
+        .project-meta { 
+            font-family: 'JetBrains Mono', monospace; 
+            font-size: 0.7rem; 
+            color: #71717a; 
+            margin-bottom: 1rem; 
+        }
+        .project-card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; font-weight: 400; }
+        .project-card p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem; }
         .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
         .tag { 
-            font-size: 0.7rem; 
-            background: #1a1a1a; 
-            padding: 2px 8px; 
-            border-radius: 4px; 
-            color: var(--text-dim); 
+            font-size: 0.65rem; 
+            background: #18181b; 
+            padding: 3px 10px; 
+            border-radius: 6px; 
+            color: #a1a1aa; 
             border: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Footer */
         footer {
-            padding: 4rem 5%;
+            padding: 6rem 8%;
+            background: #09090b;
             border-top: 1px solid var(--border);
-            text-align: center;
         }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        .social-links { display: flex; gap: 2.5rem; flex-wrap: wrap; justify-content: center; }
         .social-links a {
             color: var(--text-dim);
-            margin: 0 1rem;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            transition: color 0.3s;
         }
-        .social-links a:hover { color: var(--accent); }
+        .social-links a:hover { color: #fff; }
+        .copyright { font-size: 0.7rem; color: #3f3f46; margin-top: 4rem; text-align: center; }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            header { padding-top: 4rem; }
+            header { padding-top: 6rem; }
+            .social-links { gap: 1.5rem; }
         }
     </style>
 </head>
 <body>
+    <div class="background-glow"></div>
 
     <nav>
         <div class="logo">DARRIN WEHSER</div>
@@ -148,66 +168,64 @@
     </nav>
 
     <header>
-        <div class="badge">EPIC GAMES // UNREAL ENGINE 5.7</div>
-        <h1>Technical Artist & Groom Supervisor</h1>
-        <p class="hero-desc">Bridging the gap between cinematic artistry and real-time engine toolsets. Specializing in high-fidelity grooming, lookdev, and engine tool releases.</p>
+        <h1>Creative Technical Director<br>Groom & LookDev Supervisor<br>Generative AI Artist</h1>
+        <p class="hero-desc">Pivoting decades of cinematic technical direction into the era of Generative AI. Mastering the intersection of legacy craft and neural pipelines.</p>
     </header>
 
-    <div class="section-title" id="portfolio">Featured Technical Projects</div>
+    <div class="section-label" id="portfolio">Work History & Technical Specialization</div>
     <section class="grid">
-        <!-- Project 1: Unreal Fest -->
-        <div class="project-card">
-            <div>
-                <div class="project-meta">UNREAL FEST 2025 // BALI & STOCKHOLM</div>
-                <h3>Parametric Hairstyles for MetaHumans</h3>
-                <p>Collaborated on the development of MetaHuman Groom tools and led technical presentations on crafting parametric hairstyles for real-time applications.</p>
-            </div>
+        <!-- New Pivot: Gen AI -->
+        <div class="project-card" style="border-top: 1px solid #5e6ad2;">
+            <div class="project-meta">CURRENT FOCUS // 2026</div>
+            <h3>Generative AI Artistry</h3>
+            <p>Developing advanced workflows using Midjourney, ChatGPT, and Higgsfield. Translating 20 years of grooming and lighting expertise into latent-space precision.</p>
             <div class="tag-list">
-                <span class="tag">UE 5.6</span>
+                <span class="tag">GenAI</span>
+                <span class="tag">Prompt Engineering</span>
+                <span class="tag">Diffusion Models</span>
+            </div>
+        </div>
+
+        <!-- Epic Legacy -->
+        <div class="project-card">
+            <div class="project-meta">ENGINE DEVELOPMENT // EPIC GAMES</div>
+            <h3>MetaHuman Groom Toolsets</h3>
+            <p>Worked on Unreal Engine releases focusing on grooming toolsets. Developed parametric hair systems and technical documentation for UE 5.6 and 5.7.</p>
+            <div class="tag-list">
+                <span class="tag">Unreal Engine</span>
                 <span class="tag">MetaHuman</span>
-                <span class="tag">Technical Artist</span>
-            </div>
-        </div>
-
-        <!-- Project 2: The Matrix Awakens -->
-        <div class="project-card">
-            <div>
-                <div class="project-meta">EPIC GAMES // UE5 EXPERIENCE</div>
-                <h3>The Matrix Awakens</h3>
-                <p>Pioneering grooming work for the landmark Unreal Engine 5 technical demonstration, setting the standard for next-gen digital humans.</p>
-            </div>
-            <div class="tag-list">
-                <span class="tag">UE5</span>
                 <span class="tag">Grooming</span>
-                <span class="tag">Digital Humans</span>
             </div>
         </div>
 
-        <!-- Project 3: Film Career -->
+        <!-- Film Legacy -->
         <div class="project-card">
-            <div>
-                <div class="project-meta">VFX // ROGUE ONE, THOR: RAGNAROK</div>
-                <h3>Film Groom & LookDev</h3>
-                <p>20+ years of experience at ILM and Rhythm & Hues, contributing to Academy Award-winning franchises through high-end character grooming.</p>
-            </div>
+            <div class="project-meta">CINEMATIC LEGACY // ILM, RHYTHM & HUES</div>
+            <h3>Feature Film Technical Direction</h3>
+            <p>Extensive history at world-class studios (ILM, R&H). Grooming, LookDev, and Lighting TD for iconic franchises from Rogue One to Thor: Ragnarok.</p>
             <div class="tag-list">
                 <span class="tag">Houdini</span>
                 <span class="tag">Katana</span>
-                <span class="tag">RenderMan</span>
+                <span class="tag">LookDev</span>
             </div>
         </div>
     </section>
 
     <footer id="contact">
-        <div class="hero-desc">Looking for a Technical Director or Groom Artist?</div>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/dwehser" target="_blank">LinkedIn</a>
-            <a href="https://www.artstation.com/dwehser" target="_blank">ArtStation</a>
-            <a href="http://vimeo.com/dwehser" target="_blank">Vimeo</a>
-            <a href="http://www.imdb.com/name/nm1277925/" target="_blank">IMDb</a>
+        <div class="footer-content">
+            <h2 style="font-size: 1.5rem; font-weight: 400;">Connect for the next frontier.</h2>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/dwehser" target="_blank">LinkedIn</a>
+                <a href="https://www.artstation.com/dwehser" target="_blank">ArtStation</a>
+                <a href="https://www.youtube.com/watch?v=rPlgIsu7tXA" target="_blank">YouTube</a>
+                <a href="http://www.imdb.com/name/nm1277925/" target="_blank">IMDb</a>
+                <a href="http://vimeo.com/dwehser" target="_blank">Vimeo</a>
+            </div>
+            <div class="copyright">
+                © 2026 Darrin Wehser. All work featured remains the property of their respective studios.<br>
+                Crafted for the Generative AI Era.
+            </div>
         </div>
-        <p style="margin-top: 2rem; font-size: 0.7rem; color: #333;">© 2026 Darrin Wehser. All work featured remains the property of their respective studios.</p>
     </footer>
-
 </body>
 </html>
