@@ -13,30 +13,27 @@
         nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 8%; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(12px); z-index: 100; }
         .logo { font-weight: 700; font-size: 1rem; }
         .logo a { color: #fff; text-decoration: none; }
-        .nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 2.5rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 2.5rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
         .nav-links a:hover { color: var(--accent); }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 6rem 8% 10rem; }
-        h1 { font-size: 2.5rem; letter-spacing: -1px; margin-bottom: 3rem; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 4rem 5% 10rem; }
+        h1 { font-size: 2.5rem; margin-bottom: 3rem; }
+        h2 { font-size: 1.5rem; margin-bottom: 1rem; color: #fff; }
+        h6 { font-size: 1.1rem; color: var(--accent); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        p { margin-bottom: 1.5rem; color: var(--text-dim); font-size: 0.95rem; }
         
-        .featured-video { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 4rem; }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .video-info { padding: 2.5rem; }
-        .video-info h3 { font-size: 1.5rem; margin-bottom: 1rem; color: #fff; }
-        .video-info p { color: var(--text-dim); margin-bottom: 2rem; font-size: 1rem; }
+        .video-section { margin-bottom: 5rem; }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 4px; margin-bottom: 2rem; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         
-        .action-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-        .btn-link { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); border: 1px solid var(--border); padding: 10px 20px; text-decoration: none; border-radius: 4px; transition: all 0.2s; }
+        .btn-link { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); border: 1px solid var(--border); padding: 10px 20px; text-decoration: none; border-radius: 4px; margin-right: 1rem; margin-bottom: 1rem; }
         .btn-link:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
 
-        .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--meta); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
-        .section-label::after { content: ""; height: 1px; background: var(--border); flex-grow: 1; }
-
-        footer { padding: 8rem 8%; background: #000; border-top: 1px solid var(--border); text-align: center; }
+        footer { padding: 4rem 8%; border-top: 1px solid var(--border); text-align: center; }
         .social-links { display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3rem; }
         .social-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; }
         .social-links a:hover { color: var(--accent); }
+        .copyright { font-size: 0.65rem; color: #52525b; font-family: 'JetBrains Mono', monospace; }
     </style>
 </head>
 <body>
@@ -53,30 +50,34 @@
     <div class="container">
         <h1>Technical Showcases</h1>
 
-        <div class="section-label">Real-Time Engine Innovation</div>
-        <div class="featured-video">
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/rPlgIsu7tXA" allowfullscreen></iframe>
+        <div class="video-section">
+            <h2>2026 Unreal Engine</h2>
+            <h6>Technical Artist | Sr. Groom Artist</h6>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/WqWpwVaewEU" allowfullscreen></iframe>
             </div>
-            <div class="video-info">
-                <h3>Unreal Fest 2025 // Advanced Grooming Systems</h3>
-                <p>Collaborative effort with the Epic Games groom team. These presentations showcase the development of MetaHuman Groom tools and parametric hair architectures released for UE 5.6 and 5.7.</p>
-                <div class="action-links">
-                    <a href="https://dwehser.wixsite.com/wehser/demo-reel" class="btn-link">METAHUMAN GROOM DOCUMENTATION</a>
-                    <a href="https://www.fab.com" class="btn-link">VIEW ON FAB</a>
-                </div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/rfKzdI9X9Hg" allowfullscreen></iframe>
             </div>
+            <p>Unreal Fests 2025</p>
+            <p>These presentations were a collaborative effort with the groom team at Epic Games. While tools were being developed, we took on UE documentation of the MetaHuman Groom tools and these Unreal Fest presentations.</p>
+            <p>The link below is to an Advanced Groom Tutorial I did while developing the MetaHuman groom tools. This was released for 5.6 as part of the tool release and updated for 5.7.</p>
+            <a href="https://dev.epicgames.com/documentation/metahuman/metahuman-for-houdini" class="btn-link" target="_blank">MetaHuman Groom Tool Documentation</a>
+            <a href="https://www.fab.com/listings/165c4244-482f-4e37-9200-dd782972cdde" class="btn-link" target="_blank">MetaHuman Advanced Groom Kit for Houdini</a>
         </div>
 
-        <div class="section-label">Film Legacy</div>
-        <div class="featured-video">
-            <div class="video-container">
+        <div class="video-section">
+            <h2>2014 Demo Reel</h2>
+            <div class="video-wrapper">
                 <iframe src="https://www.youtube.com/embed/rPlgIsu7tXA" allowfullscreen></iframe>
             </div>
-            <div class="video-info">
-                <h3>Darrin Wehser // 2014 Film Demo Reel</h3>
-                <p>A compilation of Supervisor and TD work across 36 feature films, including grooming, look development, and lighting sequences for global franchises.</p>
-            </div>
+            <h6>Groom Supervisor | Lookdev Supervisor | Senior Lighting TD</h6>
+            <p>I was the Groom/Lookdev Supervisor for the Academy nominated Snow White and the Huntsman movie. This reel highlights the creatures and environments that I supervised and the work that I did on the show.</p>
+            <p>I was the Groom/Lookdev Supervisor on Mr. Poppers Penguins. Myself and another Senior Lookdev Artist we're tasked with completing an entire gentoo penguin in one month so we split the work down the middle. I did eyes, mouth, feet, skin and fur on wings, and tail feathers.</p>
+            <p>For Cabin in the Woods I was a Lighting TD. I worked on the elevator shot for nine months. We used a combination of Massive crowds and hero elevators streams to complete the shot. Elevators were filled with 2d and 3d creatures. I also lit two of the dragon bats sequence shots.</p>
+            <p>On Knight and Day I was a Senior Groom/Lookdev artist. I groomed all of the bulls for this show. There was a main hero bull and eight different variations based on it. Four of those had entirely different grooms and I completed all of these within a two month period.</p>
+            <p>I was a Senior Groom/Lookdev/Lighting Artist on Cirque du Freak: The Vampire's Assistant. My work on this show included setting up the skinny man, four of the tiny zombies, and several character props. I started the show developing the look of the “Skinny Man.” For the “zombies” I did the look development on the skin which included their heads, hands and feet. A separate artist did the robes. For the “Skinny Man” sequence I helped develop the lighting.</p>
+            <p>On The Incredible Hulk I was the Lead Groom/Lookdev Artist. I did the initial setup on Hulk including several months of skin R & D. I then moved onto grooming Hulk’s hair and all of the ripped up clothes he wore. After that, I set up “The Abomination” and I passed the Hulk on to another lead lookdev artist and oversaw the development of the Abomination through the rest of the show. The Hulk and Abomination also had up to nine flavors each for levels of dirtiness. Each of these flavors needed different stages of grooms and textures for varies parts of the movie.</p>
         </div>
     </div>
 
