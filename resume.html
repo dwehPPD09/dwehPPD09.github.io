@@ -12,47 +12,194 @@
             --text-dim: #d4d4d8;
             --accent: #38bdf8;
             --border: #27272a;
+            --meta: #71717a;
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg); color: var(--text-main); font-family: 'Geist', sans-serif; line-height: 1.6; padding: 2rem 8%; }
-        nav { margin-bottom: 4rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+        body { 
+            background-color: var(--bg); 
+            color: var(--text-main); 
+            font-family: 'Geist', sans-serif; 
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 8%;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+        }
         .logo { font-weight: 700; font-size: 1rem; }
-        .content { max-width: 800px; margin: 0 auto; }
-        h1 { font-size: 2.5rem; margin-bottom: 2rem; }
-        h2 { font-size: 1.25rem; margin: 2.5rem 0 1rem; color: var(--accent); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 1px; }
-        p { margin-bottom: 1rem; color: var(--text-dim); }
-        .entry { margin-bottom: 2rem; }
-        .entry h3 { font-size: 1.1rem; color: #fff; }
-        .entry .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); margin-bottom: 0.5rem; }
+        .logo a { color: #fff; text-decoration: none; }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 8rem 8% 10rem;
+        }
+
+        header { margin-bottom: 4rem; }
+        h1 { font-size: 3rem; letter-spacing: -2px; margin-bottom: 1rem; }
+        .contact-row { display: flex; gap: 2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); flex-wrap: wrap; }
+        
+        section { margin-bottom: 5rem; }
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--meta);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .section-label::after { content: ""; height: 1px; background: var(--border); flex-grow: 1; }
+
+        .experience-entry { margin-bottom: 4rem; }
+        .entry-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem; }
+        .company { font-size: 1.25rem; font-weight: 700; color: #fff; }
+        .location { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--meta); }
+        .role { font-size: 1.1rem; color: var(--text-main); margin-bottom: 1rem; font-weight: 400; }
+        
+        ul { list-style: none; }
+        li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; color: var(--text-dim); }
+        li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        .skill-cat h4 { font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; color: var(--accent); margin-bottom: 1rem; text-transform: uppercase; }
+        .skill-cat p { color: var(--text-dim); font-size: 0.9rem; }
+
+        .film-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 768px) {
+            .film-list { grid-template-columns: 1fr; }
+            .entry-header { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
+
     <nav>
-        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">&larr; Darrin Wehser</a></div>
+        <div class="logo"><a href="index.html">Darrin Wehser</a></div>
     </nav>
-    <div class="content">
-        <h1>Resume</h1>
-        
-        <h2>Summary</h2>
-        <p>Creative Technical Director, Groom & LookDev Supervisor, and Generative AI Artist. 25 years of experience bridging cinematic artistry with next-generation production pipelines.</p>
 
-        <h2>Experience</h2>
-        <div class="entry">
-            <div class="meta">EPIC GAMES</div>
-            <h3>Technical Artist | Sr. Groom Artist</h3>
-            <p>Developed grooming toolsets for Unreal Engine releases 4.28 through 5.7. Created parametric hair systems and comprehensive technical documentation to empower artists in real-time environments.</p>
-        </div>
+    <div class="container">
+        <header>
+            <h1>Technical Resume</h1>
+            <div class="contact-row">
+                <span>DARRIN.WEHSER@GMAIL.COM</span>
+                <span>LINKEDIN.COM/IN/DWEHSER</span>
+                <span>GITHUB.IO/DWEHPPD09</span>
+            </div>
+        </header>
 
-        <div class="entry">
-            <div class="meta">FEATURE FILM STUDIOS (ILM, R&H)</div>
-            <h3>Groom/LookDev/Lighting Technical Director</h3>
-            <p>20+ years of technical direction across 36 feature films. Specialized in complex character grooming, sophisticated look development, and high-end lighting pipelines for major studio franchises including Star Wars: Rogue One and Thor: Ragnarok.</p>
-        </div>
+        <section>
+            <div class="section-label">Profile</div>
+            <p style="font-size: 1.2rem; font-weight: 300; color: var(--text-dim);">Creative Technical Director and Supervisor with 25 years of industry-leading experience. From pioneering engine grooming tools at Epic Games to supervising LookDev and Lighting for 36 feature films at ILM and Rhythm & Hues. Currently mastering the intersection of cinematic craft and generative AI pipelines.</p>
+        </section>
 
-        <h2>Core Skills</h2>
-        <p><strong>GenAI:</strong> Midjourney, ChatGPT, Gemini, Claude, Higgsfield, Prompt Engineering, Neural Pipelines.</p>
-        <p><strong>Technical:</strong> Unreal Engine (4.28–5.7), Houdini, Maya, Katana, RenderMan, Nuke.</p>
-        <p><strong>Specialization:</strong> Grooming, LookDev, Lighting, Engine Tool Development, Procedural Systems.</p>
+        <section>
+            <div class="section-label">Experience</div>
+            
+            <div class="experience-entry">
+                <div class="entry-header">
+                    <div class="company">EPIC GAMES</div>
+                    <div class="location">CARY, NC // 2019-2026</div>
+                </div>
+                <div class="role">Technical Artist | Sr. Groom Artist (MetaHuman Team)</div>
+                <ul>
+                    <li>Deep technical focus on Unreal Engine releases 4.28 through 5.7, specifically advancing the Groom toolsets.</li>
+                    <li>Pioneered development of Parametric Hair Systems used in the landmark "The Matrix Awakens" UE5 Experience.</li>
+                    <li>Authored advanced grooming documentation and led technical demonstrations for Unreal Fests (Bali & Stockholm 2025).</li>
+                    <li>Collaborated with engine architects to bridge the gap between DCC grooming (Houdini/Maya) and real-time engine performance.</li>
+                </ul>
+            </div>
+
+            <div class="experience-entry">
+                <div class="entry-header">
+                    <div class="company">INDUSTRIAL LIGHT & MAGIC (ILM)</div>
+                    <div class="location">SAN FRANCISCO, CA // 2015-2019</div>
+                </div>
+                <div class="role">Senior Groom & LookDev Technical Director</div>
+                <ul>
+                    <li>Led complex character grooming and material development for tier-one franchise productions.</li>
+                    <li>Key technical contributor to Star Wars: Rogue One, Thor: Ragnarok, and Terminator: Dark Fate.</li>
+                    <li>Specialized in high-fidelity creature work, ensuring seamless integration between procedural groom systems and cinematic lighting.</li>
+                </ul>
+            </div>
+
+            <div class="experience-entry">
+                <div class="entry-header">
+                    <div class="company">RHYTHM & HUES</div>
+                    <div class="location">LOS ANGELES, CA</div>
+                </div>
+                <div class="role">Groom & LookDev Supervisor | Senior Lighting TD</div>
+                <ul>
+                    <li>Supervised grooming and look development teams on Academy Award-winning productions.</li>
+                    <li>Established studio-wide standards for hair and fur simulation and lighting workflows.</li>
+                <li>Developed look development pipelines for complex character assets across multiple shows.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-label">Technical Mastery</div>
+            <div class="skills-grid">
+                <div class="skill-cat">
+                    <h4>Generative AI</h4>
+                    <p>Midjourney, ChatGPT, Gemini, Claude, Higgsfield, Prompt Engineering, Neural Workflow Integration.</p>
+                </div>
+                <div class="skill-cat">
+                    <h4>Engine & DCC</h4>
+                    <p>Unreal Engine (4.28-5.7), Houdini, Katana, Maya, Maya XGen, Renderman, Nuke.</p>
+                </div>
+                <div class="skill-cat">
+                    <h4>Specializations</h4>
+                    <p>Grooming, LookDev, Lighting TD, Procedural Hair Systems, Engine Tool Releases, Advanced Documentation.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-label">Selected Filmography (36 Titles)</div>
+            <div class="film-list">
+                <div>• Terminator: Dark Fate</div>
+                <div>• Aquaman</div>
+                <div>• Star Wars: Rogue One</div>
+                <div>• Thor: Ragnarok</div>
+                <div>• Transformers: Age of Extinction</div>
+                <div>• TMNT: Out of the Shadows</div>
+                <div>• Cirque du Freak: Vampire's Assistant</div>
+                <div>• Harry Potter & The Sorcerer's Stone</div>
+                <div>• The 6th Day</div>
+                <div>• Cats & Dogs</div>
+            </div>
+            <p style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--meta); font-family: 'JetBrains Mono', monospace;">FULL FILMOGRAPHY AVAILABLE ON IMDB.</p>
+        </section>
+
     </div>
+
+    <footer style="padding: 4rem 8%; border-top: 1px solid var(--border); text-align: center; font-size: 0.65rem; color: var(--meta); font-family: 'JetBrains Mono', monospace;">
+        © 2026 DARRIN WEHSER // PRODUCED IN THE GENERATIVE FRONTIER
+    </footer>
+
 </body>
 </html>
