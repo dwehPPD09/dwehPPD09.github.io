@@ -63,6 +63,20 @@
   .email-link{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-0.01em;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:6px;transition:color .3s,border-color .3s;}
   .email-link:hover{color:var(--accent);border-color:var(--accent);}
 
+  .cform{margin-top:18px;display:flex;flex-direction:column;gap:13px;max-width:470px;}
+  .cform .hp{position:absolute;left:-9999px;opacity:0;height:0;width:0;}
+  .cform input,.cform textarea{width:100%;background:rgba(13,18,24,0.6);border:1px solid var(--line);border-radius:3px;color:var(--ink);
+    font-family:"Spline Sans",system-ui,sans-serif;font-size:1rem;padding:12px 14px;transition:border-color .25s,background .25s;resize:vertical;}
+  .cform input:focus,.cform textarea:focus{outline:none;border-color:var(--accent);background:rgba(13,18,24,0.85);}
+  .cform input::placeholder,.cform textarea::placeholder{color:var(--ink-faint);}
+  .cform button{align-self:flex-start;margin-top:2px;font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
+    color:#0a0d11;background:var(--accent);border:1px solid var(--accent);border-radius:3px;padding:12px 24px;cursor:pointer;transition:opacity .25s;}
+  .cform button:hover{opacity:.86;}
+  .cform button:disabled{opacity:.5;cursor:default;}
+  .form-status{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:0.05em;margin:2px 0 0;min-height:16px;}
+  .form-status.ok{color:var(--accent);}
+  .form-status.err{color:#E08A8A;}
+
   .avail{margin-top:36px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:0.1em;color:var(--ink-faint);line-height:1.9;}
   .avail b{color:var(--ink-dim);font-weight:500;}
 
@@ -129,17 +143,25 @@
         <div>
           <p class="eyebrow">Get in Touch // 2026</p>
           <h1>Let's make<span class="it">something.</span></h1>
-          <p class="intro">Open to collaboration on real-time character work, MetaHuman grooms, look development, and generative-AI pipeline projects. The best way to reach me is below.</p>
+          <p class="intro">Open to collaboration on real-time MetaHuman grooms, High-End Film Grooming, and generative-AI projects. The best way to reach me is below.</p>
 
-          <div class="email-cta">
-            <p class="email-label">Email</p>
-            <!-- TODO: replace with your real address -->
-            <a class="email-link" href="mailto:your-email@domain.com">your-email@domain.com</a>
-          </div>
+          <p class="email-label" style="margin-bottom:0;">Send a message</p>
+          <form class="cform" id="cform">
+            <!-- Free key from web3forms.com: tied to your inbox; this token is NOT your email address -->
+            <input type="hidden" name="access_key" value="YOUR-WEB3FORMS-ACCESS-KEY" />
+            <input type="hidden" name="subject" value="New message from your portfolio site" />
+            <input type="hidden" name="from_name" value="Darrin Wehser Portfolio" />
+            <input type="text" name="name" placeholder="Your name" required autocomplete="name" />
+            <input type="email" name="email" placeholder="Your email" required autocomplete="email" />
+            <textarea name="message" rows="5" placeholder="Your message" required></textarea>
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+            <button type="submit" id="cbtn">Send Message</button>
+            <p class="form-status" id="cstatus" role="status" aria-live="polite"></p>
+          </form>
 
           <p class="avail">
             <b>Available for</b> &mdash; freelance &middot; contract &middot; consulting<br>
-            <b>Based in</b> &mdash; [your city / region]
+            <b>Based in</b> &mdash; San Francisco Bay Area
           </p>
         </div>
 
@@ -185,7 +207,36 @@
   }
   bA.addEventListener("click", function(){ setTheme("amber"); });
   bC.addEventListener("click", function(){ setTheme("cool"); });
+
+  var cform=document.getElementById("cform");
+  if(cform){
+    var cstatus=document.getElementById("cstatus"), cbtn=document.getElementById("cbtn");
+    cform.addEventListener("submit", function(e){
+      e.preventDefault();
+      var data=Object.fromEntries(new FormData(cform).entries());
+      cstatus.className="form-status"; cstatus.textContent="Sending\u2026";
+      cbtn.disabled=true;
+      fetch("https://api.web3forms.com/submit",{
+        method:"POST",
+        headers:{"Content-Type":"application/json","Accept":"application/json"},
+        body:JSON.stringify(data)
+      }).then(function(r){ return r.json(); }).then(function(json){
+        if(json.success){
+          cstatus.className="form-status ok";
+          cstatus.textContent="Thanks \u2014 your message has been sent.";
+          cform.reset();
+        }else{
+          cstatus.className="form-status err";
+          cstatus.textContent=json.message||"Something went wrong. Please try again.";
+        }
+        cbtn.disabled=false;
+      }).catch(function(){
+        cstatus.className="form-status err";
+        cstatus.textContent="Network error \u2014 please try again.";
+        cbtn.disabled=false;
+      });
+    });
+  }
 </script>
 </body>
 </html>
-
