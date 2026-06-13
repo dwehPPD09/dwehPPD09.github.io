@@ -1,221 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume | Darrin Wehser</title>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg: #000000; --text-main: #ffffff; --text-dim: #d4d4d8; --accent: #38bdf8; --border: #27272a; --meta: #71717a; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg); color: var(--text-main); font-family: 'Geist', sans-serif; line-height: 1.6; }
-        
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 8%; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(12px); z-index: 100; }
-        .logo { font-weight: 700; font-size: 1rem; }
-        .logo a { color: #fff; text-decoration: none; }
-        .nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 2.5rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Resume | Darrin Wehser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Spline+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#070A0E;--bg-soft:#0D1218;
+    --line:rgba(231,238,244,0.12);--line-soft:rgba(231,238,244,0.06);
+    --ink:#EAEEF2;--ink-dim:#AEB7C0;--ink-faint:#6E7884;
+    --accent:#7CB3CC;--accent-rgb:124,179,204;   /* default: steel */
+    --maxw:1320px;
+  }
+  .theme-amber{ --accent:#C9A24B; --accent-rgb:201,162,75; }
+  .theme-cool{  --accent:#7CB3CC; --accent-rgb:124,179,204; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 6rem 8% 10rem; }
-        h1 { font-size: 3rem; letter-spacing: -1px; margin-bottom: 0.5rem; }
-        .headline { font-size: 1.1rem; color: var(--accent); font-weight: 400; margin-bottom: 3rem; }
-        
-        section { margin-bottom: 6rem; }
-        .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--meta); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
-        .section-label::after { content: ""; height: 1px; background: var(--border); flex-grow: 1; }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Spline Sans",system-ui,sans-serif;font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 
-        .summary { font-size: 1.15rem; line-height: 1.7; color: var(--text-dim); font-weight: 300; margin-bottom: 4rem; }
+  /* ambient */
+  .bloom{position:fixed;top:-30%;left:-10%;right:-10%;height:80vh;z-index:0;pointer-events:none;
+    background:radial-gradient(40% 50% at 30% 30%,rgba(var(--accent-rgb),0.10),transparent 70%);filter:blur(34px);transition:background .5s;}
+  .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(130% 100% at 50% 24%,transparent 52%,rgba(3,5,8,0.42) 84%,rgba(2,3,6,0.9) 100%);}
+  .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.04;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
 
-        .experience-entry { margin-bottom: 5rem; }
-        .entry-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
-        .company { font-size: 1.3rem; font-weight: 700; color: #fff; }
-        .dates { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); }
-        .role { font-size: 0.9rem; color: var(--text-main); margin-bottom: 1.5rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-        
-        .sub-section { margin-bottom: 2.5rem; }
-        .sub-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--meta); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; }
-        
-        ul { list-style: none; margin-bottom: 2rem; }
-        li { position: relative; padding-left: 1.5rem; margin-bottom: 0.6rem; color: var(--text-dim); font-size: 0.95rem; }
-        li::before { content: "•"; position: absolute; left: 0; color: var(--accent); }
+  .wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 36px;}
 
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; }
-        .skill-cat h4 { font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: var(--accent); margin-bottom: 1.5rem; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
-        .skill-item { margin-bottom: 1.5rem; }
-        .skill-title { font-size: 0.9rem; font-weight: 600; color: #fff; margin-bottom: 0.25rem; }
-        .skill-desc { font-size: 0.85rem; color: var(--text-dim); }
+  /* nav */
+  header.top{position:sticky;top:0;z-index:30;background:rgba(7,10,14,0.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);}
+  .bar{display:flex;align-items:center;justify-content:space-between;padding:22px 0;}
+  .mark{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;}
+  .mark .dot{color:var(--accent);transition:color .4s;}
+  .bar-right{display:flex;align-items:center;gap:24px;}
+  nav{display:flex;gap:28px;align-items:center;}
+  nav a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;}
+  nav a:hover,nav a:focus-visible,nav a.active{color:var(--ink);border-color:var(--accent);}
 
-        .film-list-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-        .film-studio { margin-bottom: 2rem; }
-        .film-studio h5 { font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; color: var(--accent); margin-bottom: 1rem; }
+  /* theme toggle */
+  .toggle{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .toggle button{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+    background:transparent;color:var(--ink-faint);border:none;padding:7px 12px;cursor:pointer;transition:background .25s,color .25s;}
+  .toggle button.on{background:var(--accent);color:#0a0d11;}
 
-        footer { padding: 8rem 8%; background: #000; border-top: 1px solid var(--border); text-align: center; }
-        .social-links { display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3rem; }
-        .social-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; transition: color 0.3s; }
-        .social-links a:hover { color: var(--accent); }
-        .copyright { font-size: 0.65rem; color: #52525b; font-family: 'JetBrains Mono', monospace; }
+  /* page head */
+  .pagehead{padding:74px 0 30px;}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:var(--accent);margin:0 0 20px;display:flex;align-items:center;gap:14px;transition:color .4s;}
+  .eyebrow::before{content:"";width:36px;height:1px;background:var(--accent);opacity:.85;transition:background .4s;}
+  .pagehead h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(2.8rem,7vw,5rem);line-height:1.0;letter-spacing:-0.02em;margin:0;}
+  .pagehead p{margin:24px 0 0;max-width:680px;color:var(--ink-dim);font-size:clamp(1.05rem,1.5vw,1.2rem);line-height:1.65;}
 
-        @media (max-width: 768px) { .container { padding: 4rem 5%; } }
-    </style>
+  .head-actions{margin-top:30px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+  .btn{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
+    color:#0a0d11;background:var(--accent);border:1px solid var(--accent);border-radius:3px;padding:11px 18px;cursor:pointer;text-decoration:none;transition:opacity .25s;}
+  .btn:hover{opacity:.86;}
+  .preview-note{display:flex;align-items:center;gap:14px;}
+  .preview-note span{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);}
+
+  /* resume layout */
+  .resume{padding:30px 0 10px;display:grid;grid-template-columns:1fr;gap:8px;}
+
+  .block{padding:46px 0;border-top:1px solid var(--line);}
+  .block:first-child{border-top:none;}
+  .block-grid{display:grid;grid-template-columns:0.42fr 1.58fr;gap:48px;}
+  .block-label{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);transition:color .4s;}
+  .block-label .num{display:block;color:var(--ink-faint);margin-bottom:10px;}
+
+  .lede-2{margin:0;color:var(--ink-dim);font-size:1.12rem;line-height:1.72;max-width:680px;}
+  .lede-2 strong{color:var(--ink);font-weight:500;}
+
+  /* experience / film rows */
+  .row{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--line-soft);}
+  .row:last-child{border-bottom:none;}
+  .row .when{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:0.08em;color:var(--ink-faint);padding-top:4px;}
+  .row .what h3{font-family:"Fraunces",serif;font-weight:600;font-size:1.32rem;line-height:1.2;letter-spacing:-0.01em;margin:0;color:var(--ink);}
+  .row .what .sub{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-top:7px;transition:color .4s;}
+  .row .what .desc{margin:10px 0 0;color:var(--ink-dim);line-height:1.66;max-width:600px;}
+
+  /* skill groups */
+  .skillgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:30px;}
+  .skillset h4{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink);margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid var(--line-soft);}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;}
+  .chip{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:0.08em;color:var(--ink-dim);border:1px solid var(--line);border-radius:2px;padding:8px 12px;transition:border-color .3s,color .3s;}
+  .chip:hover{border-color:var(--accent);color:var(--ink);}
+
+  .more{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);margin:22px 0 0;}
+
+  /* footer */
+  footer{position:relative;z-index:2;background:var(--bg);border-top:1px solid var(--line);margin-top:60px;}
+  .foot-inner{max-width:var(--maxw);margin:0 auto;padding:46px 36px 54px;display:flex;flex-direction:column;gap:28px;}
+  .social{display:flex;flex-wrap:wrap;gap:26px;}
+  .social a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;transition:color .25s;}
+  .social a:hover{color:var(--accent);}
+  .copy{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);}
+
+  @media (max-width:760px){
+    .wrap{padding:0 20px;} .bar-right{gap:14px;} nav{gap:14px;} nav a{font-size:10.5px;letter-spacing:0.05em;} .mark{font-size:11px;} .toggle button{padding:6px 10px;font-size:10px;}
+    .block-grid{grid-template-columns:1fr;gap:20px;}
+    .row{grid-template-columns:1fr;gap:6px;} .row .when{padding-top:0;}
+    .foot-inner{padding:40px 20px;}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+  /* print / save-as-pdf */
+  @media print{
+    .bloom,.vignette,.grain,.toggle,.preview-note,.btn,header.top nav,footer .social{display:none !important;}
+    body{background:#fff;color:#111;}
+    .pagehead h1,.row .what h3{color:#111;}
+    .eyebrow,.block-label,.row .what .sub,.row .what .yr{color:#666 !important;}
+    .lede-2,.lede-2 strong,.row .what .desc,.chip{color:#222 !important;}
+    .chip,.block,.row{border-color:#ccc !important;}
+    a{color:#111 !important;}
+    .pagehead{padding-top:20px;}
+  }
+</style>
 </head>
-<body>
-    <nav>
-        <div class="logo"><a href="index.html">Darrin Wehser</a></div>
-        <div class="nav-links">
+<body class="theme-amber">
+  <div class="bloom" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="wrap">
+      <div class="bar">
+        <a class="mark" href="index.html">DARRIN WEHSER<span class="dot">.</span></a>
+        <div class="bar-right">
+          <nav>
             <a href="portfolio.html">Portfolio</a>
             <a href="demo-reel.html">Demo Reel</a>
-            <a href="resume.html">Resume</a>
-            <a href="index.html#contact">Contact</a>
+            <a href="resume.html" class="active">Resume</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+          <div class="toggle" role="group" aria-label="Accent color">
+            <button id="tAmber" type="button" class="on">Amber</button>
+            <button id="tCool" type="button">Steel</button>
+          </div>
         </div>
-    </nav>
-
-    <div class="container">
-        <header>
-            <div class="headline">Creative Technical Director | Groom & LookDev Supervisor | Generative AI Artist</div>
-            <h1>Technical Resume</h1>
-        </header>
-
-        <section>
-            <div class="section-label">Summary</div>
-            <p class="summary">Creative and technical leader with 20+ years in the film industry, specializing in Hair/Fur Grooming and Look Development, primarily at the supervisory level. Over the past 6 years, transitioned from traditional film pipelines into real-time workflows in Unreal Engine, while developing custom grooming tools in SideFX's Houdini. Currently focused on combining deep 3D production experience with emerging AI technologies to advance next-generation pipelines.</p>
-        </section>
-
-        <section>
-            <div class="section-label">Technical Skills & Expertise</div>
-            <div class="skills-grid">
-                <div class="skill-cat">
-                    <h4>VFX & Real-Time Production</h4>
-                    <div class="skill-item">
-                        <div class="skill-title">Unreal Engine (6+ Years)</div>
-                        <div class="skill-desc">Expert in real-time grooming workflows and asset integration; contributed to internal pipeline development for the MetaHuman team at Epic Games.</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-title">High-End Groom Stack</div>
-                        <div class="skill-desc">SideFX Houdini (v19–21) and Maya XGen; specialist in procedural groom tool architecture for hair and fur strands.</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-title">Look Development Stack</div>
-                        <div class="skill-desc">Katana, Renderman, Nuke, Maya, and Adobe Photoshop.</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-title">Legacy & Proprietary Grooming Systems</div>
-                        <div class="skill-desc">Extensive experience developing and utilizing world-class proprietary grooming software at ILM and Rhythm & Hues. Utilized these grooming workflows on 36 Feature Films.</div>
-                    </div>
-                </div>
-
-                <div class="skill-cat">
-                    <h4>Generative AI & Emerging Tech</h4>
-                    <div class="skill-item">
-                        <div class="skill-title">AI Implementation</div>
-                        <div class="skill-desc">Proficient in Midjourney for high-fidelity visual development; leveraging ChatGPT, Google AI Suite and Claude to augment creative workflows and asset ideation.</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-title">Advanced Media Generation</div>
-                        <div class="skill-desc">Proficient in Higgsfield (AI video), Suno (AI audio), and Google AI Suite for production-ready content.</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-title">Workflow Evolution</div>
-                        <div class="skill-desc">Actively merging 20 years of production logic with emerging AI tools to accelerate asset iteration and look development.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="section-label">Work Experience</div>
-            
-            <div class="experience-entry">
-                <div class="entry-header">
-                    <div class="company">Epic Games - MetaHuman Team | Special Projects</div>
-                    <div class="dates">NOV 2019 - MAR 2026</div>
-                </div>
-                <div class="role">Technical Director | Sr. Groom Artist</div>
-                <ul>
-                    <li>Unreal Real Engine releases 4.28 - 5.7</li>
-                    <li>Development team for MetaHuman Groom Asset Editor</li>
-                    <li>Development team for MetaHuman Groom Tools in Houdini</li>
-                    <li>MetaHuman Groom Advanced Kit for Houdini 21</li>
-                    <li>MetaHuman Groom Tool Documentation</li>
-                </ul>
-                <div class="sub-label" style="margin-top: 2rem;">Client Grooms for:</div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; color: var(--text-dim); font-size: 0.95rem;">
-                    <div>• Ninja Theory - Senua's Saga - Hellblade II</div>
-                    <div>• Kojima</div>
-                    <div>• Skydance Media - Marvel 1943: Rise of Hydra</div>
-                    <div>• CD Projekt Red</div>
-                </div>
-                <div style="margin-top: 2rem; color: var(--text-dim); font-size: 0.95rem;">
-                    <p><strong>MetaHuman Creator:</strong> The Matrix Awakens: An Unreal Engine 5 Experience (Young Keanu Reeves Groom)</p>
-                    <p><strong>Mold3D Studio’s ‘Slay’ Animation Sample Project:</strong> Echo Groom</p>
-                </div>
-            </div>
-
-            <div class="experience-entry">
-                <div class="entry-header">
-                    <div class="company">Industrial Light & Magic (ILM San Francisco)</div>
-                    <div class="dates">FEB 2014 - OCT 2019</div>
-                </div>
-                <div class="role">Groom Supervisor | Senior Groom Artist | Senior Lighting TD</div>
-                <ul>
-                    <li><strong>Terminator - Dark Fate (2019):</strong> Groom Supervisor - Sarah and John Conner, Terminator grooms, and background digital double grooms.</li>
-                    <li><strong>Aquaman (2018):</strong> Groom Supervisor/Lighting TD - Aquaman and background grooms.</li>
-                    <li><strong>Thor: Ragnarok (2017):</strong> Seq. Lead Lighting TD.</li>
-                    <li><strong>Rogue One - A Star Wars Story (2016):</strong> Lead Groom - Grand Moff Tarkin, Princess Leia, and background characters. Lookdev/Lighting TD.</li>
-                    <li><strong>TMNT: Out of the Shadows:</strong> Lead Groom/Lookdev TD - Splinter Groom.</li>
-                    <li><strong>Warcraft (2016):</strong> Groom/Lookdev/Lighting TD - Twenty-four grooms including Blackhand and Draka.</li>
-                    <li><strong>The Revenant (2015):</strong> Groom/Lookdev TD - Bear Cubs, Deer and Wolf grooms.</li>
-                    <li><strong>Transformers: Age of Extinction (2014):</strong> Lighting TD.</li>
-                </ul>
-            </div>
-
-            <div class="experience-entry">
-                <div class="entry-header">
-                    <div class="company">Rhythm & Hues Studios</div>
-                    <div class="dates">JUN 2000 - NOV 2013</div>
-                </div>
-                <div class="role">Groom and LookDev Supervisor | Sequence Lighting Lead</div>
-                <p style="font-size: 0.85rem; color: var(--meta); margin-bottom: 1.5rem;">Selected credits from 36 Feature Films:</p>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; color: var(--text-dim); font-size: 0.9rem;">
-                    <div>• Seventh Son (Lookdev/Groom Supervisor)</div>
-                    <div>• Django Unchained (Lookdev Supervisor)</div>
-                    <div>• Snow White and the Huntsman</div>
-                    <div>• Cabin in the Woods (Lead Lighting TD)</div>
-                    <div>• Mr. Poppers Penguins</div>
-                    <div>• Hop (Environment Supervisor)</div>
-                    <div>• Knight and Day</div>
-                    <div>• Land of the Lost</div>
-                    <div>• Cirque du Freak</div>
-                    <div>• The Incredible Hulk</div>
-                    <div>• Night At the Museum</div>
-                    <div>• Chronicles of Narnia</div>
-                    <div>• Harry Potter (Lighting TD)</div>
-                    <div>• Cats & Dogs (Groom/Lighting TD)</div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="section-label">Education</div>
-            <div class="experience-entry" style="margin-bottom: 2rem;">
-                <div class="company">Academy of Art College</div>
-                <div class="role">Master of Fine Arts, Computer Arts, 1999</div>
-            </div>
-            <div class="experience-entry">
-                <div class="company">San Francisco State University</div>
-                <div class="role">B.A. Interdisciplinary in Graphic Design, 1995</div>
-            </div>
-        </section>
+      </div>
     </div>
+  </header>
 
-    <footer>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/dwehser" target="_blank">LINKEDIN</a>
-            <a href="https://www.artstation.com/dwehser" target="_blank">ARTSTATION</a>
-            <a href="https://www.youtube.com/watch?v=rPlgIsu7tXA" target="_blank">YOUTUBE</a>
-            <a href="http://www.imdb.com/name/nm1277925/" target="_blank">IMDB</a>
-            <a href="http://vimeo.com/dwehser" target="_blank">VIMEO</a>
+  <main>
+    <section class="wrap pagehead">
+      <p class="eyebrow">Curriculum Vitae // 2001&ndash;2026</p>
+      <h1>Resume</h1>
+      <p>Creative Technical Director with twenty-five years of character grooming, look development, and lighting across feature film and real-time production &mdash; now bridging that craft into MetaHuman pipelines and generative AI.</p>
+      <div class="head-actions">
+        <button class="btn" type="button" onclick="window.print()">Print / Save as PDF</button>
+      </div>
+    </section>
+
+    <section class="wrap resume">
+
+      <!-- PROFILE -->
+      <div class="block">
+        <div class="block-grid">
+          <div class="block-label"><span class="num">01</span>Profile</div>
+          <div>
+            <p class="lede-2">Twenty-five years as a grooming, look-development, and lighting technical director at world-class studios, with credits on <strong>36 feature films</strong> across iconic franchises. Currently focused on <strong>real-time character grooming in Unreal Engine</strong> and the in-engine Groom Asset Editor, alongside <strong>generative AI</strong> tooling &mdash; translating legacy cinematic craft into next-generation neural pipelines.</p>
+          </div>
         </div>
-        <div class="copyright">© 2026 DARRIN WEHSER // REPRODUCED FROM PRODUCTION RECORD</div>
-    </footer>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="block">
+        <div class="block-grid">
+          <div class="block-label"><span class="num">02</span>Experience</div>
+          <div>
+            <div class="row">
+              <div class="when">Present</div>
+              <div class="what">
+                <h3>Epic Games</h3>
+                <div class="sub">Creative Technical Director &middot; Real-Time Groom &amp; LookDev</div>
+                <p class="desc">MetaHuman development across Unreal Engine 4.28 through 5.7, focused on the in-engine Groom Asset Editor. Built a parametric hair-grooming toolkit spanning Houdini 19.5&ndash;21 and authored the technical documentation for the toolset in UE 5.6 and 5.7.</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="when">Feature Film</div>
+              <div class="what">
+                <h3>Industrial Light &amp; Magic</h3>
+                <div class="sub">Senior Groom / LookDev / Lighting TD</div>
+                <p class="desc">Grooming, look development, and lighting technical direction for tentpole features, from <em>Star Wars: Rogue One</em> to <em>Thor: Ragnarok</em>.</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="when">Feature Film</div>
+              <div class="what">
+                <h3>Rhythm &amp; Hues Studios</h3>
+                <div class="sub">LookDev / Groom / Lighting TD</div>
+                <p class="desc">Character and creature work across an extended run of feature films, leading grooming and look development on multiple titles.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKILLS -->
+      <div class="block">
+        <div class="block-grid">
+          <div class="block-label"><span class="num">03</span>Tools &amp; Disciplines</div>
+          <div class="skillgrid">
+            <div class="skillset">
+              <h4>Real-Time / Engine</h4>
+              <div class="chips">
+                <span class="chip">Unreal Engine 4.28&ndash;5.7</span>
+                <span class="chip">MetaHuman</span>
+                <span class="chip">Groom Asset Editor</span>
+              </div>
+            </div>
+            <div class="skillset">
+              <h4>Procedural</h4>
+              <div class="chips">
+                <span class="chip">Houdini 19.5&ndash;21</span>
+                <span class="chip">Parametric Groom Toolkit</span>
+              </div>
+            </div>
+            <div class="skillset">
+              <h4>Generative AI</h4>
+              <div class="chips">
+                <span class="chip">Midjourney</span>
+                <span class="chip">ChatGPT</span>
+                <span class="chip">Gemini</span>
+                <span class="chip">Claude</span>
+                <span class="chip">Higgsfield</span>
+              </div>
+            </div>
+            <div class="skillset">
+              <h4>Core Craft</h4>
+              <div class="chips">
+                <span class="chip">Character Grooming</span>
+                <span class="chip">Look Development</span>
+                <span class="chip">Lighting</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILMOGRAPHY -->
+      <div class="block">
+        <div class="block-grid">
+          <div class="block-label"><span class="num">04</span>Selected Filmography</div>
+          <div>
+            <div class="row"><div class="when">2019</div><div class="what"><h3>Terminator: Dark Fate</h3><div class="sub">Groom Supervisor</div></div></div>
+            <div class="row"><div class="when">2018</div><div class="what"><h3>Aquaman</h3><div class="sub">Groom Supervisor / Lighting TD</div></div></div>
+            <div class="row"><div class="when">2017</div><div class="what"><h3>Thor: Ragnarok</h3><div class="sub">Seq. Lead Lighting TD</div></div></div>
+            <div class="row"><div class="when">2016</div><div class="what"><h3>Rogue One: A Star Wars Story</h3><div class="sub">Lead Groom &mdash; Tarkin, Leia</div></div></div>
+            <div class="row"><div class="when">2016</div><div class="what"><h3>TMNT: Out of the Shadows</h3><div class="sub">Lead Groom &mdash; Splinter</div></div></div>
+            <div class="row"><div class="when">2016</div><div class="what"><h3>Warcraft</h3><div class="sub">Groom / LookDev / Lighting TD</div></div></div>
+            <div class="row"><div class="when">2012</div><div class="what"><h3>Snow White and the Huntsman</h3><div class="sub">LookDev / Groom Supervisor</div></div></div>
+            <div class="row"><div class="when">2010</div><div class="what"><h3>Knight and Day</h3><div class="sub">Lead LookDev / Groom TD</div></div></div>
+            <div class="row"><div class="when">2009</div><div class="what"><h3>Cirque du Freak</h3><div class="sub">Lead Groom / LookDev / Lighting TD</div></div></div>
+            <div class="row"><div class="when">2008</div><div class="what"><h3>The Incredible Hulk</h3><div class="sub">Lead LookDev / Groom TD</div></div></div>
+            <div class="row"><div class="when">2006</div><div class="what"><h3>Night at the Museum</h3><div class="sub">Groom / LookDev / Lighting Lead</div></div></div>
+            <div class="row"><div class="when">2006</div><div class="what"><h3>Garfield: A Tail of Two Kitties</h3><div class="sub">Groom / LookDev / Lighting Lead</div></div></div>
+            <div class="row"><div class="when">2005</div><div class="what"><h3>Elektra</h3><div class="sub">LookDev / Groom / Lighting TD</div></div></div>
+            <div class="row"><div class="when">2004</div><div class="what"><h3>Garfield: The Movie</h3><div class="sub">Lead Groom / Lead LookDev / Lighting TD</div></div></div>
+            <div class="row"><div class="when">2003</div><div class="what"><h3>The Cat in the Hat</h3><div class="sub">Groom / LookDev / Lighting TD</div></div></div>
+            <div class="row"><div class="when">2001</div><div class="what"><h3>Dr. Dolittle 2</h3><div class="sub">Groom / Lighting TD</div></div></div>
+            <div class="row"><div class="when">2001</div><div class="what"><h3>Harry Potter and the Sorcerer's Stone</h3><div class="sub">Lighting TD</div></div></div>
+            <p class="more">Showing 17 of 36 feature credits &middot; full list on IMDb</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-inner">
+      <div class="social">
+        <a href="https://www.linkedin.com/in/dwehser" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.artstation.com/dwehser" target="_blank" rel="noopener">ArtStation</a>
+        <a href="https://www.youtube.com/watch?v=rPlgIsu7tXA" target="_blank" rel="noopener">YouTube Film</a>
+        <a href="https://www.youtube.com/@PixelPerfectDigital" target="_blank" rel="noopener">YouTube AI</a>
+        <a href="http://www.imdb.com/name/nm1277925/" target="_blank" rel="noopener">IMDb</a>
+        <a href="http://vimeo.com/dwehser" target="_blank" rel="noopener">Vimeo</a>
+      </div>
+      <p class="copy">&copy; 2026 Darrin Wehser // All rights reserved to respective studios</p>
+    </div>
+  </footer>
+
+<script>
+  var body=document.body, bA=document.getElementById("tAmber"), bC=document.getElementById("tCool");
+  function setTheme(t){
+    body.classList.remove("theme-amber","theme-cool");
+    body.classList.add("theme-"+t);
+    bA.classList.toggle("on", t==="amber");
+    bC.classList.toggle("on", t==="cool");
+  }
+  bA.addEventListener("click", function(){ setTheme("amber"); });
+  bC.addEventListener("click", function(){ setTheme("cool"); });
+</script>
 </body>
 </html>
+
