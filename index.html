@@ -1,220 +1,358 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darrin Wehser | Creative Technical Director</title>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #000000;
-            --card-bg: #050505;
-            --border: #27272a;
-            --text-main: #ffffff;
-            --text-dim: #d4d4d8;
-            --accent: #38bdf8;
-            --meta: #71717a;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Darrin Wehser | Creative Technical Director</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Spline+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#070A0E;
+    --bg-soft:#0D1218;
+    --line:rgba(231,238,244,0.12);
+    --line-soft:rgba(231,238,244,0.06);
+    --ink:#EAEEF2;
+    --ink-dim:#AEB7C0;
+    --ink-faint:#6E7884;
+    --accent:#7CB3CC;
+    --accent-rgb:124,179,204;   /* base: steel */
+    --maxw:1180px;
+  }
+  .theme-amber{ --accent:#C9A24B; --accent-rgb:201,162,75; }
+  .theme-cool{  --accent:#7CB3CC; --accent-rgb:124,179,204; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background-color: var(--bg); 
-            color: var(--text-main); 
-            font-family: 'Geist', sans-serif; 
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Spline Sans",system-ui,sans-serif;font-weight:400;
+    line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 8%;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(12px);
-            z-index: 100;
-        }
-        .logo { font-weight: 700; letter-spacing: 0.5px; font-size: 1rem; }
-        .logo a { color: #fff; text-decoration: none; }
-        .nav-links a { 
-            color: var(--text-dim); 
-            text-decoration: none; 
-            margin-left: 2.5rem; 
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover { color: var(--accent); }
+  /* ---------- cinematic stage (fixed, hero only) ---------- */
+  #stage{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--bg);}
+  .frame{
+    position:absolute;inset:0;background-size:cover;background-position:center;
+    filter:brightness(0.5) saturate(0.92) contrast(1.05);
+    opacity:0;transition:opacity 1.8s ease-in-out;
+  }
+  .frame.on{opacity:1;}
+  .bloom{
+    position:absolute;inset:-25%;pointer-events:none;mix-blend-mode:screen;
+    background:
+      radial-gradient(42% 40% at 30% 26%,rgba(var(--accent-rgb),0.12),transparent 70%),
+      radial-gradient(46% 42% at 74% 70%,rgba(var(--accent-rgb),0.05),transparent 72%);
+    filter:blur(24px);animation:drift 32s ease-in-out infinite alternate;transition:background .5s;
+  }
+  @keyframes drift{from{transform:translate3d(-2%,-1%,0) scale(1.02);}to{transform:translate3d(3%,2%,0) scale(1.08);}}
+  .scrim{
+    position:absolute;inset:0;pointer-events:none;
+    background:
+      linear-gradient(90deg,rgba(7,10,14,0.93) 0%,rgba(7,10,14,0.74) 40%,rgba(7,10,14,0.34) 72%,rgba(7,10,14,0.58) 100%),
+      linear-gradient(0deg,rgba(7,10,14,0.92) 0%,rgba(7,10,14,0.15) 42%,transparent 70%);
+  }
+  #dust{position:absolute;inset:0;width:100%;height:100%;display:block;}
+  .vignette{
+    position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(125% 100% at 50% 36%,transparent 44%,rgba(3,5,8,0.5) 82%,rgba(2,3,6,0.94) 100%);
+  }
+  .grain{
+    position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.04;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
 
-        header {
-            padding: 12rem 8% 8rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        h1 { 
-            font-size: clamp(2.2rem, 5vw, 4rem); 
-            font-weight: 700; 
-            letter-spacing: -0.04em; 
-            line-height: 1.2;
-            margin-bottom: 2.5rem;
-            color: #fff;
-        }
-        .hero-desc { 
-            color: var(--text-dim); 
-            font-size: 1.4rem; 
-            max-width: 700px;
-            font-weight: 300;
-            border-left: 2px solid var(--accent);
-            padding-left: 2rem;
-        }
+  .wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 32px;}
 
-        .section-label {
-            padding: 0 8%;
-            margin-bottom: 3rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--meta);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .section-label::after { content: ""; height: 1px; background: var(--border); flex-grow: 1; }
+  /* ---------- top bar ---------- */
+  header{position:absolute;top:0;left:0;right:0;z-index:5;}
+  .bar{display:flex;align-items:center;justify-content:space-between;padding:30px 0;border-bottom:1px solid var(--line-soft);}
+  .mark{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;}
+  .mark .dot{color:var(--accent);transition:color .4s;}
+  .bar-right{display:flex;align-items:center;gap:26px;}
+  nav{display:flex;gap:30px;}
+  nav a{
+    font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;letter-spacing:0.14em;
+    text-transform:uppercase;color:var(--ink-dim);text-decoration:none;
+    padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;
+  }
+  nav a:hover,nav a:focus-visible{color:var(--ink);border-color:var(--accent);}
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 2.5rem;
-            padding: 0 8% 12rem;
-        }
-        .project-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 2.5rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-        .project-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.05);
-        }
-        .project-meta { 
-            font-family: 'JetBrains Mono', monospace; 
-            font-size: 0.65rem; 
-            color: var(--accent); 
-            margin-bottom: 1.5rem; 
-            letter-spacing: 1px;
-        }
-        .project-card h3 { font-size: 1.5rem; margin-bottom: 1rem; font-weight: 700; color: #fff; }
-        .project-card p { color: var(--text-dim); font-size: 1rem; margin-bottom: 2rem; }
-        
-        .tag-list { display: flex; flex-wrap: wrap; gap: 10px; }
-        .tag { 
-            font-size: 0.6rem; 
-            background: transparent; 
-            padding: 4px 10px; 
-            border-radius: 2px; 
-            color: var(--meta); 
-            border: 1px solid var(--border);
-            font-family: 'JetBrains Mono', monospace;
-        }
+  /* accent toggle */
+  .toggle{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;flex:0 0 auto;}
+  .toggle button{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+    background:transparent;color:var(--ink-faint);border:none;padding:7px 12px;cursor:pointer;transition:background .25s,color .25s;}
+  .toggle button.on{background:var(--accent);color:#0a0d11;}
 
-        footer {
-            padding: 8rem 8%;
-            background: #000;
-            border-top: 1px solid var(--border);
-        }
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3rem;
-        }
-        .social-links { display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center; }
-        .social-links a {
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-family: 'JetBrains Mono', monospace;
-            transition: color 0.3s;
-        }
-        .social-links a:hover { color: var(--accent); }
-        .copyright { font-size: 0.65rem; color: #52525b; margin-top: 5rem; text-align: center; font-family: 'JetBrains Mono', monospace; }
-    </style>
+  /* ---------- hero ---------- */
+  .hero{min-height:100svh;display:flex;align-items:center;padding:140px 0 90px;}
+  .hero-inner{max-width:960px;}
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.28em;
+    text-transform:uppercase;color:var(--accent);margin:0 0 28px;display:flex;align-items:center;gap:14px;transition:color .4s;
+  }
+  .eyebrow::before{content:"";width:36px;height:1px;background:var(--accent);opacity:.85;transition:background .4s;}
+
+  h1{
+    font-family:"Fraunces",serif;font-weight:600;
+    font-size:clamp(3rem,8.2vw,6.4rem);line-height:1.0;letter-spacing:-0.02em;margin:0;color:var(--ink);
+    text-shadow:0 2px 40px rgba(0,0,0,0.5);
+  }
+  h1 .l2{display:block;}
+  h1 .l3{display:block;font-style:italic;font-weight:500;color:var(--accent);transition:color .4s;}
+
+  .lede{
+    margin:40px 0 0;max-width:620px;font-size:clamp(1.08rem,1.6vw,1.32rem);
+    color:var(--ink-dim);line-height:1.66;font-weight:400;text-shadow:0 1px 20px rgba(0,0,0,0.4);
+  }
+  .scroll-cue{
+    margin-top:56px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:500;
+    letter-spacing:0.26em;text-transform:uppercase;color:var(--ink-faint);display:flex;align-items:center;gap:12px;
+  }
+  .scroll-cue::after{content:"";width:1px;height:30px;background:linear-gradient(var(--ink-faint),transparent);}
+
+  /* ---------- specialization (solid, scrolls over stage) ---------- */
+  .spec{position:relative;z-index:2;background:var(--bg);padding:96px 0 120px;}
+  .spec::before{content:"";position:absolute;top:0;left:0;right:0;height:120px;background:linear-gradient(var(--bg),transparent);transform:translateY(-100%);pointer-events:none;}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding-bottom:28px;border-bottom:1px solid var(--line);flex-wrap:wrap;}
+  .sec-head h2{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.7rem,3.2vw,2.4rem);letter-spacing:-0.015em;margin:0;color:var(--ink);}
+  .sec-head span{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-faint);}
+
+  .card{display:grid;grid-template-columns:0.9fr 1.4fr;gap:40px;padding:50px 0;border-bottom:1px solid var(--line);transition:background .4s;}
+  .card:hover{background:linear-gradient(90deg,rgba(var(--accent-rgb),0.045),transparent 70%);}
+  .card .meta{font-family:"IBM Plex Mono",monospace;}
+  .card .tagline{font-size:12px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px;transition:color .4s;}
+  .card h3{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.7rem,2.8vw,2.3rem);line-height:1.1;letter-spacing:-0.015em;margin:0;color:var(--ink);}
+  .card .body{margin:0;color:var(--ink-dim);font-weight:400;line-height:1.72;font-size:1.1rem;max-width:560px;}
+  .chip{display:inline-block;margin-top:24px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);border:1px solid var(--line);border-radius:2px;padding:8px 13px;}
+
+  /* ---------- footer ---------- */
+  footer{position:relative;z-index:2;background:var(--bg);border-top:1px solid var(--line);}
+  .foot-inner{max-width:var(--maxw);margin:0 auto;padding:46px 32px 52px;display:flex;flex-direction:column;gap:30px;}
+  .social{display:flex;flex-wrap:wrap;gap:28px;}
+  .social a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;transition:color .25s;}
+  .social a:hover,.social a:focus-visible{color:var(--accent);}
+  .copy{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);}
+
+  @media (max-width:760px){
+    .wrap{padding:0 22px;}
+    .bar-right{gap:16px;}
+    nav{gap:18px;} nav a{font-size:11px;letter-spacing:0.08em;}
+    .mark{font-size:12px;}
+    .toggle button{padding:6px 10px;font-size:10px;}
+    .card{grid-template-columns:1fr;gap:18px;padding:40px 0;}
+    .spec{padding:72px 0 90px;}
+    .foot-inner{padding:40px 22px;}
+  }
+  @media (max-width:430px){ nav a:nth-child(n+3){display:none;} }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .bloom{animation:none;} .frame{transition:none;}
+  }
+</style>
 </head>
-<body>
+<body class="theme-amber">
+  <div id="stage" aria-hidden="true">
+    <!-- Real reel later: drop a <video autoplay muted loop playsinline> here, full-bleed -->
+    <div class="frame" data-i="0"></div>
+    <div class="frame" data-i="1"></div>
+    <div class="frame" data-i="2"></div>
+    <div class="frame" data-i="3"></div>
+    <div class="frame" data-i="4"></div>
+    <div class="frame" data-i="5"></div>
+    <div class="bloom"></div>
+    <div class="scrim"></div>
+    <canvas id="dust"></canvas>
+  </div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
 
-    <nav>
-        <div class="logo"><a href="index.html">Darrin Wehser</a></div>
-        <div class="nav-links">
+  <header>
+    <div class="wrap">
+      <div class="bar">
+        <a class="mark" href="index.html">DARRIN WEHSER<span class="dot">.</span></a>
+        <div class="bar-right">
+          <nav>
             <a href="portfolio.html">Portfolio</a>
             <a href="demo-reel.html">Demo Reel</a>
             <a href="resume.html">Resume</a>
             <a href="contact.html">Contact</a>
+          </nav>
+          <div class="toggle" role="group" aria-label="Accent color">
+            <button id="tAmber" type="button" class="on">Amber</button>
+            <button id="tCool" type="button">Steel</button>
+          </div>
         </div>
-    </nav>
+      </div>
+    </div>
+  </header>
 
-    <header>
-        <h1>Creative Technical Director<br>
-            Groom & LookDev Supervisor<br>
-            Generative AI Artist</h1>
-        <p class="hero-desc">Pivoting 25 years of cinematic technical direction into the era of Generative AI. Mastering the intersection of legacy craft and next-generation neural pipelines.</p>
-    </header>
-
-    <div class="section-label">Technical Specialization</div>
-    <section class="grid">
-        <div class="project-card">
-            <div class="project-meta">ACTIVE DEVELOPMENT // 2026</div>
-            <h3>Generative AI Artistry</h3>
-            <p>Translating 25 years of film and game production experience with emerging AI technologies to advance next-generation pipelines. Experience with Midjourney, ChatGPT, Gemini, Claude, and Higgsfield.</p>
-            <div class="tag-list">
-                <span class="tag">LLM</span>
-                <span class="tag">DIFFUSION</span>
-                <span class="tag">PIPELINE</span>
-            </div>
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-inner">
+          <p class="eyebrow">Creative Technical Director // 2026</p>
+          <h1>
+            Groom &amp; LookDev
+            <span class="l2">Supervisor &mdash;</span>
+            <span class="l3">Generative AI Artist</span>
+          </h1>
+          <p class="lede">Pivoting 25 years of cinematic technical direction into the era of Generative AI. Mastering the intersection of legacy craft and next-generation neural pipelines.</p>
+          <p class="scroll-cue">Technical Specialization</p>
         </div>
-
-        <div class="project-card">
-            <div class="project-meta">ENGINE ARCHITECTURE // EPIC GAMES</div>
-            <h3>MetaHuman Groom Toolsets</h3>
-            <p>Worked on Unreal Engine releases 4.28 through 5.7 focusing on grooming toolsets. Helped developed parametric hair systems and technical documentation for UE 5.6 and 5.7.</p>
-            <div class="tag-list">
-                <span class="tag">UE 4.28-5.7</span>
-                <span class="tag">METAHUMAN</span>
-                <span class="tag">GROOM</span>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-meta">FEATURE FILM // 36 TITLES</div>
-            <h3>Technical Direction</h3>
-            <p>Extensive history at world-class studios (ILM, R&H). Grooming, LookDev, and Lighting TD for iconic franchises from Star Wars: Rogue One to Thor: Ragnarok. Worked on 36 feature films.</p>
-            <div class="tag-list">
-                <span class="tag">ILM</span>
-                <span class="tag">R&H</span>
-                <span class="tag">HOUDINI</span>
-            </div>
-        </div>
+      </div>
     </section>
 
-    <footer>
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/dwehser" target="_blank">LINKEDIN</a>
-                <a href="https://www.artstation.com/dwehser" target="_blank">ARTSTATION</a>
-                <a href="https://www.youtube.com/watch?v=rPlgIsu7tXA" target="_blank">YOUTUBE</a>
-                <a href="http://www.imdb.com/name/nm1277925/" target="_blank">IMDB</a>
-                <a href="http://vimeo.com/dwehser" target="_blank">VIMEO</a>
-            </div>
-            <div class="copyright">
-                © 2026 DARRIN WEHSER // ALL RIGHTS RESERVED TO RESPECTIVE STUDIOS
-            </div>
+    <section class="spec">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>Technical Specialization</h2>
+          <span>Three Disciplines</span>
         </div>
-    </footer>
+
+        <article class="card">
+          <div class="meta">
+            <p class="tagline">Active Development // 2026</p>
+            <h3>Generative AI Artistry</h3>
+          </div>
+          <div>
+            <p class="body">Translating 25 years of film and game production experience with emerging AI technologies to advance next-generation pipelines. Experience with Midjourney, ChatGPT, Gemini, Claude, and Higgsfield.</p>
+            <span class="chip">LLM Diffusion Pipeline</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="meta">
+            <p class="tagline">Engine Architecture // Epic Games</p>
+            <h3>MetaHuman Development</h3>
+          </div>
+          <div>
+            <p class="body">Spanning Unreal Engine 4.28 through 5.7, with a focus on the in-engine Groom Asset Editor. Developed a parametric hair-grooming toolkit across Houdini 19.5 to 21, and authored the technical documentation of the toolset for UE 5.6 and 5.7.</p>
+            <span class="chip">UE Groom Asset Editor &middot; Houdini 19.5&ndash;21</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="meta">
+            <p class="tagline">Feature Film // 36 Titles</p>
+            <h3>Technical Direction</h3>
+          </div>
+          <div>
+            <p class="body">Extensive history at world-class studios (ILM, R&amp;H). Grooming, LookDev, and Lighting TD for iconic franchises from Star Wars: Rogue One to Thor: Ragnarok. Worked on 36 feature films.</p>
+            <span class="chip">ILM &middot; R&amp;H &middot; Houdini</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-inner">
+      <div class="social">
+        <a href="https://www.linkedin.com/in/dwehser" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.artstation.com/dwehser" target="_blank" rel="noopener">ArtStation</a>
+        <a href="https://www.youtube.com/watch?v=rPlgIsu7tXA" target="_blank" rel="noopener">YouTube Film</a>
+        <a href="https://www.youtube.com/@PixelPerfectDigital" target="_blank" rel="noopener">YouTube AI</a>
+        <a href="http://www.imdb.com/name/nm1277925/" target="_blank" rel="noopener">IMDb</a>
+        <a href="http://vimeo.com/dwehser" target="_blank" rel="noopener">Vimeo</a>
+      </div>
+      <p class="copy">&copy; 2026 Darrin Wehser // All rights reserved to respective studios</p>
+    </div>
+  </footer>
+
+<script>
+(function(){
+  var body=document.body;
+  var accentRGB="201,162,75"; /* amber default; refreshed from CSS */
+  function refreshAccent(){
+    var v=getComputedStyle(body).getPropertyValue("--accent-rgb").trim();
+    if(v) accentRGB=v;
+  }
+  refreshAccent();
+
+  /* ---- hero crossfade: your real film stills (Terminator DF / Aquaman / Rogue One) ---- */
+  var BASE="https://static.wixstatic.com/media/";
+  var TX="/v1/fill/w_1920,h_1080,al_c,q_85,enc_auto/";
+  var ids=[
+    "8a02c7_313b9cfa9fdf45f8b57f59d3fecd7bd8~mv2.jpg", /* Terminator DF */
+    "8a02c7_4417dc6083b54e63a9067ea2daa70182~mv2.jpg", /* Terminator DF */
+    "8a02c7_d298b91638f3462aadb95ecdde685768~mv2.jpg", /* Aquaman */
+    "8a02c7_2279d9d8a5f741e0894e2d5adac4d2de~mv2.jpg", /* Aquaman */
+    "8a02c7_0a1fe209dd2a4e56b8504f265437a20c~mv2.jpg", /* Rogue One */
+    "8a02c7_90610d6161ee4cd3b06bcdce38a46037~mv2.jpg"  /* Rogue One */
+  ];
+  var frames=document.querySelectorAll(".frame");
+  frames.forEach(function(f,i){
+    var id=ids[i]; if(!id) return;
+    f.style.backgroundImage="url('"+BASE+id+TX+id+"')";
+  });
+  var cur=0; frames[0] && frames[0].classList.add("on");
+  if(frames.length>1){
+    setInterval(function(){
+      frames[cur].classList.remove("on");
+      cur=(cur+1)%frames.length;
+      frames[cur].classList.add("on");
+    },6500);
+  }
+
+  /* ---- ambient dust ---- */
+  var canvas=document.getElementById("dust");
+  var ctx=canvas.getContext("2d");
+  var reduce=window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  var w,h,dpr,motes=[],N;
+  function resize(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    w=window.innerWidth; h=window.innerHeight;
+    canvas.width=w*dpr; canvas.height=h*dpr;
+    canvas.style.width=w+"px"; canvas.style.height=h+"px";
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    N=Math.min(48,Math.round((w*h)/30000));
+    seed(); if(reduce) draw(true);
+  }
+  function seed(){
+    motes=[];
+    for(var i=0;i<N;i++){
+      motes.push({x:Math.random()*w,y:Math.random()*h,r:0.6+Math.random()*1.6,
+        a:0.10+Math.random()*0.26,vx:-0.05-Math.random()*0.09,vy:-0.04-Math.random()*0.09,
+        ph:Math.random()*Math.PI*2,sp:0.004+Math.random()*0.006});
+    }
+  }
+  function draw(stat){
+    ctx.clearRect(0,0,w,h);
+    for(var i=0;i<motes.length;i++){
+      var m=motes[i], tw=stat?1:(0.6+0.4*Math.sin(m.ph));
+      ctx.beginPath();
+      ctx.fillStyle="rgba(206,222,235,"+(m.a*tw).toFixed(3)+")";
+      ctx.shadowColor="rgba("+accentRGB+",0.55)"; ctx.shadowBlur=6;
+      ctx.arc(m.x,m.y,m.r,0,Math.PI*2); ctx.fill();
+    }
+    ctx.shadowBlur=0;
+  }
+  function step(){
+    for(var i=0;i<motes.length;i++){
+      var m=motes[i]; m.x+=m.vx; m.y+=m.vy; m.ph+=m.sp;
+      if(m.x<-10) m.x=w+10;
+      if(m.y<-10){ m.y=h+10; m.x=Math.random()*w; }
+    }
+    draw(false); requestAnimationFrame(step);
+  }
+  window.addEventListener("resize",resize);
+  resize(); if(!reduce) requestAnimationFrame(step);
+
+  /* ---- accent toggle ---- */
+  var bA=document.getElementById("tAmber"), bC=document.getElementById("tCool");
+  function setTheme(t){
+    body.classList.remove("theme-amber","theme-cool");
+    body.classList.add("theme-"+t);
+    bA.classList.toggle("on", t==="amber");
+    bC.classList.toggle("on", t==="cool");
+    refreshAccent();
+    if(reduce) draw(true);
+  }
+  bA.addEventListener("click", function(){ setTheme("amber"); });
+  bC.addEventListener("click", function(){ setTheme("cool"); });
+})();
+</script>
 </body>
 </html>
