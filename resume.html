@@ -11,8 +11,8 @@
   :root{
     --bg:#070A0E;--bg-soft:#0D1218;
     --line:rgba(231,238,244,0.12);--line-soft:rgba(231,238,244,0.06);
-    --ink:#EAEEF2;--ink-dim:#AEB7C0;--ink-faint:#6E7884;
-    --accent:#7CB3CC;--accent-rgb:124,179,204;   /* default: steel */
+    --ink:#EAEEF2;--ink-dim:#AEB7C0;--ink-faint:#6E7884;--read:#D2D9E0;
+    --accent:#7CB3CC;--accent-rgb:124,179,204;   /* base: steel */
     --maxw:1320px;
   }
   .theme-amber{ --accent:#C9A24B; --accent-rgb:201,162,75; }
@@ -22,18 +22,17 @@
   html{scroll-behavior:smooth;}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:"Spline Sans",system-ui,sans-serif;font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 
-  /* ambient */
   .bloom{position:fixed;top:-30%;left:-10%;right:-10%;height:80vh;z-index:0;pointer-events:none;
     background:radial-gradient(40% 50% at 30% 30%,rgba(var(--accent-rgb),0.10),transparent 70%);filter:blur(34px);transition:background .5s;}
   .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
-    background:radial-gradient(130% 100% at 50% 24%,transparent 52%,rgba(3,5,8,0.42) 84%,rgba(2,3,6,0.9) 100%);}
+    background:radial-gradient(130% 100% at 50% 24%,transparent 58%,rgba(3,5,8,0.38) 88%,rgba(2,3,6,0.85) 100%);}
   .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.04;mix-blend-mode:overlay;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
 
   .wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 36px;}
 
   /* nav */
-  header.top{position:sticky;top:0;z-index:30;background:rgba(7,10,14,0.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);}
+  header.top{position:sticky;top:0;z-index:30;background:rgba(7,10,14,0.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);}
   .bar{display:flex;align-items:center;justify-content:space-between;padding:22px 0;}
   .mark{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;}
   .mark .dot{color:var(--accent);transition:color .4s;}
@@ -42,57 +41,66 @@
   nav a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;}
   nav a:hover,nav a:focus-visible,nav a.active{color:var(--ink);border-color:var(--accent);}
 
-  /* theme toggle */
-  .toggle{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .toggle{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;flex:0 0 auto;}
   .toggle button{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
     background:transparent;color:var(--ink-faint);border:none;padding:7px 12px;cursor:pointer;transition:background .25s,color .25s;}
   .toggle button.on{background:var(--accent);color:#0a0d11;}
 
   /* page head */
-  .pagehead{padding:74px 0 30px;}
-  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:var(--accent);margin:0 0 20px;display:flex;align-items:center;gap:14px;transition:color .4s;}
+  .cv{max-width:920px;margin:0 auto;}
+  .pagehead{padding:70px 0 18px;}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:var(--accent);margin:0 0 18px;display:flex;align-items:center;gap:14px;transition:color .4s;}
   .eyebrow::before{content:"";width:36px;height:1px;background:var(--accent);opacity:.85;transition:background .4s;}
-  .pagehead h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(2.8rem,7vw,5rem);line-height:1.0;letter-spacing:-0.02em;margin:0;}
-  .pagehead p{margin:24px 0 0;max-width:680px;color:var(--ink-dim);font-size:clamp(1.05rem,1.5vw,1.2rem);line-height:1.65;}
+  .pagehead h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(2.8rem,7vw,4.6rem);line-height:1.0;letter-spacing:-0.02em;margin:0;}
+  .title-line{margin:22px 0 0;font-family:"IBM Plex Mono",monospace;font-size:clamp(0.82rem,1.5vw,0.95rem);letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);}
+  .title-line b{color:var(--accent);font-weight:500;transition:color .4s;}
 
-  .head-actions{margin-top:30px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+  .head-actions{margin-top:30px;}
   .btn{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
     color:#0a0d11;background:var(--accent);border:1px solid var(--accent);border-radius:3px;padding:11px 18px;cursor:pointer;text-decoration:none;transition:opacity .25s;}
   .btn:hover{opacity:.86;}
-  .preview-note{display:flex;align-items:center;gap:14px;}
-  .preview-note span{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);}
 
-  /* resume layout */
-  .resume{padding:30px 0 10px;display:grid;grid-template-columns:1fr;gap:8px;}
+  /* sections */
+  .cv-sec{padding:46px 0;border-top:1px solid var(--line);}
+  .sec-kicker{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin:0 0 6px;transition:color .4s;}
+  .cv-sec h2{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.7rem,3.4vw,2.3rem);letter-spacing:-0.015em;margin:0 0 26px;color:var(--ink);}
 
-  .block{padding:46px 0;border-top:1px solid var(--line);}
-  .block:first-child{border-top:none;}
-  .block-grid{display:grid;grid-template-columns:0.42fr 1.58fr;gap:48px;}
-  .block-label{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);transition:color .4s;}
-  .block-label .num{display:block;color:var(--ink-faint);margin-bottom:10px;}
+  .summary{font-size:1.16rem;line-height:1.72;color:var(--read);margin:0;}
 
-  .lede-2{margin:0;color:var(--ink-dim);font-size:1.12rem;line-height:1.72;max-width:680px;}
-  .lede-2 strong{color:var(--ink);font-weight:500;}
+  /* skills */
+  .skill-group{margin:0 0 30px;}
+  .skill-group:last-child{margin-bottom:0;}
+  .skill-group h3{font-family:"Fraunces",serif;font-weight:600;font-size:1.34rem;letter-spacing:-0.01em;margin:0 0 6px;color:var(--ink);}
+  .skill-group h3 + .skill-item{border-top:1px solid var(--line-soft);}
+  .skill-item{padding:15px 0;border-bottom:1px solid var(--line-soft);}
+  .skill-item .k{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.06em;color:var(--ink);display:block;margin-bottom:6px;}
+  .skill-item .v{color:var(--read);line-height:1.66;font-size:1.04rem;}
 
-  /* experience / film rows */
-  .row{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--line-soft);}
-  .row:last-child{border-bottom:none;}
-  .row .when{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:0.08em;color:var(--ink-faint);padding-top:4px;}
-  .row .what h3{font-family:"Fraunces",serif;font-weight:600;font-size:1.32rem;line-height:1.2;letter-spacing:-0.01em;margin:0;color:var(--ink);}
-  .row .what .sub{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-top:7px;transition:color .4s;}
-  .row .what .desc{margin:10px 0 0;color:var(--ink-dim);line-height:1.66;max-width:600px;}
+  /* experience */
+  .job{padding:34px 0;border-bottom:1px solid var(--line-soft);}
+  .job:last-child{border-bottom:none;}
+  .job-head{display:flex;align-items:baseline;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+  .job-co{font-family:"Fraunces",serif;font-weight:600;font-size:1.55rem;letter-spacing:-0.01em;color:var(--ink);margin:0;}
+  .job-dates{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:0.08em;color:var(--ink-faint);white-space:nowrap;}
+  .job-role{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin:8px 0 0;transition:color .4s;}
+  .job-notes{margin:18px 0 0;color:var(--read);line-height:1.7;font-size:1.04rem;}
+  .job-notes ul{margin:8px 0 0;padding-left:18px;}
+  .job-notes li{margin:4px 0;}
+  .subhead{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);margin:24px 0 10px;}
 
-  /* skill groups */
-  .skillgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:30px;}
-  .skillset h4{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink);margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid var(--line-soft);}
-  .chips{display:flex;flex-wrap:wrap;gap:9px;}
-  .chip{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:0.08em;color:var(--ink-dim);border:1px solid var(--line);border-radius:2px;padding:8px 12px;transition:border-color .3s,color .3s;}
-  .chip:hover{border-color:var(--accent);color:var(--ink);}
+  .cred{padding:11px 0;border-top:1px solid var(--line-soft);}
+  .cred:first-of-type{border-top:none;}
+  .cred .ct{color:var(--ink);font-weight:500;}
+  .cred .ct em{color:var(--ink-faint);font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:0.85em;margin-left:6px;}
+  .cred .cr{display:block;color:var(--read);font-size:0.98rem;line-height:1.6;margin-top:3px;}
 
-  .more{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);margin:22px 0 0;}
+  .edu{padding:14px 0;border-top:1px solid var(--line-soft);}
+  .edu:first-of-type{border-top:none;}
+  .edu .school{font-family:"Fraunces",serif;font-weight:600;font-size:1.2rem;color:var(--ink);}
+  .edu .deg{display:block;color:var(--read);margin-top:4px;}
 
   /* footer */
-  footer{position:relative;z-index:2;background:var(--bg);border-top:1px solid var(--line);margin-top:60px;}
+  footer{position:relative;z-index:2;background:var(--bg);border-top:1px solid var(--line);margin-top:50px;}
   .foot-inner{max-width:var(--maxw);margin:0 auto;padding:46px 36px 54px;display:flex;flex-direction:column;gap:28px;}
   .social{display:flex;flex-wrap:wrap;gap:26px;}
   .social a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;transition:color .25s;}
@@ -101,22 +109,21 @@
 
   @media (max-width:760px){
     .wrap{padding:0 20px;} .bar-right{gap:14px;} nav{gap:14px;} nav a{font-size:10.5px;letter-spacing:0.05em;} .mark{font-size:11px;} .toggle button{padding:6px 10px;font-size:10px;}
-    .block-grid{grid-template-columns:1fr;gap:20px;}
-    .row{grid-template-columns:1fr;gap:6px;} .row .when{padding-top:0;}
+    .job-head{gap:4px;}
     .foot-inner{padding:40px 20px;}
   }
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
 
-  /* print / save-as-pdf */
   @media print{
-    .bloom,.vignette,.grain,.toggle,.preview-note,.btn,header.top nav,footer .social{display:none !important;}
+    .bloom,.vignette,.grain,.toggle,.btn,header.top nav,footer .social{display:none !important;}
     body{background:#fff;color:#111;}
-    .pagehead h1,.row .what h3{color:#111;}
-    .eyebrow,.block-label,.row .what .sub,.row .what .yr{color:#666 !important;}
-    .lede-2,.lede-2 strong,.row .what .desc,.chip{color:#222 !important;}
-    .chip,.block,.row{border-color:#ccc !important;}
+    .pagehead h1,.cv-sec h2,.job-co,.skill-group h3,.edu .school,.cred .ct{color:#111 !important;}
+    .eyebrow,.sec-kicker,.job-role,.title-line b,.cred .ct em{color:#555 !important;}
+    .summary,.skill-item .v,.job-notes,.cred .cr,.edu .deg,.title-line,.skill-item .k{color:#222 !important;}
+    .cv-sec,.job,.cred,.edu,.skill-item{border-color:#ccc !important;}
     a{color:#111 !important;}
-    .pagehead{padding-top:20px;}
+    .pagehead{padding-top:16px;}
+    .cv{max-width:none;}
   }
 </style>
 </head>
@@ -146,130 +153,158 @@
   </header>
 
   <main>
-    <section class="wrap pagehead">
-      <p class="eyebrow">Curriculum Vitae // 2001&ndash;2026</p>
-      <h1>Resume</h1>
-      <p>Creative Technical Director with twenty-five years of character grooming, look development, and lighting across feature film and real-time production &mdash; now bridging that craft into MetaHuman pipelines and generative AI.</p>
-      <div class="head-actions">
-        <button class="btn" type="button" onclick="window.print()">Print / Save as PDF</button>
-      </div>
-    </section>
+    <div class="wrap">
+      <div class="cv">
 
-    <section class="wrap resume">
-
-      <!-- PROFILE -->
-      <div class="block">
-        <div class="block-grid">
-          <div class="block-label"><span class="num">01</span>Profile</div>
-          <div>
-            <p class="lede-2">Twenty-five years as a grooming, look-development, and lighting technical director at world-class studios, with credits on <strong>36 feature films</strong> across iconic franchises. Currently focused on <strong>real-time character grooming in Unreal Engine</strong> and the in-engine Groom Asset Editor, alongside <strong>generative AI</strong> tooling &mdash; translating legacy cinematic craft into next-generation neural pipelines.</p>
+        <section class="pagehead">
+          <p class="eyebrow">Curriculum Vitae // 2026</p>
+          <h1>Resume</h1>
+          <p class="title-line">Creative Technical Director &nbsp;<b>|</b>&nbsp; Groom &amp; LookDev Supervisor &nbsp;<b>|</b>&nbsp; Generative AI Artist</p>
+          <div class="head-actions">
+            <button class="btn" type="button" onclick="window.print()">Print / Save as PDF</button>
           </div>
-        </div>
-      </div>
+        </section>
 
-      <!-- EXPERIENCE -->
-      <div class="block">
-        <div class="block-grid">
-          <div class="block-label"><span class="num">02</span>Experience</div>
-          <div>
-            <div class="row">
-              <div class="when">Present</div>
-              <div class="what">
-                <h3>Epic Games</h3>
-                <div class="sub">Creative Technical Director &middot; Real-Time Groom &amp; LookDev</div>
-                <p class="desc">MetaHuman development across Unreal Engine 4.28 through 5.7, focused on the in-engine Groom Asset Editor. Built a parametric hair-grooming toolkit spanning Houdini 19.5&ndash;21 and authored the technical documentation for the toolset in UE 5.6 and 5.7.</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="when">Feature Film</div>
-              <div class="what">
-                <h3>Industrial Light &amp; Magic</h3>
-                <div class="sub">Senior Groom / LookDev / Lighting TD</div>
-                <p class="desc">Grooming, look development, and lighting technical direction for tentpole features, from <em>Star Wars: Rogue One</em> to <em>Thor: Ragnarok</em>.</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="when">Feature Film</div>
-              <div class="what">
-                <h3>Rhythm &amp; Hues Studios</h3>
-                <div class="sub">LookDev / Groom / Lighting TD</div>
-                <p class="desc">Character and creature work across an extended run of feature films, leading grooming and look development on multiple titles.</p>
-              </div>
-            </div>
+        <!-- SUMMARY -->
+        <section class="cv-sec">
+          <p class="sec-kicker">Profile</p>
+          <h2>Summary</h2>
+          <p class="summary">Creative and technical leader with 25+ years in the film industry, specializing in hair/fur grooming and look development, primarily at the supervisory level. Over the past six years, transitioned from traditional film pipelines into real-time workflows in Unreal Engine while developing custom grooming tools in SideFX Houdini. Currently focused on combining deep 3D production experience with emerging AI technologies to advance next-generation pipelines.</p>
+        </section>
+
+        <!-- SKILLS -->
+        <section class="cv-sec">
+          <p class="sec-kicker">Capabilities</p>
+          <h2>Technical Skills &amp; Expertise</h2>
+
+          <div class="skill-group">
+            <h3>VFX &amp; Real-Time Production</h3>
+            <div class="skill-item"><span class="k">Unreal Engine &mdash; 6+ Years</span><span class="v">Expert in real-time grooming workflows and asset integration; contributed to internal pipeline development for the MetaHuman team at Epic Games.</span></div>
+            <div class="skill-item"><span class="k">High-End Groom Stack</span><span class="v">SideFX Houdini (v19&ndash;21) and Maya XGen; specialist in procedural groom tool architecture for hair and fur strands.</span></div>
+            <div class="skill-item"><span class="k">Look Development Stack</span><span class="v">Katana, RenderMan, Nuke, Maya, and Adobe Photoshop.</span></div>
+            <div class="skill-item"><span class="k">Legacy &amp; Proprietary Grooming Systems</span><span class="v">Extensive experience developing and utilizing world-class proprietary grooming software at ILM and Rhythm &amp; Hues &mdash; applied across 36 feature films.</span></div>
           </div>
-        </div>
-      </div>
 
-      <!-- SKILLS -->
-      <div class="block">
-        <div class="block-grid">
-          <div class="block-label"><span class="num">03</span>Tools &amp; Disciplines</div>
-          <div class="skillgrid">
-            <div class="skillset">
-              <h4>Real-Time / Engine</h4>
-              <div class="chips">
-                <span class="chip">Unreal Engine 4.28&ndash;5.7</span>
-                <span class="chip">MetaHuman</span>
-                <span class="chip">Groom Asset Editor</span>
-              </div>
-            </div>
-            <div class="skillset">
-              <h4>Procedural</h4>
-              <div class="chips">
-                <span class="chip">Houdini 19.5&ndash;21</span>
-                <span class="chip">Parametric Groom Toolkit</span>
-              </div>
-            </div>
-            <div class="skillset">
-              <h4>Generative AI</h4>
-              <div class="chips">
-                <span class="chip">Midjourney</span>
-                <span class="chip">ChatGPT</span>
-                <span class="chip">Gemini</span>
-                <span class="chip">Claude</span>
-                <span class="chip">Higgsfield</span>
-              </div>
-            </div>
-            <div class="skillset">
-              <h4>Core Craft</h4>
-              <div class="chips">
-                <span class="chip">Character Grooming</span>
-                <span class="chip">Look Development</span>
-                <span class="chip">Lighting</span>
-              </div>
-            </div>
+          <div class="skill-group">
+            <h3>Generative AI &amp; Emerging Technology</h3>
+            <div class="skill-item"><span class="k">AI Implementation</span><span class="v">Proficient in Midjourney for high-fidelity visual development; leveraging ChatGPT, Google AI Suite, and Claude to augment creative workflows and asset ideation.</span></div>
+            <div class="skill-item"><span class="k">Advanced Media Generation</span><span class="v">Proficient in Higgsfield (AI video), Suno (AI audio), and Google AI Suite for production-ready content.</span></div>
+            <div class="skill-item"><span class="k">Workflow Evolution</span><span class="v">Actively merging 25+ years of production logic with emerging AI tools to accelerate asset iteration and look development.</span></div>
           </div>
-        </div>
-      </div>
 
-      <!-- FILMOGRAPHY -->
-      <div class="block">
-        <div class="block-grid">
-          <div class="block-label"><span class="num">04</span>Selected Filmography</div>
-          <div>
-            <div class="row"><div class="when">2019</div><div class="what"><h3>Terminator: Dark Fate</h3><div class="sub">Groom Supervisor</div></div></div>
-            <div class="row"><div class="when">2018</div><div class="what"><h3>Aquaman</h3><div class="sub">Groom Supervisor / Lighting TD</div></div></div>
-            <div class="row"><div class="when">2017</div><div class="what"><h3>Thor: Ragnarok</h3><div class="sub">Seq. Lead Lighting TD</div></div></div>
-            <div class="row"><div class="when">2016</div><div class="what"><h3>Rogue One: A Star Wars Story</h3><div class="sub">Lead Groom &mdash; Tarkin, Leia</div></div></div>
-            <div class="row"><div class="when">2016</div><div class="what"><h3>TMNT: Out of the Shadows</h3><div class="sub">Lead Groom &mdash; Splinter</div></div></div>
-            <div class="row"><div class="when">2016</div><div class="what"><h3>Warcraft</h3><div class="sub">Groom / LookDev / Lighting TD</div></div></div>
-            <div class="row"><div class="when">2012</div><div class="what"><h3>Snow White and the Huntsman</h3><div class="sub">LookDev / Groom Supervisor</div></div></div>
-            <div class="row"><div class="when">2010</div><div class="what"><h3>Knight and Day</h3><div class="sub">Lead LookDev / Groom TD</div></div></div>
-            <div class="row"><div class="when">2009</div><div class="what"><h3>Cirque du Freak</h3><div class="sub">Lead Groom / LookDev / Lighting TD</div></div></div>
-            <div class="row"><div class="when">2008</div><div class="what"><h3>The Incredible Hulk</h3><div class="sub">Lead LookDev / Groom TD</div></div></div>
-            <div class="row"><div class="when">2006</div><div class="what"><h3>Night at the Museum</h3><div class="sub">Groom / LookDev / Lighting Lead</div></div></div>
-            <div class="row"><div class="when">2006</div><div class="what"><h3>Garfield: A Tail of Two Kitties</h3><div class="sub">Groom / LookDev / Lighting Lead</div></div></div>
-            <div class="row"><div class="when">2005</div><div class="what"><h3>Elektra</h3><div class="sub">LookDev / Groom / Lighting TD</div></div></div>
-            <div class="row"><div class="when">2004</div><div class="what"><h3>Garfield: The Movie</h3><div class="sub">Lead Groom / Lead LookDev / Lighting TD</div></div></div>
-            <div class="row"><div class="when">2003</div><div class="what"><h3>The Cat in the Hat</h3><div class="sub">Groom / LookDev / Lighting TD</div></div></div>
-            <div class="row"><div class="when">2001</div><div class="what"><h3>Dr. Dolittle 2</h3><div class="sub">Groom / Lighting TD</div></div></div>
-            <div class="row"><div class="when">2001</div><div class="what"><h3>Harry Potter and the Sorcerer's Stone</h3><div class="sub">Lighting TD</div></div></div>
-            <p class="more">Showing 17 of 36 feature credits &middot; full list on IMDb</p>
+          <div class="skill-group">
+            <h3>Pipeline Development &amp; Leadership</h3>
+            <div class="skill-item"><span class="k">Architectural Engineering</span><span class="v">Co-developed industry-leading grooming pipelines and workflows at Epic Games, ILM, and Rhythm &amp; Hues.</span></div>
+            <div class="skill-item"><span class="k">Supervision</span><span class="v">Groom and look-development supervision for major motion pictures and AAA game development.</span></div>
+            <div class="skill-item"><span class="k">Cross-Functional Leadership</span><span class="v">Expert at bridging artistic vision, R&amp;D, and engineering to deliver production-ready solutions.</span></div>
           </div>
-        </div>
-      </div>
+        </section>
 
-    </section>
+        <!-- EXPERIENCE -->
+        <section class="cv-sec">
+          <p class="sec-kicker">History</p>
+          <h2>Work Experience</h2>
+
+          <div class="job">
+            <div class="job-head">
+              <h3 class="job-co">Epic Games &mdash; MetaHuman Team, Special Projects</h3>
+              <span class="job-dates">Nov 2019 &ndash; Mar 2026</span>
+            </div>
+            <p class="job-role">Technical Director &middot; Sr. Groom Artist</p>
+            <div class="job-notes">
+              <ul>
+                <li>Unreal Engine releases 4.28 &ndash; 5.7.</li>
+                <li>Development team for the MetaHuman Groom Asset Editor.</li>
+                <li>Development team for MetaHuman Groom Tools in Houdini.</li>
+                <li>MetaHuman Groom Advanced Kit for Houdini 21.</li>
+                <li>MetaHuman Groom Tool documentation.</li>
+              </ul>
+            </div>
+            <p class="subhead">Client Grooms</p>
+            <div class="cred"><span class="ct">Ninja Theory &mdash; Senua's Saga: Hellblade II</span></div>
+            <div class="cred"><span class="ct">Kojima Productions</span></div>
+            <div class="cred"><span class="ct">Skydance Media &mdash; Marvel 1943: Rise of Hydra</span></div>
+            <div class="cred"><span class="ct">CD Projekt Red</span></div>
+            <p class="subhead">Featured Projects</p>
+            <div class="cred"><span class="ct">The Matrix Awakens: An Unreal Engine 5 Experience</span><span class="cr">MetaHuman Creator &mdash; Young Keanu Reeves groom.</span></div>
+            <div class="cred"><span class="ct">Mold3D Studio &mdash; "Slay" Animation Sample Project</span><span class="cr">Unreal Engine &mdash; Echo groom.</span></div>
+          </div>
+
+          <div class="job">
+            <div class="job-head">
+              <h3 class="job-co">Industrial Light &amp; Magic &mdash; San Francisco</h3>
+              <span class="job-dates">Feb 2014 &ndash; Oct 2019</span>
+            </div>
+            <p class="job-role">Groom Supervisor &middot; Senior Groom Artist &middot; Senior Lighting TD</p>
+            <p class="subhead">Films</p>
+            <div class="cred"><span class="ct">Terminator: Dark Fate <em>(2019)</em></span><span class="cr">Groom Supervisor &mdash; Sarah and John Connor, Terminator grooms, and background digital-double grooms.</span></div>
+            <div class="cred"><span class="ct">Aquaman <em>(2018)</em></span><span class="cr">Groom Supervisor / Lighting TD &mdash; Aquaman and background grooms.</span></div>
+            <div class="cred"><span class="ct">Thor: Ragnarok <em>(2017)</em></span><span class="cr">Sequence Lead Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Rogue One: A Star Wars Story <em>(2016)</em></span><span class="cr">Lead Groom &mdash; Grand Moff Tarkin, Princess Leia, and background characters. LookDev / Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Teenage Mutant Ninja Turtles: Out of the Shadows <em>(2016)</em></span><span class="cr">Lead Groom / LookDev TD &mdash; Splinter groom.</span></div>
+            <div class="cred"><span class="ct">Warcraft <em>(2016)</em></span><span class="cr">Groom / LookDev / Lighting TD &mdash; twenty-four grooms including Blackhand and Draka.</span></div>
+            <div class="cred"><span class="ct">The Revenant <em>(2015)</em></span><span class="cr">Groom / LookDev TD &mdash; bear cubs, deer, and wolf grooms.</span></div>
+            <div class="cred"><span class="ct">Transformers: Age of Extinction <em>(2014)</em></span><span class="cr">Lighting TD.</span></div>
+          </div>
+
+          <div class="job">
+            <div class="job-head">
+              <h3 class="job-co">Rhythm &amp; Hues Studios</h3>
+              <span class="job-dates">Jun 2000 &ndash; Nov 2013</span>
+            </div>
+            <p class="job-role">Groom &amp; LookDev Supervisor &middot; Sequence Lighting Lead</p>
+            <p class="subhead">Films</p>
+            <div class="cred"><span class="ct">Seventh Son <em>(2014)</em></span><span class="cr">LookDev / Groom Supervisor.</span></div>
+            <div class="cred"><span class="ct">Django Unchained <em>(2012)</em></span><span class="cr">LookDev Supervisor.</span></div>
+            <div class="cred"><span class="ct">Snow White and the Huntsman <em>(2012)</em></span><span class="cr">LookDev / Groom Supervisor.</span></div>
+            <div class="cred"><span class="ct">The Cabin in the Woods <em>(2012)</em></span><span class="cr">Lead Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Mr. Popper's Penguins <em>(2011)</em></span><span class="cr">LookDev / Groom Supervisor.</span></div>
+            <div class="cred"><span class="ct">Hop <em>(2011)</em></span><span class="cr">Environment Supervisor.</span></div>
+            <div class="cred"><span class="ct">Knight and Day <em>(2010)</em></span><span class="cr">Lead Look Development / Groom TD.</span></div>
+            <div class="cred"><span class="ct">Land of the Lost <em>(2009)</em></span><span class="cr">Environment Supervisor.</span></div>
+            <div class="cred"><span class="ct">Cirque du Freak <em>(2009)</em></span><span class="cr">Lead Groom / Lead Look Development / Lighting TD.</span></div>
+            <div class="cred"><span class="ct">The Incredible Hulk <em>(2008)</em></span><span class="cr">Lead Look Development / Groom TD.</span></div>
+            <div class="cred"><span class="ct">Night at the Museum <em>(2006)</em></span><span class="cr">Groom / Look Development / Lighting Lead / Sequence Lead.</span></div>
+            <div class="cred"><span class="ct">Garfield: A Tail of Two Kitties <em>(2006)</em></span><span class="cr">Groom / Look Development / Lighting Lead / Sequence Lead.</span></div>
+            <div class="cred"><span class="ct">The Chronicles of Narnia <em>(2005)</em></span><span class="cr">Lead Look Development / Groom TD.</span></div>
+            <div class="cred"><span class="ct">Elektra <em>(2005)</em></span><span class="cr">Look Development / Groom / Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Garfield <em>(2004)</em></span><span class="cr">Lead Groom / Lead Look Development / Lighting TD.</span></div>
+            <div class="cred"><span class="ct">The Cat in the Hat <em>(2003)</em></span><span class="cr">Groom / Look Development / Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Daredevil <em>(2003)</em></span><span class="cr">Look Development / Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Scooby-Doo <em>(2002)</em></span><span class="cr">Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Harry Potter <em>(2001)</em></span><span class="cr">Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Dr. Dolittle 2 <em>(2001)</em></span><span class="cr">Groom / Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Cats &amp; Dogs <em>(2001)</em></span><span class="cr">Groom / Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Red Planet <em>(2000)</em></span><span class="cr">Matchmoving.</span></div>
+            <div class="cred"><span class="ct">The 6th Day <em>(2000)</em></span><span class="cr">Matchmoving.</span></div>
+          </div>
+
+          <div class="job">
+            <div class="job-head">
+              <h3 class="job-co">Stargate Films Inc.</h3>
+              <span class="job-dates">Sep 1999 &ndash; Jun 2000</span>
+            </div>
+            <p class="job-role">Maya Generalist</p>
+            <p class="subhead">Projects</p>
+            <div class="cred"><span class="ct">Santa Who? <em>(NBC, 2000)</em></span></div>
+            <div class="cred"><span class="ct">Race Against Time <em>(TNT, 2000)</em></span></div>
+            <div class="cred"><span class="ct">Running Mates <em>(TNT, 2000)</em></span></div>
+            <div class="cred"><span class="ct">The Little Richard Story <em>(NBC, 2000)</em></span></div>
+            <div class="cred"><span class="ct">Hardee's Commercial <em>(2000)</em></span></div>
+            <div class="cred"><span class="ct">Millennium Man <em>(Paramount, 1999)</em></span></div>
+          </div>
+        </section>
+
+        <!-- EDUCATION -->
+        <section class="cv-sec">
+          <p class="sec-kicker">Background</p>
+          <h2>Education</h2>
+          <div class="edu"><span class="school">Academy of Art College &mdash; San Francisco, CA</span><span class="deg">Master of Fine Arts, Computer Arts &mdash; 1999</span></div>
+          <div class="edu"><span class="school">San Francisco State University &mdash; San Francisco, CA</span><span class="deg">B.A., Interdisciplinary &mdash; Graphic Design &mdash; 1995</span></div>
+        </section>
+
+      </div>
+    </div>
   </main>
 
   <footer>
@@ -299,4 +334,3 @@
 </script>
 </body>
 </html>
-
