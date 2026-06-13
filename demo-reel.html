@@ -1,95 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Reel | Darrin Wehser</title>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg: #000000; --card-bg: #050505; --border: #27272a; --text-main: #ffffff; --text-dim: #d4d4d8; --accent: #38bdf8; --meta: #71717a; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg); color: var(--text-main); font-family: 'Geist', sans-serif; line-height: 1.6; }
-        
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 8%; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(12px); z-index: 100; }
-        .logo { font-weight: 700; font-size: 1rem; }
-        .logo a { color: #fff; text-decoration: none; }
-        .nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 2.5rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Demo Reel | Darrin Wehser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Spline+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#070A0E;--bg-soft:#0D1218;
+    --line:rgba(231,238,244,0.12);--line-soft:rgba(231,238,244,0.06);
+    --ink:#EAEEF2;--ink-dim:#AEB7C0;--ink-faint:#6E7884;--read:#D2D9E0;
+    --accent:#7CB3CC;--accent-rgb:124,179,204;   /* base: steel */
+    --maxw:1320px;
+  }
+  .theme-amber{ --accent:#C9A24B; --accent-rgb:201,162,75; }
+  .theme-cool{  --accent:#7CB3CC; --accent-rgb:124,179,204; }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 4rem 5% 10rem; }
-        h1 { font-size: 2.5rem; margin-bottom: 3rem; }
-        h2 { font-size: 1.5rem; margin-bottom: 1rem; color: #fff; }
-        h6 { font-size: 1.1rem; color: var(--accent); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
-        p { margin-bottom: 1.5rem; color: var(--text-dim); font-size: 0.95rem; }
-        
-        .video-section { margin-bottom: 5rem; }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 4px; margin-bottom: 2rem; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        
-        .btn-link { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); border: 1px solid var(--border); padding: 10px 20px; text-decoration: none; border-radius: 4px; margin-right: 1rem; margin-bottom: 1rem; }
-        .btn-link:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Spline Sans",system-ui,sans-serif;font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 
-        footer { padding: 4rem 8%; border-top: 1px solid var(--border); text-align: center; }
-        .social-links { display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3rem; }
-        .social-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; }
-        .social-links a:hover { color: var(--accent); }
-        .copyright { font-size: 0.65rem; color: #52525b; font-family: 'JetBrains Mono', monospace; }
-    </style>
+  .bloom{position:fixed;top:-30%;left:-10%;right:-10%;height:80vh;z-index:0;pointer-events:none;
+    background:radial-gradient(40% 50% at 30% 30%,rgba(var(--accent-rgb),0.10),transparent 70%);filter:blur(34px);transition:background .5s;}
+  .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(130% 100% at 50% 24%,transparent 58%,rgba(3,5,8,0.38) 88%,rgba(2,3,6,0.85) 100%);}
+  .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.04;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
+
+  .wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 36px;}
+
+  /* nav */
+  header.top{position:sticky;top:0;z-index:30;background:rgba(7,10,14,0.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);}
+  .bar{display:flex;align-items:center;justify-content:space-between;padding:22px 0;}
+  .mark{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;}
+  .mark .dot{color:var(--accent);transition:color .4s;}
+  .bar-right{display:flex;align-items:center;gap:24px;}
+  nav{display:flex;gap:28px;align-items:center;}
+  nav a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;}
+  nav a:hover,nav a:focus-visible,nav a.active{color:var(--ink);border-color:var(--accent);}
+
+  .toggle{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;flex:0 0 auto;}
+  .toggle button{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+    background:transparent;color:var(--ink-faint);border:none;padding:7px 12px;cursor:pointer;transition:background .25s,color .25s;}
+  .toggle button.on{background:var(--accent);color:#0a0d11;}
+
+  /* page head */
+  .reel{max-width:960px;margin:0 auto;}
+  .pagehead{padding:70px 0 18px;}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:var(--accent);margin:0 0 18px;display:flex;align-items:center;gap:14px;transition:color .4s;}
+  .eyebrow::before{content:"";width:36px;height:1px;background:var(--accent);opacity:.85;transition:background .4s;}
+  .pagehead h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(2.8rem,7vw,4.6rem);line-height:1.0;letter-spacing:-0.02em;margin:0;}
+  .pagehead p{margin:22px 0 0;max-width:640px;color:var(--read);font-size:clamp(1.05rem,1.5vw,1.18rem);line-height:1.68;}
+
+  /* section */
+  .sec{padding:50px 0;border-top:1px solid var(--line);}
+  .sec-kicker{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin:0 0 6px;transition:color .4s;}
+  .sec h2{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.8rem,3.6vw,2.5rem);letter-spacing:-0.015em;margin:0;color:var(--ink);}
+  .sec .role{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-dim);margin:14px 0 0;}
+  .sec .blurb{margin:22px 0 0;color:var(--read);line-height:1.72;font-size:1.08rem;max-width:680px;}
+
+  /* video */
+  .video{position:relative;width:100%;padding-bottom:56.25%;height:0;margin:30px 0 0;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#000;box-shadow:0 24px 60px rgba(0,0,0,0.45);}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+
+  /* link buttons */
+  .links-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px;}
+  .lbtn{display:inline-flex;align-items:center;gap:10px;font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:3px;padding:13px 18px;transition:border-color .25s,color .25s,background .25s;}
+  .lbtn:hover{border-color:var(--accent);color:var(--accent);background:rgba(var(--accent-rgb),0.05);}
+  .lbtn.solid{background:var(--accent);border-color:var(--accent);color:#0a0d11;}
+  .lbtn.solid:hover{opacity:.86;color:#0a0d11;}
+  .lbtn .arr{color:var(--accent);transition:color .25s;}
+  .lbtn:hover .arr,.lbtn.solid .arr{color:inherit;}
+
+  /* breakdown list */
+  .breakdown{margin-top:34px;}
+  .shot{padding:24px 0;border-top:1px solid var(--line-soft);}
+  .shot:first-child{border-top:none;}
+  .shot h3{font-family:"Fraunces",serif;font-weight:600;font-size:1.4rem;letter-spacing:-0.01em;margin:0;color:var(--ink);}
+  .shot .sr{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin:7px 0 0;transition:color .4s;}
+  .shot p{margin:12px 0 0;color:var(--read);line-height:1.72;font-size:1.04rem;max-width:700px;}
+
+  /* footer */
+  footer{position:relative;z-index:2;background:var(--bg);border-top:1px solid var(--line);margin-top:50px;}
+  .foot-inner{max-width:var(--maxw);margin:0 auto;padding:46px 36px 54px;display:flex;flex-direction:column;gap:28px;}
+  .social{display:flex;flex-wrap:wrap;gap:26px;}
+  .social a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;transition:color .25s;}
+  .social a:hover{color:var(--accent);}
+  .copy{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);}
+
+  @media (max-width:760px){
+    .wrap{padding:0 20px;} .bar-right{gap:14px;} nav{gap:14px;} nav a{font-size:10.5px;letter-spacing:0.05em;} .mark{font-size:11px;} .toggle button{padding:6px 10px;font-size:10px;}
+    .foot-inner{padding:40px 20px;}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style>
 </head>
-<body>
-    <nav>
-        <div class="logo"><a href="index.html">Darrin Wehser</a></div>
-        <div class="nav-links">
+<body class="theme-amber">
+  <div class="bloom" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="wrap">
+      <div class="bar">
+        <a class="mark" href="index.html">DARRIN WEHSER<span class="dot">.</span></a>
+        <div class="bar-right">
+          <nav>
             <a href="portfolio.html">Portfolio</a>
-            <a href="demo-reel.html">Demo Reel</a>
+            <a href="demo-reel.html" class="active">Demo Reel</a>
             <a href="resume.html">Resume</a>
-            <a href="index.html#contact">Contact</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+          <div class="toggle" role="group" aria-label="Accent color">
+            <button id="tAmber" type="button" class="on">Amber</button>
+            <button id="tCool" type="button">Steel</button>
+          </div>
         </div>
-    </nav>
-
-    <div class="container">
-        <h1>Technical Showcases</h1>
-
-        <div class="video-section">
-            <h2>2026 Unreal Engine</h2>
-            <h6>Technical Artist | Sr. Groom Artist</h6>
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/WqWpwVaewEU" allowfullscreen></iframe>
-            </div>
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/rfKzdI9X9Hg" allowfullscreen></iframe>
-            </div>
-            <p>Unreal Fests 2025</p>
-            <p>These presentations were a collaborative effort with the groom team at Epic Games. While tools were being developed, we took on UE documentation of the MetaHuman Groom tools and these Unreal Fest presentations.</p>
-            <p>The link below is to an Advanced Groom Tutorial I did while developing the MetaHuman groom tools. This was released for 5.6 as part of the tool release and updated for 5.7.</p>
-            <a href="https://dev.epicgames.com/documentation/metahuman/metahuman-for-houdini" class="btn-link" target="_blank">MetaHuman Groom Tool Documentation</a>
-            <a href="https://www.fab.com/listings/165c4244-482f-4e37-9200-dd782972cdde" class="btn-link" target="_blank">MetaHuman Advanced Groom Kit for Houdini</a>
-        </div>
-
-        <div class="video-section">
-            <h2>2014 Demo Reel</h2>
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/rPlgIsu7tXA" allowfullscreen></iframe>
-            </div>
-            <h6>Groom Supervisor | Lookdev Supervisor | Senior Lighting TD</h6>
-            <p>I was the Groom/Lookdev Supervisor for the Academy nominated Snow White and the Huntsman movie. This reel highlights the creatures and environments that I supervised and the work that I did on the show.</p>
-            <p>I was the Groom/Lookdev Supervisor on Mr. Poppers Penguins. Myself and another Senior Lookdev Artist we're tasked with completing an entire gentoo penguin in one month so we split the work down the middle. I did eyes, mouth, feet, skin and fur on wings, and tail feathers.</p>
-            <p>For Cabin in the Woods I was a Lighting TD. I worked on the elevator shot for nine months. We used a combination of Massive crowds and hero elevators streams to complete the shot. Elevators were filled with 2d and 3d creatures. I also lit two of the dragon bats sequence shots.</p>
-            <p>On Knight and Day I was a Senior Groom/Lookdev artist. I groomed all of the bulls for this show. There was a main hero bull and eight different variations based on it. Four of those had entirely different grooms and I completed all of these within a two month period.</p>
-            <p>I was a Senior Groom/Lookdev/Lighting Artist on Cirque du Freak: The Vampire's Assistant. My work on this show included setting up the skinny man, four of the tiny zombies, and several character props. I started the show developing the look of the “Skinny Man.” For the “zombies” I did the look development on the skin which included their heads, hands and feet. A separate artist did the robes. For the “Skinny Man” sequence I helped develop the lighting.</p>
-            <p>On The Incredible Hulk I was the Lead Groom/Lookdev Artist. I did the initial setup on Hulk including several months of skin R & D. I then moved onto grooming Hulk’s hair and all of the ripped up clothes he wore. After that, I set up “The Abomination” and I passed the Hulk on to another lead lookdev artist and oversaw the development of the Abomination through the rest of the show. The Hulk and Abomination also had up to nine flavors each for levels of dirtiness. Each of these flavors needed different stages of grooms and textures for varies parts of the movie.</p>
-        </div>
+      </div>
     </div>
+  </header>
 
-    <footer>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/dwehser" target="_blank">LINKEDIN</a>
-            <a href="https://www.artstation.com/dwehser" target="_blank">ARTSTATION</a>
-            <a href="https://www.youtube.com/watch?v=rPlgIsu7tXA" target="_blank">YOUTUBE</a>
-            <a href="http://www.imdb.com/name/nm1277925/" target="_blank">IMDB</a>
-            <a href="http://vimeo.com/dwehser" target="_blank">VIMEO</a>
-        </div>
-        <div class="copyright">© 2026 DARRIN WEHSER // CINEMATIC & ENGINE ARCHIVE</div>
-    </footer>
+  <main>
+    <div class="wrap">
+      <div class="reel">
+
+        <section class="pagehead">
+          <p class="eyebrow">Showreel // 2014&ndash;2026</p>
+          <h1>Demo Reel</h1>
+          <p>Selected real-time and feature-film work &mdash; from MetaHuman groom-tool development at Epic Games to supervised creature and look-development work across 25+ years of film.</p>
+        </section>
+
+        <!-- 2026 UNREAL -->
+        <section class="sec">
+          <p class="sec-kicker">2026 // Unreal Engine</p>
+          <h2>MetaHuman Groom Tools &amp; Documentation</h2>
+          <p class="role">Technical Artist &middot; Sr. Groom Artist</p>
+          <p class="blurb">These presentations were a collaborative effort with the groom team at Epic Games. While the tools were being developed, we authored the Unreal Engine documentation for the MetaHuman Groom tools alongside the Unreal Fest 2025 presentations. The advanced groom tutorial below was created during development of the MetaHuman Groom tools &mdash; released for UE 5.6 as part of the tool release and updated for 5.7.</p>
+          <div class="links-row">
+            <a class="lbtn solid" href="https://dev.epicgames.com/documentation/metahuman/metahuman-for-houdini" target="_blank" rel="noopener">MetaHuman Groom Documentation <span class="arr">&rarr;</span></a>
+            <a class="lbtn" href="https://www.fab.com/listings/165c4244-482f-4e37-9200-dd782972cdde" target="_blank" rel="noopener">Advanced Groom Kit on Fab <span class="arr">&rarr;</span></a>
+          </div>
+        </section>
+
+        <!-- 2014 REEL -->
+        <section class="sec">
+          <p class="sec-kicker">2014 // Feature Film</p>
+          <h2>Demo Reel</h2>
+          <p class="role">Groom Supervisor &middot; LookDev Supervisor &middot; Senior Lighting TD</p>
+
+          <div class="video">
+            <iframe src="https://www.youtube.com/embed/rPlgIsu7tXA?rel=0" title="Darrin Wehser 2014 Demo Reel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="links-row">
+            <a class="lbtn" href="https://vimeo.com/dwehser" target="_blank" rel="noopener">Watch on Vimeo <span class="arr">&rarr;</span></a>
+            <a class="lbtn" href="https://www.youtube.com/watch?v=rPlgIsu7tXA" target="_blank" rel="noopener">Watch on YouTube <span class="arr">&rarr;</span></a>
+          </div>
+
+          <div class="breakdown">
+            <div class="shot">
+              <h3>Snow White and the Huntsman</h3>
+              <p class="sr">Groom / LookDev Supervisor</p>
+              <p>Supervised the groom and look development on the Academy Award&ndash;nominated feature. The reel highlights the creatures and environments I oversaw, along with the work I delivered on the show.</p>
+            </div>
+            <div class="shot">
+              <h3>Mr. Popper's Penguins</h3>
+              <p class="sr">Groom / LookDev Supervisor</p>
+              <p>Another senior LookDev artist and I were tasked with completing an entire gentoo penguin in one month, so we split the work down the middle. I handled eyes, mouth, feet, skin, and the fur on the wings and tail feathers.</p>
+            </div>
+            <div class="shot">
+              <h3>The Cabin in the Woods</h3>
+              <p class="sr">Lighting TD</p>
+              <p>Worked on the elevator shot for nine months, using a combination of Massive crowds and hero elevator streams filled with 2D and 3D creatures. I also lit two of the dragon-bat sequence shots.</p>
+            </div>
+            <div class="shot">
+              <h3>Knight and Day</h3>
+              <p class="sr">Senior Groom / LookDev Artist</p>
+              <p>Groomed all of the bulls for the show &mdash; a main hero bull plus eight variations, four of which had entirely different grooms &mdash; completing them within a two-month period.</p>
+            </div>
+            <div class="shot">
+              <h3>Cirque du Freak: The Vampire's Assistant</h3>
+              <p class="sr">Senior Groom / LookDev / Lighting Artist</p>
+              <p>Set up the Skinny Man, four of the tiny zombies, and several character props, starting by developing the look of the Skinny Man. For the zombies I handled look development on the skin &mdash; heads, hands, and feet (a separate artist did the robes) &mdash; and helped develop the lighting for the Skinny Man sequence.</p>
+            </div>
+            <div class="shot">
+              <h3>The Incredible Hulk</h3>
+              <p class="sr">Lead Groom / LookDev Artist</p>
+              <p>Handled the initial setup on Hulk, including several months of skin R&amp;D, then groomed Hulk's hair and his torn clothing. I set up the Abomination and oversaw its development through the rest of the show. Hulk and the Abomination each had up to nine "flavors" for levels of dirtiness, each requiring different groom and texture stages for various parts of the film.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- GENERATIVE AI -->
+        <section class="sec">
+          <p class="sec-kicker">2026 // Generative AI</p>
+          <h2>AI Showreel</h2>
+          <p class="blurb">Ongoing generative-AI work &mdash; visual development, AI video, and look exploration &mdash; lives on the Pixel Perfect Digital channel.</p>
+          <div class="links-row">
+            <a class="lbtn solid" href="https://www.youtube.com/@PixelPerfectDigital" target="_blank" rel="noopener">Pixel Perfect Digital on YouTube <span class="arr">&rarr;</span></a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="foot-inner">
+      <div class="social">
+        <a href="https://www.linkedin.com/in/dwehser" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.artstation.com/dwehser" target="_blank" rel="noopener">ArtStation</a>
+        <a href="https://www.youtube.com/watch?v=rPlgIsu7tXA" target="_blank" rel="noopener">YouTube Film</a>
+        <a href="https://www.youtube.com/@PixelPerfectDigital" target="_blank" rel="noopener">YouTube AI</a>
+        <a href="http://www.imdb.com/name/nm1277925/" target="_blank" rel="noopener">IMDb</a>
+        <a href="http://vimeo.com/dwehser" target="_blank" rel="noopener">Vimeo</a>
+      </div>
+      <p class="copy">&copy; 2026 Darrin Wehser // All rights reserved to respective studios</p>
+    </div>
+  </footer>
+
+<script>
+  var body=document.body, bA=document.getElementById("tAmber"), bC=document.getElementById("tCool");
+  function setTheme(t){
+    body.classList.remove("theme-amber","theme-cool");
+    body.classList.add("theme-"+t);
+    bA.classList.toggle("on", t==="amber");
+    bC.classList.toggle("on", t==="cool");
+  }
+  bA.addEventListener("click", function(){ setTheme("amber"); });
+  bC.addEventListener("click", function(){ setTheme("cool"); });
+</script>
 </body>
 </html>
