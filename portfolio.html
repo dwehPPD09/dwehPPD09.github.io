@@ -1,347 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Darrin Wehser</title>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg: #000000; --card-bg: #050505; --border: #27272a; --text-main: #ffffff; --text-dim: #d4d4d8; --accent: #38bdf8; --meta: #71717a; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg); color: var(--text-main); font-family: 'Geist', sans-serif; line-height: 1.6; }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 8%; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(12px); z-index: 100; }
-        .logo { font-weight: 700; font-size: 1rem; }
-        .logo a { color: #fff; text-decoration: none; }
-        .nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 2.5rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
-        .container { padding: 6rem 8% 10rem; max-width: 1400px; margin: 0 auto; }
-        h1 { font-size: 2.5rem; letter-spacing: -1px; margin-bottom: 3rem; }
-        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
-        .gallery-item { position: relative; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; background: var(--card-bg); cursor: pointer; transition: border-color 0.3s; }
-        .gallery-item:hover { border-color: var(--accent); }
-        .gallery-item img { width: 100%; height: 280px; object-fit: cover; display: block; filter: grayscale(10%); transition: all 0.4s ease; }
-        .gallery-item:hover img { filter: grayscale(0%); transform: scale(1.03); }
-        .item-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 1rem; background: linear-gradient(transparent, rgba(0,0,0,0.8)); opacity: 0; transition: opacity 0.3s; }
-        .gallery-item:hover .item-overlay { opacity: 1; }
-        .item-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
-        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 1000; cursor: zoom-out; }
-        .lightbox:target { display: flex; }
-        .lightbox img { max-width: 90%; max-height: 85%; border: 1px solid var(--border); box-shadow: 0 0 50px rgba(0,0,0,0.5); }
-        .close-btn { position: absolute; top: 2rem; right: 3rem; font-family: 'JetBrains Mono', monospace; color: var(--text-dim); text-decoration: none; font-size: 0.8rem; border: 1px solid var(--border); padding: 5px 15px; }
-        footer { padding: 8rem 8%; background: #000; border-top: 1px solid var(--border); text-align: center; }
-        .social-links { display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3rem; }
-        .social-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; }
-        .social-links a:hover { color: var(--accent); }
-        .copyright { font-size: 0.65rem; color: #52525b; font-family: 'JetBrains Mono', monospace; }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio | Darrin Wehser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Spline+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#070A0E;--bg-soft:#0D1218;
+    --line:rgba(231,238,244,0.12);--line-soft:rgba(231,238,244,0.06);
+    --ink:#EAEEF2;--ink-dim:#AEB7C0;--ink-faint:#6E7884;
+    --accent:#7CB3CC;--accent-rgb:124,179,204;   /* default: steel */
+    --maxw:1320px;
+  }
+  .theme-amber{ --accent:#C9A24B; --accent-rgb:201,162,75; }
+  .theme-cool{  --accent:#7CB3CC; --accent-rgb:124,179,204; }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Spline Sans",system-ui,sans-serif;font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+  /* ambient */
+  .bloom{position:fixed;top:-30%;left:-10%;right:-10%;height:80vh;z-index:0;pointer-events:none;
+    background:radial-gradient(40% 50% at 30% 30%,rgba(var(--accent-rgb),0.10),transparent 70%);filter:blur(34px);transition:background .5s;}
+  .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(130% 100% at 50% 24%,transparent 52%,rgba(3,5,8,0.42) 84%,rgba(2,3,6,0.9) 100%);}
+  .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.04;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
+
+  .wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 36px;}
+
+  /* nav */
+  header.top{position:sticky;top:0;z-index:30;background:rgba(7,10,14,0.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);}
+  .bar{display:flex;align-items:center;justify-content:space-between;padding:22px 0;}
+  .mark{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;}
+  .mark .dot{color:var(--accent);transition:color .4s;}
+  .bar-right{display:flex;align-items:center;gap:24px;}
+  nav{display:flex;gap:28px;align-items:center;}
+  nav a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;}
+  nav a:hover,nav a:focus-visible,nav a.active{color:var(--ink);border-color:var(--accent);}
+
+  /* theme toggle */
+  .toggle{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .toggle button{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+    background:transparent;color:var(--ink-faint);border:none;padding:7px 12px;cursor:pointer;transition:background .25s,color .25s;}
+  .toggle button.on{background:var(--accent);color:#0a0d11;}
+
+  /* page head */
+  .pagehead{padding:74px 0 30px;}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:var(--accent);margin:0 0 20px;display:flex;align-items:center;gap:14px;transition:color .4s;}
+  .eyebrow::before{content:"";width:36px;height:1px;background:var(--accent);opacity:.85;transition:background .4s;}
+  .pagehead h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(2.8rem,7vw,5rem);line-height:1.0;letter-spacing:-0.02em;margin:0;}
+  .pagehead p{margin:24px 0 0;max-width:640px;color:var(--ink-dim);font-size:clamp(1.05rem,1.5vw,1.2rem);line-height:1.65;}
+
+  /* section header */
+  .section{padding:54px 0 10px;}
+  .sec-band{display:flex;align-items:baseline;gap:18px;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:8px;}
+  .sec-band h2{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.8rem,3.4vw,2.5rem);letter-spacing:-0.015em;margin:0;}
+  .sec-band .meta{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);margin-left:auto;}
+
+  /* filmstrip row */
+  .strip{padding:30px 0 14px;border-bottom:1px solid var(--line-soft);}
+  .strip-head{display:flex;align-items:baseline;gap:16px;margin-bottom:16px;flex-wrap:wrap;}
+  .strip-head .title{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.25rem,2.2vw,1.7rem);letter-spacing:-0.01em;color:var(--ink);}
+  .strip-head .yr{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.14em;color:var(--accent);transition:color .4s;}
+  .strip-head .role{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);margin-left:auto;}
+
+  .track-wrap{position:relative;}
+  .track-wrap::after{content:"";position:absolute;top:0;right:0;bottom:14px;width:60px;pointer-events:none;
+    background:linear-gradient(90deg,transparent,var(--bg));opacity:.9;}
+  .track{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;padding-bottom:14px;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:rgba(var(--accent-rgb),0.4) transparent;}
+  .track::-webkit-scrollbar{height:7px;}
+  .track::-webkit-scrollbar-thumb{background:rgba(var(--accent-rgb),0.4);border-radius:4px;}
+  .track::-webkit-scrollbar-track{background:transparent;}
+
+  .cell{position:relative;flex:0 0 auto;height:200px;border:1px solid var(--line);border-radius:2px;overflow:hidden;cursor:pointer;scroll-snap-align:start;background:var(--bg-soft);transition:transform .3s,border-color .3s;}
+  .cell:hover,.cell:focus-visible{transform:translateY(-4px);border-color:var(--accent);outline:none;}
+  .cell img{height:200px;width:auto;display:block;filter:brightness(0.92);transition:filter .35s;}
+  .cell:hover img{filter:brightness(1.05);}
+  .cell .ph{width:300px;height:200px;display:none;align-items:center;justify-content:center;text-align:center;padding:16px;
+    background:linear-gradient(135deg,#101822,#0a0f15 70%);}
+  .cell.broken img{display:none;}
+  .cell.broken .ph{display:flex;}
+  .cell .ph span{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);line-height:1.5;}
+
+  /* lightbox */
+  .lb{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(3,5,8,0.94);backdrop-filter:blur(6px);padding:4vh 4vw;}
+  .lb.open{display:flex;}
+  .lb img{max-width:100%;max-height:84vh;border:1px solid var(--line);border-radius:3px;box-shadow:0 30px 80px rgba(0,0,0,0.6);}
+  .lb .lbcap{position:absolute;bottom:3.5vh;left:0;right:0;text-align:center;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);}
+  .lb .nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:none;border:1px solid var(--line);color:var(--ink-dim);font-size:20px;width:46px;height:46px;border-radius:3px;cursor:pointer;transition:color .2s,border-color .2s;}
+  .lb .nav-btn:hover{color:var(--ink);border-color:var(--accent);}
+  .lb .prev{left:3vw;} .lb .next{right:3vw;}
+  .lb .close{position:absolute;top:22px;right:26px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);background:none;border:1px solid var(--line);border-radius:2px;padding:9px 14px;cursor:pointer;}
+  .lb .close:hover{color:var(--ink);border-color:var(--accent);}
+
+  /* footer */
+  footer{position:relative;z-index:2;background:var(--bg);border-top:1px solid var(--line);margin-top:60px;}
+  .foot-inner{max-width:var(--maxw);margin:0 auto;padding:46px 36px 54px;display:flex;flex-direction:column;gap:28px;}
+  .social{display:flex;flex-wrap:wrap;gap:26px;}
+  .social a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;transition:color .25s;}
+  .social a:hover{color:var(--accent);}
+  .copy{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);}
+
+  @media (max-width:760px){
+    .wrap{padding:0 20px;} .bar-right{gap:14px;} nav{gap:14px;} nav a{font-size:10.5px;letter-spacing:0.05em;} .mark{font-size:11px;} .toggle button{padding:6px 10px;font-size:10px;}
+    .cell,.cell img{height:150px;} .cell .ph{height:150px;width:230px;}
+    .strip-head .role{margin-left:0;flex-basis:100%;}
+    .foot-inner{padding:40px 20px;}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.cell{transition:none;}}
+</style>
 </head>
-<body>
-    <nav>
-        <div class="logo"><a href="index.html">Darrin Wehser</a></div>
-        <div class="nav-links"><a href="portfolio.html">Portfolio</a><a href="demo-reel.html">Demo Reel</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div>
-    </nav>
-    <div class="container">
-        <h1>Visual Production Archive</h1>
-        <div class="gallery">
-            <a href="#img1" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_313b9cfa9fdf45f8b57f59d3fecd7bd8~mv2.jpg"><div class="item-overlay"><div class="item-label">Terminator_DF_v001</div></div></a>
-            <div id="img1" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_313b9cfa9fdf45f8b57f59d3fecd7bd8~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img2" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_0068e77241da43f3b782b06e3911041f~mv2.jpg"><div class="item-overlay"><div class="item-label">Terminator_DF_v006</div></div></a>
-            <div id="img2" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_0068e77241da43f3b782b06e3911041f~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img3" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_4417dc6083b54e63a9067ea2daa70182~mv2.jpg"><div class="item-overlay"><div class="item-label">Terminator_DF_v004</div></div></a>
-            <div id="img3" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_4417dc6083b54e63a9067ea2daa70182~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img4" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_2b0872d6286541b0a21af4dad9620e44~mv2.jpg"><div class="item-overlay"><div class="item-label">Terminator_DF_v002</div></div></a>
-            <div id="img4" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_2b0872d6286541b0a21af4dad9620e44~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img5" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_9dc9408f949b4933bd84d48d8b9b6709~mv2.jpg"><div class="item-overlay"><div class="item-label">Terminator_DF_v005</div></div></a>
-            <div id="img5" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_9dc9408f949b4933bd84d48d8b9b6709~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img6" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_7a4ab4e1c24c4803bf14cebc852c4049~mv2.jpg"><div class="item-overlay"><div class="item-label">Terminator_DF_v003</div></div></a>
-            <div id="img6" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_7a4ab4e1c24c4803bf14cebc852c4049~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img7" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_7bf29b4f6849474aadb711e298d4ee87~mv2.jpg"><div class="item-overlay"><div class="item-label">Terminator_DF_v012</div></div></a>
-            <div id="img7" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_7bf29b4f6849474aadb711e298d4ee87~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img8" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_a17208aa90de4237af4f18713a058447~mv2.jpg"><div class="item-overlay"><div class="item-label">Terminator_DF_v013</div></div></a>
-            <div id="img8" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_a17208aa90de4237af4f18713a058447~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img9" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_66f8bdf655e641c2a9bb4a4dc9ab0acd~mv2.jpg"><div class="item-overlay"><div class="item-label">Terminator_DF_v011</div></div></a>
-            <div id="img9" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_66f8bdf655e641c2a9bb4a4dc9ab0acd~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img10" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_1b23cb8004c84df686c48d47c8c7e762~mv2.jpg"><div class="item-overlay"><div class="item-label">Terminator_DF_v009</div></div></a>
-            <div id="img10" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_1b23cb8004c84df686c48d47c8c7e762~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img11" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_59ef6f8e571140b69e90d2b7aed68a00~mv2.jpg"><div class="item-overlay"><div class="item-label">Terminator_DF_v010</div></div></a>
-            <div id="img11" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_59ef6f8e571140b69e90d2b7aed68a00~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img12" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_c1838c64571e4d0a884c4bb582e7a2ba~mv2.jpg"><div class="item-overlay"><div class="item-label">Terminator_DF_v008</div></div></a>
-            <div id="img12" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_c1838c64571e4d0a884c4bb582e7a2ba~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img13" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_4616574d46ee4fd9a6d725d43803b217~mv2.jpg"><div class="item-overlay"><div class="item-label">Terminator_DF_v014</div></div></a>
-            <div id="img13" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_4616574d46ee4fd9a6d725d43803b217~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img14" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_3bb72f1e4f5748d9aabcc57ad0af404b~mv2.jpg"><div class="item-overlay"><div class="item-label">Terminator_DF_v007</div></div></a>
-            <div id="img14" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_3bb72f1e4f5748d9aabcc57ad0af404b~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img15" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_6240e476e14848399974433c9978021b~mv2.jpg"><div class="item-overlay"><div class="item-label">Terminator_DF_v015</div></div></a>
-            <div id="img15" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_6240e476e14848399974433c9978021b~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img16" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_d298b91638f3462aadb95ecdde685768~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v002</div></div></a>
-            <div id="img16" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_d298b91638f3462aadb95ecdde685768~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img17" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_2df8ea6eab974d4296c522a3f7b1795e~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v003</div></div></a>
-            <div id="img17" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_2df8ea6eab974d4296c522a3f7b1795e~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img18" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_2279d9d8a5f741e0894e2d5adac4d2de~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v007</div></div></a>
-            <div id="img18" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_2279d9d8a5f741e0894e2d5adac4d2de~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img19" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_69789cbbac034316be244e11dbef2eb4~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v006</div></div></a>
-            <div id="img19" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_69789cbbac034316be244e11dbef2eb4~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img20" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_1a3bab0ea29c42e6b9e3beda636b4252~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v004</div></div></a>
-            <div id="img20" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_1a3bab0ea29c42e6b9e3beda636b4252~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img21" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_d2b0749bfdc8468e9edeaa51bcf2de35~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v009</div></div></a>
-            <div id="img21" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_d2b0749bfdc8468e9edeaa51bcf2de35~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img22" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_4f5b4b2bbf33423ca30652da447e5c01~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v015</div></div></a>
-            <div id="img22" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_4f5b4b2bbf33423ca30652da447e5c01~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img23" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_2b17c0fdd1ca475b9a9c95e9258fca0d~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v016</div></div></a>
-            <div id="img23" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_2b17c0fdd1ca475b9a9c95e9258fca0d~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img24" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_a7da1de0eb4f45afaa7d8db2216d22fb~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v014</div></div></a>
-            <div id="img24" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_a7da1de0eb4f45afaa7d8db2216d22fb~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img25" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_54b482efe43841a5adc936a7f14e2701~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v013</div></div></a>
-            <div id="img25" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_54b482efe43841a5adc936a7f14e2701~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img26" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_d4225d32ad0f4b8a97cbc6e8d2731999~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v011</div></div></a>
-            <div id="img26" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_d4225d32ad0f4b8a97cbc6e8d2731999~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img27" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_ff65432c23d94dee926cbc837daba987~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v012</div></div></a>
-            <div id="img27" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_ff65432c23d94dee926cbc837daba987~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img28" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_2c539c529af240d59f5c634f99601e5c~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v010</div></div></a>
-            <div id="img28" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_2c539c529af240d59f5c634f99601e5c~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img29" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_05b8f7a3c59a43b6922506f0eb893192~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v008</div></div></a>
-            <div id="img28" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_05b8f7a3c59a43b6922506f0eb893192~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img30" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_76e460e7a59c4de88b895b172efa0aad~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v005</div></div></a>
-            <div id="img30" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_76e460e7a59c4de88b895b172efa0aad~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img31" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_69ee728ca2d14bb7b5b3f9a202529c6b~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v018</div></div></a>
-            <div id="img31" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_69ee728ca2d14bb7b5b3f9a202529c6b~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img32" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_41d82fc0cc554f758984905d7c214d24~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v017</div></div></a>
-            <div id="img32" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_41d82fc0cc554f758984905d7c214d24~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img33" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_b6a44bfb8ad5466d9c8cb0f05c19191a~mv2.jpg"><div class="item-overlay"><div class="item-label">Aquaman_v001</div></div></a>
-            <div id="img33" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_b6a44bfb8ad5466d9c8cb0f05c19191a~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img34" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_0a1fe209dd2a4e56b8504f265437a20c~mv2.jpg"><div class="item-overlay"><div class="item-label">Rogue_One_v011</div></div></a>
-            <div id="img34" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_0a1fe209dd2a4e56b8504f265437a20c~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img35" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_716fb2bc2892459d8fbccadff0d71b6a~mv2.jpg"><div class="item-overlay"><div class="item-label">Rogue_One_v010</div></div></a>
-            <div id="img35" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_716fb2bc2892459d8fbccadff0d71b6a~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img36" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_90610d6161ee4cd3b06bcdce38a46037~mv2.jpg"><div class="item-overlay"><div class="item-label">Rogue_One_v009</div></div></a>
-            <div id="img36" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_90610d6161ee4cd3b06bcdce38a46037~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img37" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_cf21344f9b174cb385e0350502a575f7~mv2.jpg"><div class="item-overlay"><div class="item-label">Rogue_One_v007</div></div></a>
-            <div id="img37" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_cf21344f9b174cb385e0350502a575f7~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img38" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_603cf26ccb4b4fc08a1d9642c112a0fd~mv2_d_2646_2646_s_4_2.jpg"><div class="item-overlay"><div class="item-label">Grand Moff Tarkin - Rogue One</div></div></a>
-            <div id="img38" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_603cf26ccb4b4fc08a1d9642c112a0fd~mv2_d_2646_2646_s_4_2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img39" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_683fb285119d47ce8429828616e278ea~mv2.jpg"><div class="item-overlay"><div class="item-label">Grand Moff Tarkin - Rogue One</div></div></a>
-            <div id="img39" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_683fb285119d47ce8429828616e278ea~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img40" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_dc5b5f504e13465e80f04396e414f7a9~mv2.jpg"><div class="item-overlay"><div class="item-label">Rogue_One_v006</div></div></a>
-            <div id="img40" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_dc5b5f504e13465e80f04396e414f7a9~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img41" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_02ef51715abf498dbcfbacfa0bf64f8f~mv2.jpg"><div class="item-overlay"><div class="item-label">Rogue_One_v001</div></div></a>
-            <div id="img41" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_02ef51715abf498dbcfbacfa0bf64f8f~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img42" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_85dd382a289d4ecb975499ad7880a5be~mv2.jpg"><div class="item-overlay"><div class="item-label">Rogue_One_v008</div></div></a>
-            <div id="img42" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_85dd382a289d4ecb975499ad7880a5be~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img43" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_700999eadd1741eb8fe2552364824124~mv2.jpg"><div class="item-overlay"><div class="item-label">Rogue_One_v012</div></div></a>
-            <div id="img43" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_700999eadd1741eb8fe2552364824124~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img44" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_a926e36a569841499beabdef27d4f8da~mv2.jpg"><div class="item-overlay"><div class="item-label">Rogue_One_v015</div></div></a>
-            <div id="img44" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_a926e36a569841499beabdef27d4f8da~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img45" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_ed12bec19da8418b82555e5c7463bf28~mv2.jpg"><div class="item-overlay"><div class="item-label">Rogue_One_v014</div></div></a>
-            <div id="img45" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_ed12bec19da8418b82555e5c7463bf28~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img46" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_159e65a5a5f74f9ea9ad9c6f5f4acd7a~mv2.jpg"><div class="item-overlay"><div class="item-label">Rogue_One_v013</div></div></a>
-            <div id="img46" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_159e65a5a5f74f9ea9ad9c6f5f4acd7a~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img47" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_b131761b69c240e9ad4a08bd89f29a90~mv2.jpg"><div class="item-overlay"><div class="item-label">Rogue_One_v005</div></div></a>
-            <div id="img47" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_b131761b69c240e9ad4a08bd89f29a90~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img48" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_dc963fa36c484c55b3563dc5b8df02c9~mv2.jpg"><div class="item-overlay"><div class="item-label">Rogue_One_v003</div></div></a>
-            <div id="img48" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_dc963fa36c484c55b3563dc5b8df02c9~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img49" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_227e31149c5f4c4990f733c72b889517~mv2.jpg"><div class="item-overlay"><div class="item-label">Rogue_One_v002</div></div></a>
-            <div id="img49" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_227e31149c5f4c4990f733c72b889517~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img50" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_2c180edf860f4e02aab47cea91a1b650~mv2.jpg"><div class="item-overlay"><div class="item-label">Rogue_One_v004</div></div></a>
-            <div id="img50" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_2c180edf860f4e02aab47cea91a1b650~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img51" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_64bb475f0c4847769b5e5f1f1c8e80aa~mv2.jpg"><div class="item-overlay"><div class="item-label">Thor-Ragnarok</div></div></a>
-            <div id="img51" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_64bb475f0c4847769b5e5f1f1c8e80aa~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img52" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_5eb008c4ebd341e3973843c663eed337~mv2.jpg"><div class="item-overlay"><div class="item-label">Teenage Mutant Ninja Turtles Two</div></div></a>
-            <div id="img52" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_5eb008c4ebd341e3973843c663eed337~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img53" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_dfc3879081e149f18fa8738c05341c4a~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft_v009</div></div></a>
-            <div id="img53" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_dfc3879081e149f18fa8738c05341c4a~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img54" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_791bc60b74194af59c7a7d4c2c4dfd44~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft_v012</div></div></a>
-            <div id="img54" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_791bc60b74194af59c7a7d4c2c4dfd44~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img55" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_57d38ec41b6c47718bff4b2cdc024a2d~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft_v011</div></div></a>
-            <div id="img55" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_57d38ec41b6c47718bff4b2cdc024a2d~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img56" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_88eea2549a324e56a2ba01dd399de543~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft_v010</div></div></a>
-            <div id="img56" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_88eea2549a324e56a2ba01dd399de543~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img57" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_3a10a7e437cc4586a1483ba8b16ecde8~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft_v008</div></div></a>
-            <div id="img57" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_3a10a7e437cc4586a1483ba8b16ecde8~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img58" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_7ec6dd92d9ce43528d6f5635c7eb850d~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft_v006</div></div></a>
-            <div id="img58" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_7ec6dd92d9ce43528d6f5635c7eb850d~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img59" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_7124739164644f8e8bfb618f6f1f2dcc~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft_v007</div></div></a>
-            <div id="img59" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_7124739164644f8e8bfb618f6f1f2dcc~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img60" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_5dd219d81eca45cf8a323a26d29de73b~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft_v005</div></div></a>
-            <div id="img60" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_5dd219d81eca45cf8a323a26d29de73b~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img61" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_472ba988b80c490383ea0421b81529b3~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft_v003</div></div></a>
-            <div id="img61" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_472ba988b80c490383ea0421b81529b3~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img62" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_196c1ddeee66484b876ed4d776b4cb67~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft_v002</div></div></a>
-            <div id="img62" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_196c1ddeee66484b876ed4d776b4cb67~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img63" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_0ff53953e2e1465dbf12d5bb21d5c419~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft_v004</div></div></a>
-            <div id="img63" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_0ff53953e2e1465dbf12d5bb21d5c419~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img64" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_98274f9e037c40249174b1717828596c~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft_v001</div></div></a>
-            <div id="img64" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_98274f9e037c40249174b1717828596c~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img65" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_2973aeae1d64476f885a73891183d177~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft Movie</div></div></a>
-            <div id="img65" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_2973aeae1d64476f885a73891183d177~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img66" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_aeae10c019054a79b824f908b9e5efc3~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft Movie</div></div></a>
-            <div id="img66" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_aeae10c019054a79b824f908b9e5efc3~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img67" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_d9d9dc9febb4473c825a69e823f43d09~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft Movie</div></div></a>
-            <div id="img67" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_d9d9dc9febb4473c825a69e823f43d09~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img68" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_1cb31a6b43ea4a0593f93d1d6eb1c90c~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft Movie</div></div></a>
-            <div id="img68" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_1cb31a6b43ea4a0593f93d1d6eb1c90c~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img69" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_bac870a50d42404a9da2af062447ad5e~mv2.png"><div class="item-overlay"><div class="item-label">Warcraft Movie</div></div></a>
-            <div id="img69" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_bac870a50d42404a9da2af062447ad5e~mv2.png"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img70" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_a156ad9b4fce4e3aa07cc3b2f66585da~mv2.jpg"><div class="item-overlay"><div class="item-label">Warcraft Movie</div></div></a>
-            <div id="img70" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_a156ad9b4fce4e3aa07cc3b2f66585da~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img71" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_94c7c82445dc4ebb9f307cddb79ead68.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img71" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_94c7c82445dc4ebb9f307cddb79ead68.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img72" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_d5442a8082b448ce954685d6e08ea6d3.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img72" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_d5442a8082b448ce954685d6e08ea6d3.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img73" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_fd25ab82772d485398d130c6f3552ea3~mv2.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img73" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_fd25ab82772d485398d130c6f3552ea3~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img74" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_786e0eb78ac94d35abab36037b050e31.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img74" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_786e0eb78ac94d35abab36037b050e31.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img75" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_ca2dc3fba6214625b2364fac56ddab02.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img75" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_ca2dc3fba6214625b2364fac56ddab02.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img76" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_d274400732f14428bf7b88e6f67bd717.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img76" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_d274400732f14428bf7b88e6f67bd717.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img77" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_c44c31ef6aba472f8e93220399daff7e.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img77" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_c44c31ef6aba472f8e93220399daff7e.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img78" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_73e0910c8b324580a18b59a3297ea69c.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img78" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_73e0910c8b324580a18b59a3297ea69c.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img79" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_fbea0a9beff440259db6740687958ad8.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img79" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_fbea0a9beff440259db6740687958ad8.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img80" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_79def29cd97a4db98d3c6b635d994b55.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img80" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_79def29cd97a4db98d3c6b635d994b55.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img81" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_9649e12e3d26471385804b5d02a0360b.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img81" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_9649e12e3d26471385804b5d02a0360b.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img82" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_c77793b3cb274302a710b0123da6b5a1.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img82" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_c77793b3cb274302a710b0123da6b5a1.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img83" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_b52b5865055e4182bd311d0f30e6b32a.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img83" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_b52b5865055e4182bd311d0f30e6b32a.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img84" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_336b49e3faae4fb8a559b567821cca7c.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img84" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_336b49e3faae4fb8a559b567821cca7c.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img85" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_e5c15a3ecb8e434db3161026937ecc71~mv2.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img85" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_e5c15a3ecb8e434db3161026937ecc71~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img86" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_050ff9e76cdb4d7d9385b6822af5b917~mv2.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img86" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_050ff9e76cdb4d7d9385b6822af5b917~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img87" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_72ce1817e4b8496294623649219e4a34.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img87" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_72ce1817e4b8496294623649219e4a34.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img88" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_2b283b20467c4127acd614ee51cd5dda~mv2.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img88" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_2b283b20467c4127acd614ee51cd5dda~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img89" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_7a04b4f4267940549d513486a99bd2a0~mv2.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img89" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_7a04b4f4267940549d513486a99bd2a0~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img90" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_07052815523446c7a696685f8245991b~mv2.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img90" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_07052815523446c7a696685f8245991b~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img91" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_3c6421fa31a943d49631cb95c49765b8~mv2.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img91" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_3c6421fa31a943d49631cb95c49765b8~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img92" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_64863ca99aa84b33839d36cc8658c61e.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img92" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_64863ca99aa84b33839d36cc8658c61e.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img93" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_fd20c001fd2f4eda988d675d9281a0a5~mv2.jpg"><div class="item-overlay"><div class="item-label">Snow White and the Huntsman (2012)</div></div></a>
-            <div id="img93" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_fd20c001fd2f4eda988d675d9281a0a5~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img94" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_99814184ac89458ea1569b66cb409e5e.jpg"><div class="item-overlay"><div class="item-label">Mr Poppers Penguins (2011)</div></div></a>
-            <div id="img94" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_99814184ac89458ea1569b66cb409e5e.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img95" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_22485d958b9b4e618fee8ab01b289a9a.jpg"><div class="item-overlay"><div class="item-label">Mr Poppers Penguins (2011)</div></div></a>
-            <div id="img95" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_22485d958b9b4e618fee8ab01b289a9a.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img96" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_56b4900f23ce47289ee074c9f743449f.jpg"><div class="item-overlay"><div class="item-label">Mr Poppers Penguins (2011)</div></div></a>
-            <div id="img96" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_56b4900f23ce47289ee074c9f743449f.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img97" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_bb073dba2acb40f5a3e33e931841ae6a.jpg"><div class="item-overlay"><div class="item-label">Mr Poppers Penguins (2011)</div></div></a>
-            <div id="img97" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_bb073dba2acb40f5a3e33e931841ae6a.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img98" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_984ee41c5d1a4086965c7f5f83ef808b.jpg"><div class="item-overlay"><div class="item-label">Cain in the Woods (2012)</div></div></a>
-            <div id="img98" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_984ee41c5d1a4086965c7f5f83ef808b.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img99" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_e160580639d64a27b3af51a1d21f4c8a.jpg"><div class="item-overlay"><div class="item-label">Cain in the Woods (2012)</div></div></a>
-            <div id="img99" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_e160580639d64a27b3af51a1d21f4c8a.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img100" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_4c64ed1251824d2ea7c28519487bf299.jpg"><div class="item-overlay"><div class="item-label">Cain in the Woods (2012)</div></div></a>
-            <div id="img100" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_4c64ed1251824d2ea7c28519487bf299.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img101" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_8c1fd97bbeb04ff58f12e448afa9535d.jpg"><div class="item-overlay"><div class="item-label">Knight and Day (2010)</div></div></a>
-            <div id="img101" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_8c1fd97bbeb04ff58f12e448afa9535d.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img102" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_2040df7e39984a6286a7695da6730579~mv2.jpg"><div class="item-overlay"><div class="item-label">Knight and Day (2010)</div></div></a>
-            <div id="img102" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_2040df7e39984a6286a7695da6730579~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img103" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_e140a30a7d0a44f88edb528bf5721c09.jpg"><div class="item-overlay"><div class="item-label">Knight and Day (2010)</div></div></a>
-            <div id="img103" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_e140a30a7d0a44f88edb528bf5721c09.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img104" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_51961b1dcf85408a8010a231a2f07b86.jpg"><div class="item-overlay"><div class="item-label">Knight and Day (2010)</div></div></a>
-            <div id="img104" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_51961b1dcf85408a8010a231a2f07b86.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img105" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_f39537455254463cb219f1d87f9df881.jpg"><div class="item-overlay"><div class="item-label">Knight and Day (2010)</div></div></a>
-            <div id="img105" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_f39537455254463cb219f1d87f9df881.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img106" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_35602c07b0ee4a039a7d729584b8ba9e~mv2.jpg"><div class="item-overlay"><div class="item-label">Knight and Day (2010)</div></div></a>
-            <div id="img106" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_35602c07b0ee4a039a7d729584b8ba9e~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img107" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_dfca1ad388ad447ab8fc61bdfe26c685~mv2.jpg"><div class="item-overlay"><div class="item-label">Knight and Day (2010)</div></div></a>
-            <div id="img107" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_dfca1ad388ad447ab8fc61bdfe26c685~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img108" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_cda69516ee07486c8cf051e2c5639863~mv2.jpg"><div class="item-overlay"><div class="item-label">Knight and Day (2010)</div></div></a>
-            <div id="img108" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_cda69516ee07486c8cf051e2c5639863~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img109" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_14100c5494c14ec39fa6a74c4f6c28bb.jpg"><div class="item-overlay"><div class="item-label">Knight and Day (2010)</div></div></a>
-            <div id="img109" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_14100c5494c14ec39fa6a74c4f6c28bb.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img110" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_473ffd8e23e54bc49c07732e2b22c78c~mv2.jpg"><div class="item-overlay"><div class="item-label">Knight and Day (2010)</div></div></a>
-            <div id="img110" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_473ffd8e23e54bc49c07732e2b22c78c~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img111" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_c9f6b355624c4f2591ccccef5795223b~mv2.jpg"><div class="item-overlay"><div class="item-label">Knight and Day (2010)2</div></div></a>
-            <div id="img111" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_c9f6b355624c4f2591ccccef5795223b~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img112" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_29aa37e118714fddac3d0ec2724df5f6~mv2.jpg"><div class="item-overlay"><div class="item-label">Cirque du Freak (2009)</div></div></a>
-            <div id="img112" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_29aa37e118714fddac3d0ec2724df5f6~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img113" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_f51de56c7768435da2fb6d6c9bc8ff9f~mv2.jpg"><div class="item-overlay"><div class="item-label">Cirque du Freak (2009)</div></div></a>
-            <div id="img113" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_f51de56c7768435da2fb6d6c9bc8ff9f~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img114" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_90a878f61dd54574b890521d41263a45.jpg"><div class="item-overlay"><div class="item-label">Cirque du Freak (2009)</div></div></a>
-            <div id="img114" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_90a878f61dd54574b890521d41263a45.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img115" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_5c5321590daf4076b382be5ee24dc318.jpg"><div class="item-overlay"><div class="item-label">Cirque du Freak (2009)</div></div></a>
-            <div id="img115" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_5c5321590daf4076b382be5ee24dc318.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img116" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_c94330664292421484dfb15f1c76b0ac.jpg"><div class="item-overlay"><div class="item-label">Cirque du Freak (2009)</div></div></a>
-            <div id="img116" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_c94330664292421484dfb15f1c76b0ac.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img117" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_e7adf5f9dc4d43b7b7131fbc213790c9.jpg"><div class="item-overlay"><div class="item-label">Cirque du Freak (2009)</div></div></a>
-            <div id="img117" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_e7adf5f9dc4d43b7b7131fbc213790c9.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img118" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_9fac8ac433f848fda3ecfac9f5a10a51~mv2.jpg"><div class="item-overlay"><div class="item-label">Cirque du Freak (2009)</div></div></a>
-            <div id="img118" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_9fac8ac433f848fda3ecfac9f5a10a51~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img119" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_0fce9286bec745a79bcf1dd256a02fd0.jpg"><div class="item-overlay"><div class="item-label">Cirque du Freak (2009)</div></div></a>
-            <div id="img119" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_0fce9286bec745a79bcf1dd256a02fd0.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img120" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_3ee47eb55ccf4021935bc90d208ce652~mv2.jpg"><div class="item-overlay"><div class="item-label">The Incredible Hulk (2008)</div></div></a>
-            <div id="img120" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_3ee47eb55ccf4021935bc90d208ce652~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img121" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_de2e8e7fb7f44ee58c9d84b58e6466be.jpg"><div class="item-overlay"><div class="item-label">The Incredible Hulk (2008) </div></div></a>
-            <div id="img121" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_de2e8e7fb7f44ee58c9d84b58e6466be.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img122" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_c95a4fdac7a44781882559521587aa43~mv2.jpg"><div class="item-overlay"><div class="item-label">The Incredible Hulk (2008)</div></div></a>
-            <div id="img122" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_c95a4fdac7a44781882559521587aa43~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img123" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_227a84e32a974b8b88fd7ad7d5204ded~mv2.jpg"><div class="item-overlay"><div class="item-label">The Incredible Hulk (2008)</div></div></a>
-            <div id="img123" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_227a84e32a974b8b88fd7ad7d5204ded~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img124" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_ff6140e569a14f97bc7fdf06c4a4fbe9~mv2.jpg"><div class="item-overlay"><div class="item-label">The Incredible Hulk (2008)</div></div></a>
-            <div id="img124" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_ff6140e569a14f97bc7fdf06c4a4fbe9~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img125" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_110768f76d6645f6a330c272f8317a33~mv2.jpg"><div class="item-overlay"><div class="item-label">Night at the Museum</div></div></a>
-            <div id="img125" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_110768f76d6645f6a330c272f8317a33~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img126" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_c1f5675eec244c359a73537c7ea7b51f~mv2.jpg"><div class="item-overlay"><div class="item-label">Night at the Museum</div></div></a>
-            <div id="img126" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_c1f5675eec244c359a73537c7ea7b51f~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img127" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_182e35ff50344a8eb5461d718b574bef~mv2.jpg"><div class="item-overlay"><div class="item-label">Night at the Museum</div></div></a>
-            <div id="img127" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_182e35ff50344a8eb5461d718b574bef~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img128" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_5db7d3ef5f56444fb1764c563c0b4c15~mv2.jpg"><div class="item-overlay"><div class="item-label">Garfield 2</div></div></a>
-            <div id="img128" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_5db7d3ef5f56444fb1764c563c0b4c15~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img129" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_9401454563f84d9885e5feff9da32217~mv2.jpg"><div class="item-overlay"><div class="item-label">Garfield 2</div></div></a>
-            <div id="img129" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_9401454563f84d9885e5feff9da32217~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img130" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_a2235c633a1f4ba88af4760cced74714~mv2.jpg"><div class="item-overlay"><div class="item-label">Garfield 2</div></div></a>
-            <div id="img130" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_a2235c633a1f4ba88af4760cced74714~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img131" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_f6c63da91cd04a26b3b2da3b0a1c1996~mv2.jpg"><div class="item-overlay"><div class="item-label">Elektra</div></div></a>
-            <div id="img131" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_f6c63da91cd04a26b3b2da3b0a1c1996~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img132" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_c61bb4d5e942499aa342c87c6eaacd33~mv2.jpg"><div class="item-overlay"><div class="item-label">Elektra</div></div></a>
-            <div id="img132" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_c61bb4d5e942499aa342c87c6eaacd33~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img133" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_67ac5f18edef4cc4b59261ee2e83f512~mv2.jpg"><div class="item-overlay"><div class="item-label">Elektra</div></div></a>
-            <div id="img133" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_67ac5f18edef4cc4b59261ee2e83f512~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img134" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_cdc954a891fb4c369c45dbf1748f0833~mv2.jpg"><div class="item-overlay"><div class="item-label">Elektra</div></div></a>
-            <div id="img134" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_cdc954a891fb4c369c45dbf1748f0833~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img135" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_faa3321e5ce944ee971e0bce69f67144~mv2.jpg"><div class="item-overlay"><div class="item-label">Garfield</div></div></a>
-            <div id="img135" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_faa3321e5ce944ee971e0bce69f67144~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img136" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_e890a32770ac4427a254a210cb38a077~mv2.jpg"><div class="item-overlay"><div class="item-label">Garfield</div></div></a>
-            <div id="img136" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_e890a32770ac4427a254a210cb38a077~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img137" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_d0f55393e6404d4da65f4a8814c8f219~mv2.jpg"><div class="item-overlay"><div class="item-label">Garfield</div></div></a>
-            <div id="img137" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_d0f55393e6404d4da65f4a8814c8f219~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img138" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_3f890234f2a9407bbb95236f3ac13d9e~mv2.jpg"><div class="item-overlay"><div class="item-label">Garfield</div></div></a>
-            <div id="img138" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_3f890234f2a9407bbb95236f3ac13d9e~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img139" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_3900d5d629664569ba9f78caa6a3d227~mv2.jpg"><div class="item-overlay"><div class="item-label">Cat in the Hat</div></div></a>
-            <div id="img139" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_3900d5d629664569ba9f78caa6a3d227~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img140" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_05b2322937aa4ddcb59b70b0cdcfab28~mv2.jpg"><div class="item-overlay"><div class="item-label">Cat in the Hat</div></div></a>
-            <div id="img140" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_05b2322937aa4ddcb59b70b0cdcfab28~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img141" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_341a003c6f7641be84ad9fb705233ddf~mv2.jpg"><div class="item-overlay"><div class="item-label">Harry Potter</div></div></a>
-            <div id="img141" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_341a003c6f7641be84ad9fb705233ddf~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img142" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_42844a07988b4f32aca8d01dee489781~mv2.jpg"><div class="item-overlay"><div class="item-label">Harry Potter</div></div></a>
-            <div id="img142" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_42844a07988b4f32aca8d01dee489781~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img143" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_bc81f3a7a610409089f55dde78c2c109~mv2.jpg"><div class="item-overlay"><div class="item-label">Dr Doolittle</div></div></a>
-            <div id="img143" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_bc81f3a7a610409089f55dde78c2c109~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
-            <a href="#img144" class="gallery-item"><img src="https://static.wixstatic.com/media/8a02c7_e2c9b1d91e6a4292b2dc207d5fef2f25~mv2.jpg"><div class="item-overlay"><div class="item-label">Dr Doolight</div></div></a>
-            <div id="img144" class="lightbox" onclick="history.back()"><img src="https://static.wixstatic.com/media/8a02c7_e2c9b1d91e6a4292b2dc207d5fef2f25~mv2.jpg"><a href="#" class="close-btn">CLOSE [ESC]</a></div>
+<body class="theme-amber">
+  <div class="bloom" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="wrap">
+      <div class="bar">
+        <a class="mark" href="index.html">DARRIN WEHSER<span class="dot">.</span></a>
+        <div class="bar-right">
+          <nav>
+            <a href="portfolio.html" class="active">Portfolio</a>
+            <a href="demo-reel.html">Demo Reel</a>
+            <a href="resume.html">Resume</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+          <div class="toggle" role="group" aria-label="Accent color">
+            <button id="tAmber" type="button" class="on">Amber</button>
+            <button id="tCool" type="button">Steel</button>
+          </div>
         </div>
+      </div>
     </div>
-    <footer>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/dwehser" target="_blank">LINKEDIN</a>
-            <a href="https://www.artstation.com/dwehser" target="_blank">ARTSTATION</a>
-            <a href="https://www.youtube.com/watch?v=rPlgIsu7tXA" target="_blank">YOUTUBE</a>
-            <a href="http://www.imdb.com/name/nm1277925/" target="_blank">IMDB</a>
-            <a href="http://vimeo.com/dwehser" target="_blank">VIMEO</a>
-        </div>
-        <div class="copyright">© 2026 DARRIN WEHSER // ALL RIGHTS RESERVED TO RESPECTIVE STUDIOS</div>
-    </footer>
+  </header>
+
+  <main>
+    <section class="wrap pagehead">
+      <p class="eyebrow">Visual Production Archive // 2001&ndash;2026</p>
+      <h1>Portfolio</h1>
+      <p>Twenty-five years of character grooming, look development, and technical direction &mdash; from feature film at ILM and Rhythm &amp; Hues to real-time MetaHuman grooms in Unreal Engine.</p>
+    </section>
+
+    <section class="wrap section">
+      <div class="sec-band">
+        <h2>Feature Film</h2>
+        <span class="meta">36 titles &middot; ILM &amp; Rhythm &amp; Hues</span>
+      </div>
+      <div id="film"></div>
+    </section>
+
+    <section class="wrap section">
+      <div class="sec-band">
+        <h2>Real-Time / MetaHuman Grooms</h2>
+        <span class="meta">Unreal Engine &middot; Epic Games</span>
+      </div>
+      <div id="meta"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-inner">
+      <div class="social">
+        <a href="https://www.linkedin.com/in/dwehser" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.artstation.com/dwehser" target="_blank" rel="noopener">ArtStation</a>
+        <a href="https://www.youtube.com/watch?v=rPlgIsu7tXA" target="_blank" rel="noopener">YouTube Film</a>
+        <a href="https://www.youtube.com/@PixelPerfectDigital" target="_blank" rel="noopener">YouTube AI</a>
+        <a href="http://www.imdb.com/name/nm1277925/" target="_blank" rel="noopener">IMDb</a>
+        <a href="http://vimeo.com/dwehser" target="_blank" rel="noopener">Vimeo</a>
+      </div>
+      <p class="copy">&copy; 2026 Darrin Wehser // All rights reserved to respective studios</p>
+    </div>
+  </footer>
+
+  <div class="lb" id="lb" aria-hidden="true">
+    <button class="close" id="lbClose">Close &times;</button>
+    <button class="nav-btn prev" id="lbPrev" aria-label="Previous">&#8249;</button>
+    <img id="lbImg" alt="" />
+    <button class="nav-btn next" id="lbNext" aria-label="Next">&#8250;</button>
+    <div class="lbcap" id="lbCap"></div>
+  </div>
+
+<script>
+  var IMG = "images/";  // <-- your repo's images folder
+
+  function pad2(n){ return (n<10?"0":"")+n; }
+  function seq(prefix,a,b,ext){ var out=[]; for(var i=a;i<=b;i++) out.push(prefix+pad2(i)+"."+ext); return out; }
+
+  // ---------- FEATURE FILM (latest -> oldest) ----------
+  var film = [
+    {title:"Terminator: Dark Fate", yr:"2019", role:"Groom Supervisor", files: seq("terminator_dark_fate_movie_2019_",1,18,"png")},
+    {title:"Aquaman", yr:"2018", role:"Groom Supervisor / Lighting TD", files: seq("aquaman_movie_2018_",1,20,"png")},
+    {title:"Thor: Ragnarok", yr:"2017", role:"Seq. Lead Lighting TD", files:["thor_ragnarok_2017_v01.jpg"]},
+    {title:"Rogue One: A Star Wars Story", yr:"2016", role:"Lead Groom \u2014 Tarkin, Leia", files: seq("rogue_one_movie_2016_",1,20,"png")},
+    {title:"TMNT: Out of the Shadows", yr:"2016", role:"Lead Groom \u2014 Splinter", files:["teenage_mutant_ninja_turtles_splinter_01.jpg"]},
+    {title:"Warcraft", yr:"2016", role:"Groom / LookDev / Lighting TD", files: seq("warcraft_movie_2016_",1,19,"png")},
+    {title:"Snow White and the Huntsman", yr:"2012", role:"LookDev / Groom Supervisor", files:["snow4.jpg","snow6.jpg","snow13.jpg","snow14.jpg","snow19.jpg","snow20.jpg","snow25.jpg","snow26.jpg","snow30.jpg","snow32.jpg"]},
+    {title:"Knight and Day", yr:"2010", role:"Lead LookDev / Groom TD", files:["knightday_lookdev2.jpg","knightday_lookdev4.jpg","knightday_lookdev6.jpg","knightday_lookdev9.jpg","knightday_lookdev10.jpg","knightday_lookdev14.jpg","knightday_lookdev15.jpg"]},
+    {title:"Cirque du Freak", yr:"2009", role:"Lead Groom / LookDev / Lighting TD", files:["cirque2.jpg","cirque5.jpg","cirque7.jpg","cirque_lookdev14.jpg"]},
+    {title:"The Incredible Hulk", yr:"2008", role:"Lead LookDev / Groom TD", files:["hulk_lookdev1.jpg","hulk_lookdev2.jpg","hulk_lookdev3.jpg","hulk33.jpg"]},
+    {title:"Night at the Museum", yr:"2006", role:"Groom / LookDev / Lighting Lead", files:["museum_lookdev1.jpg","museum_lookdev2.jpg","museum_lookdev3.jpg"]},
+    {title:"Garfield: A Tail of Two Kitties", yr:"2006", role:"Groom / LookDev / Lighting Lead", files:["garf2_2.jpg","garf2_5.jpg","garf2_9.jpg","garf2_11.jpg"]},
+    {title:"Elektra", yr:"2005", role:"LookDev / Groom / Lighting TD", files:["elektra1.jpg","elektra2.jpg","elektra_lookdev1.jpg","elektra_lookdev2.jpg"]},
+    {title:"Garfield: The Movie", yr:"2004", role:"Lead Groom / Lead LookDev / Lighting TD", files:["garfield_1.jpg","garfield_2.jpg","garfield_5.jpg","garfield_6.jpg","garfield_7.jpg"]},
+    {title:"The Cat in the Hat", yr:"2003", role:"Groom / LookDev / Lighting TD", files:["catIntheyhat2.jpg","catInthehat3.jpg"]},
+    {title:"Dr. Dolittle 2", yr:"2001", role:"Groom / Lighting TD", files:["drdoolittle1_v1.jpg","drdoolittle2_v1.jpg"]},
+    {title:"Harry Potter and the Sorcerer's Stone", yr:"2001", role:"Lighting TD", files:["harrypotter1.jpg","harrypotter5.jpg","harrypotter6.jpg"]}
+  ];
+
+  // ---------- REAL-TIME / METAHUMAN (grouped by character) ----------
+  var meta = [
+    {title:"Keji", role:"Real-Time Groom", files: seq("metahuman_keji_v",1,7,"jpg")},
+    {title:"Jamal", role:"Real-Time Groom", files:["metahuman_jamal_v01.jpg","metahuman_jamal_v02.png","metahuman_jamal_v03.png","metahuman_jamal_v04.jpg","metahuman_jamal_v05.jpg","metahuman_jamal_v06.jpg"]},
+    {title:"Kendra", role:"Real-Time Groom", files: seq("metahuman_kendra_jy_v",1,9,"jpg")},
+    {title:"Roxxi", role:"Real-Time Groom", files: seq("metahuman_roxxi_v",1,9,"jpg")},
+    {title:"Gavin", role:"Real-Time Groom", files: seq("metahuman_gavin_v",1,5,"jpg")},
+    {title:"Reevers", role:"Real-Time Groom", files: seq("metahuman_reevers_v",1,10,"jpg")},
+    {title:"Aoi", role:"Real-Time Groom", files: seq("metahuman_aoi_v",1,9,"jpg")},
+    {title:"Pia", role:"Real-Time Groom", files: seq("metahuman_pia_pe_v",1,8,"jpg")},
+    {title:"Shoa Zhen", role:"Real-Time Groom", files: seq("metahuman_shoa_zhen_v",1,6,"jpg")},
+    {title:"Apoou", role:"Real-Time Groom", files: seq("metahuman_apoou_v",1,6,"jpg")},
+    {title:"Sherry", role:"Real-Time Groom", files:["metahuman_sherry_v01.png","metahuman_sherry_v02.png"]}
+  ];
+
+  // flat index for lightbox navigation
+  var ALL = [];
+
+  function buildStrip(group, kind){
+    var strip = document.createElement("div"); strip.className="strip";
+    var head = document.createElement("div"); head.className="strip-head";
+    var t = '<span class="title">'+group.title+'</span>';
+    if(group.yr) t += '<span class="yr">'+group.yr+'</span>';
+    t += '<span class="role">'+group.role+'</span>';
+    head.innerHTML = t;
+    var tw = document.createElement("div"); tw.className="track-wrap";
+    var track = document.createElement("div"); track.className="track";
+
+    group.files.forEach(function(f,i){
+      var idx = ALL.length;
+      ALL.push({src:IMG+f, cap:group.title+(group.yr?"  //  "+group.yr:"")+"  //  "+(i+1)+"/"+group.files.length});
+      var cell = document.createElement("div"); cell.className="cell"; cell.tabIndex=0;
+      cell.innerHTML =
+        '<img src="'+IMG+f+'" alt="'+group.title+' '+(i+1)+'" loading="lazy">'+
+        '<div class="ph"><span>'+group.title+'<br>'+(group.yr||group.role)+'<br>'+(i+1)+' / '+group.files.length+'</span></div>';
+      var img = cell.querySelector("img");
+      img.addEventListener("error", function(){ cell.classList.add("broken"); });
+      cell.addEventListener("click", function(){ openLb(idx); });
+      cell.addEventListener("keydown", function(e){ if(e.key==="Enter") openLb(idx); });
+      track.appendChild(cell);
+    });
+    tw.appendChild(track); strip.appendChild(head); strip.appendChild(tw);
+    return strip;
+  }
+
+  var filmRoot = document.getElementById("film");
+  film.forEach(function(g){ filmRoot.appendChild(buildStrip(g,"film")); });
+  var metaRoot = document.getElementById("meta");
+  meta.forEach(function(g){ metaRoot.appendChild(buildStrip(g,"meta")); });
+
+  // ---------- lightbox ----------
+  var lb=document.getElementById("lb"), lbImg=document.getElementById("lbImg"), lbCap=document.getElementById("lbCap");
+  var cur=0;
+  function openLb(i){ cur=i; render(); lb.classList.add("open"); lb.setAttribute("aria-hidden","false"); }
+  function render(){ var it=ALL[cur]; lbImg.src=it.src; lbImg.alt=it.cap; lbCap.textContent=it.cap; }
+  function closeLb(){ lb.classList.remove("open"); lb.setAttribute("aria-hidden","true"); lbImg.src=""; }
+  function step(d){ cur=(cur+d+ALL.length)%ALL.length; render(); }
+  document.getElementById("lbClose").addEventListener("click",closeLb);
+  document.getElementById("lbPrev").addEventListener("click",function(e){e.stopPropagation();step(-1);});
+  document.getElementById("lbNext").addEventListener("click",function(e){e.stopPropagation();step(1);});
+  lb.addEventListener("click",function(e){ if(e.target===lb) closeLb(); });
+  document.addEventListener("keydown",function(e){
+    if(!lb.classList.contains("open")) return;
+    if(e.key==="Escape") closeLb();
+    else if(e.key==="ArrowLeft") step(-1);
+    else if(e.key==="ArrowRight") step(1);
+  });
+
+  // ---------- accent toggle ----------
+  var body=document.body, bA=document.getElementById("tAmber"), bC=document.getElementById("tCool");
+  function setTheme(t){
+    body.classList.remove("theme-amber","theme-cool");
+    body.classList.add("theme-"+t);
+    bA.classList.toggle("on", t==="amber");
+    bC.classList.toggle("on", t==="cool");
+  }
+  bA.addEventListener("click", function(){ setTheme("amber"); });
+  bC.addEventListener("click", function(){ setTheme("cool"); });
+</script>
 </body>
 </html>
