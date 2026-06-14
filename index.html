@@ -35,7 +35,7 @@
   #stage{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--bg);}
   .frame{
     position:absolute;inset:0;background-size:cover;background-position:center;
-    filter:brightness(0.5) saturate(0.92) contrast(1.05);
+    filter:brightness(0.6) saturate(0.92) contrast(1.05);
     opacity:0;transition:opacity 1.8s ease-in-out;
   }
   .frame.on{opacity:1;}
@@ -50,8 +50,8 @@
   .scrim{
     position:absolute;inset:0;pointer-events:none;
     background:
-      linear-gradient(90deg,rgba(7,10,14,0.93) 0%,rgba(7,10,14,0.74) 40%,rgba(7,10,14,0.34) 72%,rgba(7,10,14,0.58) 100%),
-      linear-gradient(0deg,rgba(7,10,14,0.92) 0%,rgba(7,10,14,0.15) 42%,transparent 70%);
+      linear-gradient(90deg,rgba(7,10,14,0.84) 0%,rgba(7,10,14,0.66) 40%,rgba(7,10,14,0.26) 72%,rgba(7,10,14,0.50) 100%),
+      linear-gradient(0deg,rgba(7,10,14,0.82) 0%,rgba(7,10,14,0.13) 42%,transparent 70%);
   }
   #dust{position:absolute;inset:0;width:100%;height:100%;display:block;}
   .vignette{
@@ -114,7 +114,6 @@
 
   /* ---------- specialization (solid, scrolls over stage) ---------- */
   .spec{position:relative;z-index:2;background:var(--bg);padding:96px 0 120px;}
-  .spec::before{content:"";position:absolute;top:0;left:0;right:0;height:120px;background:linear-gradient(var(--bg),transparent);transform:translateY(-100%);pointer-events:none;}
   .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding-bottom:28px;border-bottom:1px solid var(--line);flex-wrap:wrap;}
   .sec-head h2{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.7rem,3.2vw,2.4rem);letter-spacing:-0.015em;margin:0;color:var(--ink);}
   .sec-head span{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-faint);}
@@ -171,7 +170,7 @@
   <header>
     <div class="wrap">
       <div class="bar">
-        <a class="mark" href="index.html">DARRIN WEHSER<span class="dot">.</span></a>
+        <a class="mark" href="index.html">DARRIN WEHSER</a>
         <div class="bar-right">
           <nav>
             <a href="portfolio.html">Portfolio</a>
@@ -194,9 +193,9 @@
         <div class="hero-inner">
           <p class="eyebrow">Creative Technical Director // 2026</p>
           <h1>
-            Groom &amp; LookDev
-            <span class="l2">Supervisor &mdash;</span>
+            Groom Artist
             <span class="l3">Generative AI Artist</span>
+            <span class="l2">&amp; Groom / LookDev Supervisor</span>
           </h1>
           <p class="lede">Pivoting 25+ years of cinematic technical direction into the era of Generative AI. Mastering the intersection of legacy craft and next-generation neural pipelines.</p>
           <p class="scroll-cue">Technical Specialization</p>
@@ -236,11 +235,11 @@
         <article class="card">
           <div class="meta">
             <p class="tagline">Feature Film // 36 Titles</p>
-            <h3>Technical Direction</h3>
+            <h3>Groom Artist</h3>
           </div>
           <div>
             <p class="body">Extensive history at world-class studios (ILM, R&amp;H). Grooming, LookDev, and Lighting TD for iconic franchises from Star Wars: Rogue One to Thor: Ragnarok. Worked on 36 feature films.</p>
-            <span class="chip">ILM &middot; R&amp;H &middot; Houdini</span>
+            <span class="chip">Industrial Light &amp; Magic &middot; Rhythm &amp; Hues</span>
           </div>
         </article>
       </div>
@@ -271,21 +270,24 @@
   }
   refreshAccent();
 
-  /* ---- hero crossfade: your real film stills (Terminator DF / Aquaman / Rogue One) ---- */
-  var BASE="https://static.wixstatic.com/media/";
-  var TX="/v1/fill/w_1920,h_1080,al_c,q_85,enc_auto/";
-  var ids=[
-    "8a02c7_313b9cfa9fdf45f8b57f59d3fecd7bd8~mv2.jpg", /* Terminator DF */
-    "8a02c7_4417dc6083b54e63a9067ea2daa70182~mv2.jpg", /* Terminator DF */
-    "8a02c7_d298b91638f3462aadb95ecdde685768~mv2.jpg", /* Aquaman */
-    "8a02c7_2279d9d8a5f741e0894e2d5adac4d2de~mv2.jpg", /* Aquaman */
-    "8a02c7_0a1fe209dd2a4e56b8504f265437a20c~mv2.jpg", /* Rogue One */
-    "8a02c7_90610d6161ee4cd3b06bcdce38a46037~mv2.jpg"  /* Rogue One */
-  ];
+  /* ---- hero crossfade: random pull from repo images/ (Terminator / Aquaman / Rogue One / Warcraft / Thor / TMNT) ---- */
+  function pad2(n){ return (n<10?"0":"")+n; }
+  function seq(prefix,a,b,ext){ var out=[]; for(var i=a;i<=b;i++) out.push(prefix+pad2(i)+"."+ext); return out; }
+  var heroPool=[]
+    .concat(seq("terminator_dark_fate_movie_2019_",1,18,"png"))
+    .concat(seq("aquaman_movie_2018_",1,20,"png"))
+    .concat(seq("rogue_one_movie_2016_",1,20,"png"))
+    .concat(seq("warcraft_movie_2016_",1,19,"png"))
+    .concat(["thor_ragnarok_2017_v01.jpg"])
+    .concat(["teenage_mutant_ninja_turtles_splinter_01.jpg"]);
+  /* Fisher-Yates shuffle so the six on-screen stills are random each load */
+  for(var s=heroPool.length-1;s>0;s--){
+    var rj=Math.floor(Math.random()*(s+1)), tmp=heroPool[s]; heroPool[s]=heroPool[rj]; heroPool[rj]=tmp;
+  }
   var frames=document.querySelectorAll(".frame");
   frames.forEach(function(f,i){
-    var id=ids[i]; if(!id) return;
-    f.style.backgroundImage="url('"+BASE+id+TX+id+"')";
+    var file=heroPool[i]; if(!file) return;
+    f.style.backgroundImage="url('images/"+file+"')";
   });
   var cur=0; frames[0] && frames[0].classList.add("on");
   if(frames.length>1){
