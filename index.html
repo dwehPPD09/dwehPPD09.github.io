@@ -3,141 +3,177 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Portfolio | Darrin Wehser</title>
+<title>Darrin Wehser | Creative Technical Director</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Spline+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Spline+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --bg:#070A0E;--bg-soft:#0D1218;
-    --line:rgba(231,238,244,0.12);--line-soft:rgba(231,238,244,0.06);
-    --ink:#EAEEF2;--ink-dim:#AEB7C0;--ink-faint:#6E7884;
-    --accent:#7CB3CC;--accent-rgb:124,179,204;   /* default: steel */
-    --maxw:1320px;
+    --bg:#070A0E;
+    --bg-soft:#0D1218;
+    --line:rgba(231,238,244,0.12);
+    --line-soft:rgba(231,238,244,0.06);
+    --ink:#EAEEF2;
+    --ink-dim:#AEB7C0;
+    --ink-faint:#6E7884;
+    --accent:#7CB3CC;
+    --accent-rgb:124,179,204;   /* base: steel */
+    --maxw:1180px;
   }
   .theme-amber{ --accent:#C9A24B; --accent-rgb:201,162,75; }
   .theme-cool{  --accent:#7CB3CC; --accent-rgb:124,179,204; }
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Spline Sans",system-ui,sans-serif;font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Spline Sans",system-ui,sans-serif;font-weight:400;
+    line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
 
-  /* ambient */
-  .bloom{position:fixed;top:-30%;left:-10%;right:-10%;height:80vh;z-index:0;pointer-events:none;
-    background:radial-gradient(40% 50% at 30% 30%,rgba(var(--accent-rgb),0.10),transparent 70%);filter:blur(34px);transition:background .5s;}
-  .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
-    background:radial-gradient(130% 100% at 50% 24%,transparent 52%,rgba(3,5,8,0.42) 84%,rgba(2,3,6,0.9) 100%);}
-  .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.04;mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
+  /* ---------- cinematic stage (fixed, hero only) ---------- */
+  #stage{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--bg);}
+  .frame{
+    position:absolute;inset:0;background-size:cover;background-position:center;
+    filter:brightness(0.6) saturate(0.92) contrast(1.05);
+    opacity:0;transition:opacity 1.8s ease-in-out;
+  }
+  .frame.on{opacity:1;}
+  .bloom{
+    position:absolute;inset:-25%;pointer-events:none;mix-blend-mode:screen;
+    background:
+      radial-gradient(42% 40% at 30% 26%,rgba(var(--accent-rgb),0.12),transparent 70%),
+      radial-gradient(46% 42% at 74% 70%,rgba(var(--accent-rgb),0.05),transparent 72%);
+    filter:blur(24px);animation:drift 32s ease-in-out infinite alternate;transition:background .5s;
+  }
+  @keyframes drift{from{transform:translate3d(-2%,-1%,0) scale(1.02);}to{transform:translate3d(3%,2%,0) scale(1.08);}}
+  .scrim{
+    position:absolute;inset:0;pointer-events:none;
+    background:
+      linear-gradient(90deg,rgba(7,10,14,0.84) 0%,rgba(7,10,14,0.66) 40%,rgba(7,10,14,0.26) 72%,rgba(7,10,14,0.50) 100%),
+      linear-gradient(0deg,rgba(7,10,14,0.82) 0%,rgba(7,10,14,0.13) 42%,transparent 70%);
+  }
+  #dust{position:absolute;inset:0;width:100%;height:100%;display:block;}
+  .vignette{
+    position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(125% 100% at 50% 36%,transparent 44%,rgba(3,5,8,0.5) 82%,rgba(2,3,6,0.94) 100%);
+  }
+  .grain{
+    position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.04;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
 
-  .wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 36px;}
+  .wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 32px;}
 
-  /* nav */
-  header.top{position:sticky;top:0;z-index:30;background:rgba(7,10,14,0.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);}
-  .bar{display:flex;align-items:center;justify-content:space-between;padding:22px 0;}
+  /* ---------- top bar ---------- */
+  header{position:absolute;top:0;left:0;right:0;z-index:5;}
+  .bar{display:flex;align-items:center;justify-content:space-between;padding:30px 0;border-bottom:1px solid var(--line-soft);}
   .mark{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;}
   .mark .dot{color:var(--accent);transition:color .4s;}
-  .bar-right{display:flex;align-items:center;gap:24px;}
-  nav{display:flex;gap:28px;align-items:center;}
-  nav a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;}
-  nav a:hover,nav a:focus-visible,nav a.active{color:var(--ink);border-color:var(--accent);}
+  .bar-right{display:flex;align-items:center;gap:26px;}
+  nav{display:flex;gap:30px;}
+  nav a{
+    font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;letter-spacing:0.14em;
+    text-transform:uppercase;color:var(--ink-dim);text-decoration:none;
+    padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;
+  }
+  nav a:hover,nav a:focus-visible{color:var(--ink);border-color:var(--accent);}
 
-  /* theme toggle */
-  .toggle{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  /* accent toggle */
+  .toggle{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;flex:0 0 auto;}
   .toggle button{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
     background:transparent;color:var(--ink-faint);border:none;padding:7px 12px;cursor:pointer;transition:background .25s,color .25s;}
   .toggle button.on{background:var(--accent);color:#0a0d11;}
 
-  /* page head */
-  .pagehead{padding:74px 0 30px;}
-  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:var(--accent);margin:0 0 20px;display:flex;align-items:center;gap:14px;transition:color .4s;}
+  /* ---------- hero ---------- */
+  .hero{min-height:100svh;display:flex;align-items:center;padding:140px 0 90px;}
+  .hero-inner{max-width:960px;}
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.28em;
+    text-transform:uppercase;color:var(--accent);margin:0 0 28px;display:flex;align-items:center;gap:14px;transition:color .4s;
+  }
   .eyebrow::before{content:"";width:36px;height:1px;background:var(--accent);opacity:.85;transition:background .4s;}
-  .pagehead h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(2.8rem,7vw,5rem);line-height:1.0;letter-spacing:-0.02em;margin:0;}
-  .pagehead p{margin:24px 0 0;max-width:640px;color:var(--ink-dim);font-size:clamp(1.05rem,1.5vw,1.2rem);line-height:1.65;}
 
-  /* section header */
-  .section{padding:54px 0 10px;}
-  .sec-band{display:flex;align-items:baseline;gap:18px;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:8px;}
-  .sec-band h2{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.8rem,3.4vw,2.5rem);letter-spacing:-0.015em;margin:0;}
-  .sec-band .meta{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);margin-left:auto;}
+  h1{
+    font-family:"Fraunces",serif;font-weight:600;
+    font-size:clamp(3rem,8.2vw,6.4rem);line-height:1.0;letter-spacing:-0.02em;margin:0;color:var(--ink);
+    text-shadow:0 2px 40px rgba(0,0,0,0.5);
+  }
+  h1 .l2{display:block;}
+  h1 .l3{display:block;font-style:italic;font-weight:500;color:var(--accent);transition:color .4s;}
 
-  /* category tabs */
-  .tabs{display:flex;align-items:baseline;gap:30px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:8px;flex-wrap:wrap;}
-  .tab{background:none;border:none;cursor:pointer;padding:0 0 8px;margin:0;line-height:1.1;
-    font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.35rem,2.8vw,2rem);letter-spacing:-0.015em;
-    color:var(--ink-faint);border-bottom:2px solid transparent;transition:color .25s,border-color .25s;}
-  .tab:hover{color:var(--ink-dim);}
-  .tab.on{color:var(--ink);border-color:var(--accent);}
-  .tab:focus-visible{outline:none;color:var(--ink);border-color:var(--accent);}
-  .tabs .meta{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);margin-left:auto;align-self:center;}
-  .panel{display:none;}
-  .panel.on{display:block;}
+  .lede{
+    margin:40px 0 0;max-width:620px;font-size:clamp(1.08rem,1.6vw,1.32rem);
+    color:var(--ink-dim);line-height:1.66;font-weight:400;text-shadow:0 1px 20px rgba(0,0,0,0.4);
+  }
+  .scroll-cue{
+    margin-top:56px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:500;
+    letter-spacing:0.26em;text-transform:uppercase;color:var(--ink-faint);display:flex;align-items:center;gap:12px;
+  }
+  .scroll-cue::after{content:"";width:1px;height:30px;background:linear-gradient(var(--ink-faint),transparent);}
 
-  /* filmstrip row */
-  .strip{padding:30px 0 14px;border-bottom:1px solid var(--line-soft);}
-  .strip-head{display:flex;align-items:baseline;gap:16px;margin-bottom:16px;flex-wrap:wrap;}
-  .strip-head .title{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.25rem,2.2vw,1.7rem);letter-spacing:-0.01em;color:var(--ink);}
-  .strip-head .yr{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.14em;color:var(--accent);transition:color .4s;}
-  .strip-head .role{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);margin-left:auto;}
+  /* ---------- specialization (solid, scrolls over stage) ---------- */
+  .spec{position:relative;z-index:2;background:var(--bg);padding:96px 0 120px;}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding-bottom:28px;border-bottom:1px solid var(--line);flex-wrap:wrap;}
+  .sec-head h2{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.7rem,3.2vw,2.4rem);letter-spacing:-0.015em;margin:0;color:var(--ink);}
+  .sec-head span{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-faint);}
 
-  .track-wrap{position:relative;}
-  .track-wrap::after{content:"";position:absolute;top:0;right:0;bottom:14px;width:60px;pointer-events:none;
-    background:linear-gradient(90deg,transparent,var(--bg));opacity:.9;}
-  .track{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;padding-bottom:14px;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:rgba(var(--accent-rgb),0.4) transparent;}
-  .track::-webkit-scrollbar{height:7px;}
-  .track::-webkit-scrollbar-thumb{background:rgba(var(--accent-rgb),0.4);border-radius:4px;}
-  .track::-webkit-scrollbar-track{background:transparent;}
+  .card{display:grid;grid-template-columns:0.9fr 1.4fr;gap:40px;padding:50px 0;border-bottom:1px solid var(--line);transition:background .4s;}
+  .card:hover{background:linear-gradient(90deg,rgba(var(--accent-rgb),0.045),transparent 70%);}
+  .card .meta{font-family:"IBM Plex Mono",monospace;}
+  .card .tagline{font-size:12px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px;transition:color .4s;}
+  .card h3{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.7rem,2.8vw,2.3rem);line-height:1.1;letter-spacing:-0.015em;margin:0;color:var(--ink);}
+  .card .body{margin:0;color:var(--ink-dim);font-weight:400;line-height:1.72;font-size:1.1rem;max-width:560px;}
+  .chip{display:inline-block;margin-top:24px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);border:1px solid var(--line);border-radius:2px;padding:8px 13px;}
 
-  .cell{position:relative;flex:0 0 auto;height:200px;border:1px solid var(--line);border-radius:2px;overflow:hidden;cursor:pointer;scroll-snap-align:start;background:var(--bg-soft);transition:transform .3s,border-color .3s;}
-  .cell:hover,.cell:focus-visible{transform:translateY(-4px);border-color:var(--accent);outline:none;}
-  .cell img{height:200px;width:auto;display:block;filter:brightness(0.92);transition:filter .35s;}
-  .cell:hover img{filter:brightness(1.05);}
-  .cell .ph{width:300px;height:200px;display:none;align-items:center;justify-content:center;text-align:center;padding:16px;
-    background:linear-gradient(135deg,#101822,#0a0f15 70%);}
-  .cell.broken img{display:none;}
-  .cell.broken .ph{display:flex;}
-  .cell .ph span{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);line-height:1.5;}
-
-  /* lightbox */
-  .lb{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(3,5,8,0.94);backdrop-filter:blur(6px);padding:4vh 4vw;}
-  .lb.open{display:flex;}
-  .lb img{max-width:100%;max-height:84vh;border:1px solid var(--line);border-radius:3px;box-shadow:0 30px 80px rgba(0,0,0,0.6);}
-  .lb .lbcap{position:absolute;bottom:3.5vh;left:0;right:0;text-align:center;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);}
-  .lb .nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:none;border:1px solid var(--line);color:var(--ink-dim);font-size:20px;width:46px;height:46px;border-radius:3px;cursor:pointer;transition:color .2s,border-color .2s;}
-  .lb .nav-btn:hover{color:var(--ink);border-color:var(--accent);}
-  .lb .prev{left:3vw;} .lb .next{right:3vw;}
-  .lb .close{position:absolute;top:22px;right:26px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);background:none;border:1px solid var(--line);border-radius:2px;padding:9px 14px;cursor:pointer;}
-  .lb .close:hover{color:var(--ink);border-color:var(--accent);}
-
-  /* footer */
-  footer{position:relative;z-index:2;background:var(--bg);border-top:1px solid var(--line);margin-top:60px;}
-  .foot-inner{max-width:var(--maxw);margin:0 auto;padding:46px 36px 54px;display:flex;flex-direction:column;gap:28px;}
-  .social{display:flex;flex-wrap:wrap;gap:26px;}
+  /* ---------- footer ---------- */
+  footer{position:relative;z-index:2;background:var(--bg);border-top:1px solid var(--line);}
+  .foot-inner{max-width:var(--maxw);margin:0 auto;padding:46px 32px 52px;display:flex;flex-direction:column;gap:30px;}
+  .social{display:flex;flex-wrap:wrap;gap:28px;}
   .social a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;transition:color .25s;}
-  .social a:hover{color:var(--accent);}
+  .social a:hover,.social a:focus-visible{color:var(--accent);}
   .copy{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);}
 
   @media (max-width:760px){
-    .wrap{padding:0 20px;} .bar-right{gap:14px;} nav{gap:14px;} nav a{font-size:10.5px;letter-spacing:0.05em;} .mark{font-size:11px;} .toggle button{padding:6px 10px;font-size:10px;}
-    .cell,.cell img{height:150px;} .cell .ph{height:150px;width:230px;}
-    .strip-head .role{margin-left:0;flex-basis:100%;}
-    .foot-inner{padding:40px 20px;}
+    .wrap{padding:0 22px;}
+    .bar-right{gap:16px;}
+    nav{gap:18px;} nav a{font-size:11px;letter-spacing:0.08em;}
+    .mark{font-size:12px;}
+    .toggle button{padding:6px 10px;font-size:10px;}
+    .card{grid-template-columns:1fr;gap:18px;padding:40px 0;}
+    .spec{padding:72px 0 90px;}
+    .foot-inner{padding:40px 22px;}
   }
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.cell{transition:none;}}
+  @media (max-width:430px){ nav a:nth-child(n+3){display:none;} }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .bloom{animation:none;} .frame{transition:none;}
+  }
 </style>
 </head>
 <body class="theme-amber">
-  <div class="bloom" aria-hidden="true"></div>
+  <div id="stage" aria-hidden="true">
+    <!-- Real reel later: drop a <video autoplay muted loop playsinline> here, full-bleed -->
+    <div class="frame" data-i="0"></div>
+    <div class="frame" data-i="1"></div>
+    <div class="frame" data-i="2"></div>
+    <div class="frame" data-i="3"></div>
+    <div class="frame" data-i="4"></div>
+    <div class="frame" data-i="5"></div>
+    <div class="bloom"></div>
+    <div class="scrim"></div>
+    <canvas id="dust"></canvas>
+  </div>
   <div class="vignette" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
 
-  <header class="top">
+  <header>
     <div class="wrap">
       <div class="bar">
         <a class="mark" href="index.html">DARRIN WEHSER</a>
         <div class="bar-right">
           <nav>
-            <a href="portfolio.html" class="active">Portfolio</a>
+            <a href="portfolio.html">Portfolio</a>
             <a href="demo-reel.html">Demo Reel</a>
             <a href="resume.html">Resume</a>
             <a href="contact.html">Contact</a>
@@ -152,23 +188,60 @@
   </header>
 
   <main>
-    <section class="wrap pagehead">
-      <p class="eyebrow">Visual Production Archive // 2001&ndash;2026</p>
-      <h1>Portfolio</h1>
-      <p>25+ years of character grooming, look development, and technical direction &mdash; from feature film at ILM and Rhythm &amp; Hues to real-time MetaHuman grooms in Unreal Engine.</p>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-inner">
+          <p class="eyebrow">Creative Technical Director // 2026</p>
+          <h1>
+            Groom Artist
+            <span class="l3">Generative AI Artist</span>
+            <span class="l2">&amp; Groom / LookDev Supervisor</span>
+          </h1>
+          <p class="lede">Pivoting 25+ years of cinematic technical direction into the era of Generative AI. Mastering the intersection of legacy craft and next-generation neural pipelines.</p>
+          <p class="scroll-cue">Technical Specialization</p>
+        </div>
+      </div>
     </section>
 
-    <section class="wrap section">
-      <div class="tabs" role="tablist" aria-label="Portfolio category">
-        <button class="tab on" id="tabFilm" role="tab" aria-selected="true" aria-controls="film-panel">Feature Film</button>
-        <button class="tab" id="tabMeta" role="tab" aria-selected="false" aria-controls="meta-panel">Real-Time / MetaHuman</button>
-        <span class="meta" id="tabmeta">36 titles &middot; ILM &amp; Rhythm &amp; Hues</span>
-      </div>
-      <div class="panel on" id="film-panel" role="tabpanel" aria-labelledby="tabFilm">
-        <div id="film"></div>
-      </div>
-      <div class="panel" id="meta-panel" role="tabpanel" aria-labelledby="tabMeta">
-        <div id="meta"></div>
+    <section class="spec">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>Technical Specialization</h2>
+          <span>Three Disciplines</span>
+        </div>
+
+        <article class="card">
+          <div class="meta">
+            <p class="tagline">Active Development // 2026</p>
+            <h3>Generative AI Artistry</h3>
+          </div>
+          <div>
+            <p class="body">Translating 25+ years of film and game production experience with emerging AI technologies to advance next-generation pipelines. Experience with Midjourney, ChatGPT, Gemini, Claude, and Higgsfield.</p>
+            <span class="chip">LLM Diffusion Pipeline</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="meta">
+            <p class="tagline">Engine Architecture // Epic Games</p>
+            <h3>MetaHuman Development</h3>
+          </div>
+          <div>
+            <p class="body">Worked across Unreal Engine 4.28 through 5.7 on MetaHuman development &mdash; grooming for client projects, Houdini groom tools, and technical documentation for UE 5.6 and 5.7.</p>
+            <span class="chip">UE 4.28&ndash;5.7 &middot; Houdini &middot; MetaHuman</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="meta">
+            <p class="tagline">Feature Film // 36 Titles</p>
+            <h3>Groom Artist</h3>
+          </div>
+          <div>
+            <p class="body">Extensive history at world-class studios (ILM, R&amp;H). Grooming, LookDev, and Lighting TD for iconic franchises from Star Wars: Rogue One to Thor: Ragnarok. Worked on 36 feature films.</p>
+            <span class="chip">Industrial Light &amp; Magic &middot; Rhythm &amp; Hues</span>
+          </div>
+        </article>
       </div>
     </section>
   </main>
@@ -187,151 +260,101 @@
     </div>
   </footer>
 
-  <div class="lb" id="lb" aria-hidden="true">
-    <button class="close" id="lbClose">Close &times;</button>
-    <button class="nav-btn prev" id="lbPrev" aria-label="Previous">&#8249;</button>
-    <img id="lbImg" alt="" />
-    <button class="nav-btn next" id="lbNext" aria-label="Next">&#8250;</button>
-    <div class="lbcap" id="lbCap"></div>
-  </div>
-
 <script>
-  var IMG = "images/";  // <-- your repo's images folder
+(function(){
+  var body=document.body;
+  var accentRGB="201,162,75"; /* amber default; refreshed from CSS */
+  function refreshAccent(){
+    var v=getComputedStyle(body).getPropertyValue("--accent-rgb").trim();
+    if(v) accentRGB=v;
+  }
+  refreshAccent();
 
+  /* ---- hero crossfade: random pull from repo images/ (Terminator / Aquaman / Rogue One / Warcraft / Thor / TMNT) ---- */
   function pad2(n){ return (n<10?"0":"")+n; }
   function seq(prefix,a,b,ext){ var out=[]; for(var i=a;i<=b;i++) out.push(prefix+pad2(i)+"."+ext); return out; }
-
-  // ---------- FEATURE FILM (latest -> oldest) ----------
-  var film = [
-    {title:"Terminator: Dark Fate", yr:"2019", role:"Groom Supervisor \u00b7 Groom Artist", files: seq("terminator_dark_fate_movie_2019_",1,18,"png")},
-    {title:"Aquaman", yr:"2018", role:"Groom Supervisor \u00b7 Groom Artist \u00b7 Lighting TD", files: seq("aquaman_movie_2018_",1,20,"png")},
-    {title:"Thor: Ragnarok", yr:"2017", role:"Seq. Lead Lighting TD", files:["thor_ragnarok_2017_v01.jpg"]},
-    {title:"Rogue One: A Star Wars Story", yr:"2016", role:"Lead Groom \u2014 Tarkin, Leia", files: seq("rogue_one_movie_2016_",1,20,"png")},
-    {title:"TMNT: Out of the Shadows", yr:"2016", role:"Lead Groom \u2014 Splinter", files:["teenage_mutant_ninja_turtles_splinter_01.jpg"]},
-    {title:"Warcraft", yr:"2016", role:"Groom \u00b7 LookDev \u00b7 Lighting TD", files: seq("warcraft_movie_2016_",1,19,"png")},
-    {title:"Snow White and the Huntsman", yr:"2012", role:"LookDev \u00b7 Groom Supervisor", files:["snow4.jpg","snow6.jpg","snow13.jpg","snow14.jpg","snow19.jpg","snow20.jpg","snow25.jpg","snow26.jpg","snow30.jpg","snow32.jpg"]},
-    {title:"Knight and Day", yr:"2010", role:"Lead LookDev \u00b7 Groom TD", files:["knightday_lookdev2.jpg","knightday_lookdev4.jpg","knightday_lookdev6.jpg","knightday_lookdev9.jpg","knightday_lookdev10.jpg","knightday_lookdev14.jpg","knightday_lookdev15.jpg"]},
-    {title:"Cirque du Freak", yr:"2009", role:"Lead Groom \u00b7 LookDev \u00b7 Lighting TD", files:["cirque2.jpg","cirque5.jpg","cirque7.jpg","cirque_lookdev14.jpg"]},
-    {title:"The Incredible Hulk", yr:"2008", role:"Lead LookDev \u00b7 Groom TD", files:["hulk_lookdev1.jpg","hulk_lookdev2.jpg","hulk_lookdev3.jpg","hulk33.jpg"]},
-    {title:"Night at the Museum", yr:"2006", role:"Groom \u00b7 LookDev \u00b7 Lighting Lead", files:["museum_lookdev1.jpg","museum_lookdev2.jpg","museum_lookdev3.jpg"]},
-    {title:"Garfield: A Tail of Two Kitties", yr:"2006", role:"Groom \u00b7 LookDev \u00b7 Lighting Lead", files:["garf2_2.jpg","garf2_5.jpg","garf2_9.jpg","garf2_11.jpg"]},
-    {title:"Elektra", yr:"2005", role:"LookDev \u00b7 Groom \u00b7 Lighting TD", files:["elektra1.jpg","elektra2.jpg","elektra_lookdev1.jpg","elektra_lookdev2.jpg"]},
-    {title:"Garfield: The Movie", yr:"2004", role:"Lead Groom \u00b7 Lead LookDev \u00b7 Lighting TD", files:["garfield_1.jpg","garfield_2.jpg","garfield_5.jpg","garfield_6.jpg","garfield_7.jpg"]},
-    {title:"The Cat in the Hat", yr:"2003", role:"Groom \u00b7 LookDev \u00b7 Lighting TD", files:["catIntheyhat2.jpg","catInthehat3.jpg"]},
-    {title:"Dr. Dolittle 2", yr:"2001", role:"Groom \u00b7 Lighting TD", files:["drdoolittle1_v1.jpg","drdoolittle2_v1.jpg"]},
-    {title:"Harry Potter and the Sorcerer's Stone", yr:"2001", role:"Lighting TD", files:["harrypotter1.jpg","harrypotter5.jpg","harrypotter6.jpg"]}
-  ];
-
-  // ---------- REAL-TIME / METAHUMAN (grouped by character) ----------
-  var meta = [
-    {title:"Keji", role:"Real-Time Groom", files: seq("metahuman_keji_v",1,7,"jpg")},
-    {title:"Jamal", role:"Real-Time Groom", files:["metahuman_jamal_v01.jpg","metahuman_jamal_v02.png","metahuman_jamal_v03.png","metahuman_jamal_v04.jpg","metahuman_jamal_v05.jpg","metahuman_jamal_v06.jpg"]},
-    {title:"Kendra", role:"Real-Time Groom", files: seq("metahuman_kendra_jy_v",1,9,"jpg")},
-    {title:"Roxxi", role:"Real-Time Groom", files: seq("metahuman_roxxi_v",1,9,"jpg")},
-    {title:"Gavin", role:"Real-Time Groom", files: seq("metahuman_gavin_v",1,5,"jpg")},
-    {title:"Reevers", role:"Real-Time Groom", files: seq("metahuman_reevers_v",1,10,"jpg")},
-    {title:"Aoi", role:"Real-Time Groom", files: seq("metahuman_aoi_v",1,9,"jpg")},
-    {title:"Pia", role:"Real-Time Groom", files: seq("metahuman_pia_pe_v",1,8,"jpg")},
-    {title:"Shoa Zhen", role:"Real-Time Groom", files: seq("metahuman_shoa_zhen_v",1,6,"jpg")},
-    {title:"Apoou", role:"Real-Time Groom", files: seq("metahuman_apoou_v",1,6,"jpg")},
-    {title:"Sherry", role:"Real-Time Groom", files:["metahuman_sherry_v01.png","metahuman_sherry_v02.png"]}
-  ];
-
-  // flat index for lightbox navigation
-  var ALL = [];
-
-  function buildStrip(group, kind){
-    var strip = document.createElement("div"); strip.className="strip";
-    var head = document.createElement("div"); head.className="strip-head";
-    var t = '<span class="title">'+group.title+'</span>';
-    if(group.yr) t += '<span class="yr">'+group.yr+'</span>';
-    t += '<span class="role">'+group.role+'</span>';
-    head.innerHTML = t;
-    var tw = document.createElement("div"); tw.className="track-wrap";
-    var track = document.createElement("div"); track.className="track";
-
-    // randomize image order within this gallery on each page load
-    var files = group.files.slice();
-    for(var sh=files.length-1;sh>0;sh--){ var rj=Math.floor(Math.random()*(sh+1)), tmp=files[sh]; files[sh]=files[rj]; files[rj]=tmp; }
-
-    files.forEach(function(f,i){
-      var idx = ALL.length;
-      ALL.push({src:IMG+f, cap:group.title+(group.yr?"  //  "+group.yr:"")+"  //  "+(i+1)+"/"+files.length});
-      var cell = document.createElement("div"); cell.className="cell"; cell.tabIndex=0;
-      cell.innerHTML =
-        '<img src="'+IMG+f+'" alt="'+group.title+' '+(i+1)+'" loading="lazy">'+
-        '<div class="ph"><span>'+group.title+'<br>'+(group.yr||group.role)+'<br>'+(i+1)+' / '+files.length+'</span></div>';
-      var img = cell.querySelector("img");
-      img.addEventListener("error", function(){ cell.classList.add("broken"); });
-      cell.addEventListener("click", function(){ openLb(idx); });
-      cell.addEventListener("keydown", function(e){ if(e.key==="Enter") openLb(idx); });
-      track.appendChild(cell);
-    });
-    tw.appendChild(track); strip.appendChild(head); strip.appendChild(tw);
-    return strip;
+  var heroPool=[]
+    .concat(seq("terminator_dark_fate_movie_2019_",1,18,"png"))
+    .concat(seq("aquaman_movie_2018_",1,20,"png"))
+    .concat(seq("rogue_one_movie_2016_",1,20,"png"))
+    .concat(seq("warcraft_movie_2016_",1,19,"png"))
+    .concat(["thor_ragnarok_2017_v01.jpg"])
+    .concat(["teenage_mutant_ninja_turtles_splinter_01.jpg"]);
+  /* Fisher-Yates shuffle so the six on-screen stills are random each load */
+  for(var s=heroPool.length-1;s>0;s--){
+    var rj=Math.floor(Math.random()*(s+1)), tmp=heroPool[s]; heroPool[s]=heroPool[rj]; heroPool[rj]=tmp;
   }
-
-  var filmRoot = document.getElementById("film");
-  film.forEach(function(g){ filmRoot.appendChild(buildStrip(g,"film")); });
-  var filmCount = ALL.length;            // film images occupy indices [0, filmCount)
-  var metaRoot = document.getElementById("meta");
-  meta.forEach(function(g){ metaRoot.appendChild(buildStrip(g,"meta")); });
-
-  // ---------- lightbox ----------
-  var lb=document.getElementById("lb"), lbImg=document.getElementById("lbImg"), lbCap=document.getElementById("lbCap");
-  var cur=0, activeGroup="film";
-  function openLb(i){ cur=i; render(); lb.classList.add("open"); lb.setAttribute("aria-hidden","false"); }
-  function render(){ var it=ALL[cur]; lbImg.src=it.src; lbImg.alt=it.cap; lbCap.textContent=it.cap; }
-  function closeLb(){ lb.classList.remove("open"); lb.setAttribute("aria-hidden","true"); lbImg.src=""; }
-  function step(d){
-    var lo = activeGroup==="film" ? 0 : filmCount;
-    var hi = activeGroup==="film" ? filmCount : ALL.length;
-    var n = hi - lo; if(n<=0) return;
-    cur = lo + (((cur - lo + d) % n) + n) % n;
-    render();
-  }
-  document.getElementById("lbClose").addEventListener("click",closeLb);
-  document.getElementById("lbPrev").addEventListener("click",function(e){e.stopPropagation();step(-1);});
-  document.getElementById("lbNext").addEventListener("click",function(e){e.stopPropagation();step(1);});
-  lb.addEventListener("click",function(e){ if(e.target===lb) closeLb(); });
-  document.addEventListener("keydown",function(e){
-    if(!lb.classList.contains("open")) return;
-    if(e.key==="Escape") closeLb();
-    else if(e.key==="ArrowLeft") step(-1);
-    else if(e.key==="ArrowRight") step(1);
+  var frames=document.querySelectorAll(".frame");
+  frames.forEach(function(f,i){
+    var file=heroPool[i]; if(!file) return;
+    f.style.backgroundImage="url('images/"+file+"')";
   });
-
-  // ---------- category tabs ----------
-  var tabFilm=document.getElementById("tabFilm"), tabMeta=document.getElementById("tabMeta");
-  var panelFilm=document.getElementById("film-panel"), panelMeta=document.getElementById("meta-panel");
-  var tabMetaSpan=document.getElementById("tabmeta");
-  var META_TEXT={
-    film:"36 titles \u00b7 ILM \u0026 Rhythm \u0026 Hues",
-    meta:"11 characters \u00b7 Unreal Engine \u00b7 Epic Games"
-  };
-  function setTab(g){
-    activeGroup=g;
-    var isFilm=(g==="film");
-    tabFilm.classList.toggle("on",isFilm); tabFilm.setAttribute("aria-selected",isFilm);
-    tabMeta.classList.toggle("on",!isFilm); tabMeta.setAttribute("aria-selected",!isFilm);
-    panelFilm.classList.toggle("on",isFilm);
-    panelMeta.classList.toggle("on",!isFilm);
-    tabMetaSpan.textContent=META_TEXT[g];
-    if(lb.classList.contains("open")) closeLb();
+  var cur=0; frames[0] && frames[0].classList.add("on");
+  if(frames.length>1){
+    setInterval(function(){
+      frames[cur].classList.remove("on");
+      cur=(cur+1)%frames.length;
+      frames[cur].classList.add("on");
+    },6500);
   }
-  tabFilm.addEventListener("click",function(){ setTab("film"); });
-  tabMeta.addEventListener("click",function(){ setTab("meta"); });
 
-  // ---------- accent toggle ----------
-  var body=document.body, bA=document.getElementById("tAmber"), bC=document.getElementById("tCool");
+  /* ---- ambient dust ---- */
+  var canvas=document.getElementById("dust");
+  var ctx=canvas.getContext("2d");
+  var reduce=window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  var w,h,dpr,motes=[],N;
+  function resize(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    w=window.innerWidth; h=window.innerHeight;
+    canvas.width=w*dpr; canvas.height=h*dpr;
+    canvas.style.width=w+"px"; canvas.style.height=h+"px";
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    N=Math.min(48,Math.round((w*h)/30000));
+    seed(); if(reduce) draw(true);
+  }
+  function seed(){
+    motes=[];
+    for(var i=0;i<N;i++){
+      motes.push({x:Math.random()*w,y:Math.random()*h,r:0.6+Math.random()*1.6,
+        a:0.10+Math.random()*0.26,vx:-0.05-Math.random()*0.09,vy:-0.04-Math.random()*0.09,
+        ph:Math.random()*Math.PI*2,sp:0.004+Math.random()*0.006});
+    }
+  }
+  function draw(stat){
+    ctx.clearRect(0,0,w,h);
+    for(var i=0;i<motes.length;i++){
+      var m=motes[i], tw=stat?1:(0.6+0.4*Math.sin(m.ph));
+      ctx.beginPath();
+      ctx.fillStyle="rgba(206,222,235,"+(m.a*tw).toFixed(3)+")";
+      ctx.shadowColor="rgba("+accentRGB+",0.55)"; ctx.shadowBlur=6;
+      ctx.arc(m.x,m.y,m.r,0,Math.PI*2); ctx.fill();
+    }
+    ctx.shadowBlur=0;
+  }
+  function step(){
+    for(var i=0;i<motes.length;i++){
+      var m=motes[i]; m.x+=m.vx; m.y+=m.vy; m.ph+=m.sp;
+      if(m.x<-10) m.x=w+10;
+      if(m.y<-10){ m.y=h+10; m.x=Math.random()*w; }
+    }
+    draw(false); requestAnimationFrame(step);
+  }
+  window.addEventListener("resize",resize);
+  resize(); if(!reduce) requestAnimationFrame(step);
+
+  /* ---- accent toggle ---- */
+  var bA=document.getElementById("tAmber"), bC=document.getElementById("tCool");
   function setTheme(t){
     body.classList.remove("theme-amber","theme-cool");
     body.classList.add("theme-"+t);
     bA.classList.toggle("on", t==="amber");
     bC.classList.toggle("on", t==="cool");
+    refreshAccent();
+    if(reduce) draw(true);
   }
   bA.addEventListener("click", function(){ setTheme("amber"); });
   bC.addEventListener("click", function(){ setTheme("cool"); });
+})();
 </script>
 </body>
 </html>
