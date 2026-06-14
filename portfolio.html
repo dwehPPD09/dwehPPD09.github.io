@@ -35,7 +35,7 @@
   /* nav */
   header.top{position:sticky;top:0;z-index:30;background:rgba(7,10,14,0.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);}
   .bar{display:flex;align-items:center;justify-content:space-between;padding:22px 0;}
-  .mark{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;}
+  .mark{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:inline-block;padding:6px 2px;margin:-6px -2px;cursor:pointer;}
   .mark .dot{color:var(--accent);transition:color .4s;}
   .bar-right{display:flex;align-items:center;gap:24px;}
   nav{display:flex;gap:28px;align-items:center;}
@@ -134,7 +134,7 @@
   <header class="top">
     <div class="wrap">
       <div class="bar">
-        <a class="mark" href="index.html">DARRIN WEHSER<span class="dot">.</span></a>
+        <a class="mark" href="index.html">DARRIN WEHSER</a>
         <div class="bar-right">
           <nav>
             <a href="portfolio.html" class="active">Portfolio</a>
@@ -203,22 +203,22 @@
 
   // ---------- FEATURE FILM (latest -> oldest) ----------
   var film = [
-    {title:"Terminator: Dark Fate", yr:"2019", role:"Groom Supervisor", files: seq("terminator_dark_fate_movie_2019_",1,18,"png")},
-    {title:"Aquaman", yr:"2018", role:"Groom Supervisor / Lighting TD", files: seq("aquaman_movie_2018_",1,20,"png")},
+    {title:"Terminator: Dark Fate", yr:"2019", role:"Groom Supervisor \u00b7 Groom Artist", files: seq("terminator_dark_fate_movie_2019_",1,18,"png")},
+    {title:"Aquaman", yr:"2018", role:"Groom Supervisor \u00b7 Groom Artist \u00b7 Lighting TD", files: seq("aquaman_movie_2018_",1,20,"png")},
     {title:"Thor: Ragnarok", yr:"2017", role:"Seq. Lead Lighting TD", files:["thor_ragnarok_2017_v01.jpg"]},
     {title:"Rogue One: A Star Wars Story", yr:"2016", role:"Lead Groom \u2014 Tarkin, Leia", files: seq("rogue_one_movie_2016_",1,20,"png")},
     {title:"TMNT: Out of the Shadows", yr:"2016", role:"Lead Groom \u2014 Splinter", files:["teenage_mutant_ninja_turtles_splinter_01.jpg"]},
-    {title:"Warcraft", yr:"2016", role:"Groom / LookDev / Lighting TD", files: seq("warcraft_movie_2016_",1,19,"png")},
-    {title:"Snow White and the Huntsman", yr:"2012", role:"LookDev / Groom Supervisor", files:["snow4.jpg","snow6.jpg","snow13.jpg","snow14.jpg","snow19.jpg","snow20.jpg","snow25.jpg","snow26.jpg","snow30.jpg","snow32.jpg"]},
-    {title:"Knight and Day", yr:"2010", role:"Lead LookDev / Groom TD", files:["knightday_lookdev2.jpg","knightday_lookdev4.jpg","knightday_lookdev6.jpg","knightday_lookdev9.jpg","knightday_lookdev10.jpg","knightday_lookdev14.jpg","knightday_lookdev15.jpg"]},
-    {title:"Cirque du Freak", yr:"2009", role:"Lead Groom / LookDev / Lighting TD", files:["cirque2.jpg","cirque5.jpg","cirque7.jpg","cirque_lookdev14.jpg"]},
-    {title:"The Incredible Hulk", yr:"2008", role:"Lead LookDev / Groom TD", files:["hulk_lookdev1.jpg","hulk_lookdev2.jpg","hulk_lookdev3.jpg","hulk33.jpg"]},
-    {title:"Night at the Museum", yr:"2006", role:"Groom / LookDev / Lighting Lead", files:["museum_lookdev1.jpg","museum_lookdev2.jpg","museum_lookdev3.jpg"]},
-    {title:"Garfield: A Tail of Two Kitties", yr:"2006", role:"Groom / LookDev / Lighting Lead", files:["garf2_2.jpg","garf2_5.jpg","garf2_9.jpg","garf2_11.jpg"]},
-    {title:"Elektra", yr:"2005", role:"LookDev / Groom / Lighting TD", files:["elektra1.jpg","elektra2.jpg","elektra_lookdev1.jpg","elektra_lookdev2.jpg"]},
-    {title:"Garfield: The Movie", yr:"2004", role:"Lead Groom / Lead LookDev / Lighting TD", files:["garfield_1.jpg","garfield_2.jpg","garfield_5.jpg","garfield_6.jpg","garfield_7.jpg"]},
-    {title:"The Cat in the Hat", yr:"2003", role:"Groom / LookDev / Lighting TD", files:["catIntheyhat2.jpg","catInthehat3.jpg"]},
-    {title:"Dr. Dolittle 2", yr:"2001", role:"Groom / Lighting TD", files:["drdoolittle1_v1.jpg","drdoolittle2_v1.jpg"]},
+    {title:"Warcraft", yr:"2016", role:"Groom \u00b7 LookDev \u00b7 Lighting TD", files: seq("warcraft_movie_2016_",1,19,"png")},
+    {title:"Snow White and the Huntsman", yr:"2012", role:"LookDev \u00b7 Groom Supervisor", files:["snow4.jpg","snow6.jpg","snow13.jpg","snow14.jpg","snow19.jpg","snow20.jpg","snow25.jpg","snow26.jpg","snow30.jpg","snow32.jpg"]},
+    {title:"Knight and Day", yr:"2010", role:"Lead LookDev \u00b7 Groom TD", files:["knightday_lookdev2.jpg","knightday_lookdev4.jpg","knightday_lookdev6.jpg","knightday_lookdev9.jpg","knightday_lookdev10.jpg","knightday_lookdev14.jpg","knightday_lookdev15.jpg"]},
+    {title:"Cirque du Freak", yr:"2009", role:"Lead Groom \u00b7 LookDev \u00b7 Lighting TD", files:["cirque2.jpg","cirque5.jpg","cirque7.jpg","cirque_lookdev14.jpg"]},
+    {title:"The Incredible Hulk", yr:"2008", role:"Lead LookDev \u00b7 Groom TD", files:["hulk_lookdev1.jpg","hulk_lookdev2.jpg","hulk_lookdev3.jpg","hulk33.jpg"]},
+    {title:"Night at the Museum", yr:"2006", role:"Groom \u00b7 LookDev \u00b7 Lighting Lead", files:["museum_lookdev1.jpg","museum_lookdev2.jpg","museum_lookdev3.jpg"]},
+    {title:"Garfield: A Tail of Two Kitties", yr:"2006", role:"Groom \u00b7 LookDev \u00b7 Lighting Lead", files:["garf2_2.jpg","garf2_5.jpg","garf2_9.jpg","garf2_11.jpg"]},
+    {title:"Elektra", yr:"2005", role:"LookDev \u00b7 Groom \u00b7 Lighting TD", files:["elektra1.jpg","elektra2.jpg","elektra_lookdev1.jpg","elektra_lookdev2.jpg"]},
+    {title:"Garfield: The Movie", yr:"2004", role:"Lead Groom \u00b7 Lead LookDev \u00b7 Lighting TD", files:["garfield_1.jpg","garfield_2.jpg","garfield_5.jpg","garfield_6.jpg","garfield_7.jpg"]},
+    {title:"The Cat in the Hat", yr:"2003", role:"Groom \u00b7 LookDev \u00b7 Lighting TD", files:["catIntheyhat2.jpg","catInthehat3.jpg"]},
+    {title:"Dr. Dolittle 2", yr:"2001", role:"Groom \u00b7 Lighting TD", files:["drdoolittle1_v1.jpg","drdoolittle2_v1.jpg"]},
     {title:"Harry Potter and the Sorcerer's Stone", yr:"2001", role:"Lighting TD", files:["harrypotter1.jpg","harrypotter5.jpg","harrypotter6.jpg"]}
   ];
 
@@ -250,13 +250,17 @@
     var tw = document.createElement("div"); tw.className="track-wrap";
     var track = document.createElement("div"); track.className="track";
 
-    group.files.forEach(function(f,i){
+    // randomize image order within this gallery on each page load
+    var files = group.files.slice();
+    for(var sh=files.length-1;sh>0;sh--){ var rj=Math.floor(Math.random()*(sh+1)), tmp=files[sh]; files[sh]=files[rj]; files[rj]=tmp; }
+
+    files.forEach(function(f,i){
       var idx = ALL.length;
-      ALL.push({src:IMG+f, cap:group.title+(group.yr?"  //  "+group.yr:"")+"  //  "+(i+1)+"/"+group.files.length});
+      ALL.push({src:IMG+f, cap:group.title+(group.yr?"  //  "+group.yr:"")+"  //  "+(i+1)+"/"+files.length});
       var cell = document.createElement("div"); cell.className="cell"; cell.tabIndex=0;
       cell.innerHTML =
         '<img src="'+IMG+f+'" alt="'+group.title+' '+(i+1)+'" loading="lazy">'+
-        '<div class="ph"><span>'+group.title+'<br>'+(group.yr||group.role)+'<br>'+(i+1)+' / '+group.files.length+'</span></div>';
+        '<div class="ph"><span>'+group.title+'<br>'+(group.yr||group.role)+'<br>'+(i+1)+' / '+files.length+'</span></div>';
       var img = cell.querySelector("img");
       img.addEventListener("error", function(){ cell.classList.add("broken"); });
       cell.addEventListener("click", function(){ openLb(idx); });
