@@ -35,7 +35,7 @@
   #stage{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--bg);}
   .frame{
     position:absolute;inset:0;background-size:cover;background-position:center;
-    filter:brightness(0.6) saturate(0.92) contrast(1.05);
+    filter:brightness(0.69) saturate(0.92) contrast(1.05);
     opacity:0;transition:opacity 1.8s ease-in-out;
   }
   .frame.on{opacity:1;}
@@ -50,8 +50,8 @@
   .scrim{
     position:absolute;inset:0;pointer-events:none;
     background:
-      linear-gradient(90deg,rgba(7,10,14,0.84) 0%,rgba(7,10,14,0.66) 40%,rgba(7,10,14,0.26) 72%,rgba(7,10,14,0.50) 100%),
-      linear-gradient(0deg,rgba(7,10,14,0.82) 0%,rgba(7,10,14,0.13) 42%,transparent 70%);
+      linear-gradient(90deg,rgba(7,10,14,0.71) 0%,rgba(7,10,14,0.56) 40%,rgba(7,10,14,0.22) 72%,rgba(7,10,14,0.43) 100%),
+      linear-gradient(0deg,rgba(7,10,14,0.70) 0%,rgba(7,10,14,0.11) 42%,transparent 70%);
   }
   #dust{position:absolute;inset:0;width:100%;height:100%;display:block;}
   .vignette{
@@ -270,16 +270,37 @@
   }
   refreshAccent();
 
-  /* ---- hero crossfade: random pull from repo images/ (Terminator / Aquaman / Rogue One / Warcraft / Thor / TMNT) ---- */
-  function pad2(n){ return (n<10?"0":"")+n; }
-  function seq(prefix,a,b,ext){ var out=[]; for(var i=a;i<=b;i++) out.push(prefix+pad2(i)+"."+ext); return out; }
-  var heroPool=[]
-    .concat(seq("terminator_dark_fate_movie_2019_",1,18,"png"))
-    .concat(seq("aquaman_movie_2018_",1,20,"png"))
-    .concat(seq("rogue_one_movie_2016_",1,20,"png"))
-    .concat(seq("warcraft_movie_2016_",1,19,"png"))
-    .concat(["thor_ragnarok_2017_v01.jpg"])
-    .concat(["teenage_mutant_ninja_turtles_splinter_01.jpg"]);
+  /* ---- hero crossfade: random pull from a curated set in repo images/ (Terminator / TMNT / Thor / Warcraft / Aquaman / Rogue One) ---- */
+  var heroPool=[
+    "terminator_dark_fate_movie_2019_01.png",
+    "teenage_mutant_ninja_turtles_splinter_01.jpg",
+    "terminator_dark_fate_movie_2019_05.png",
+    "terminator_dark_fate_movie_2019_08.png",
+    "terminator_dark_fate_movie_2019_09.png",
+    "thor_ragnarok_2017_v01.jpg",
+    "terminator_dark_fate_movie_2019_16.png",
+    "warcraft_movie_2016_18.png",
+    "warcraft_movie_2016_07.png",
+    "warcraft_movie_2016_11.png",
+    "warcraft_movie_2016_09.png",
+    "warcraft_movie_2016_08.png",
+    "warcraft_movie_2016_05.png",
+    "terminator_dark_fate_movie_2019_14.png",
+    "terminator_dark_fate_movie_2019_07.png",
+    "warcraft_movie_2016_04.png",
+    "warcraft_movie_2016_13.png",
+    "aquaman_movie_2018_16.png",
+    "aquaman_movie_2018_13.png",
+    "aquaman_movie_2018_19.png",
+    "aquaman_movie_2018_20.png",
+    "aquaman_movie_2018_14.png",
+    "aquaman_movie_2018_06.png",
+    "rogue_one_movie_2016_03.png",
+    "rogue_one_movie_2016_14.png",
+    "rogue_one_movie_2016_20.png",
+    "rogue_one_movie_2016_16.png",
+    "rogue_one_movie_2016_17.png"
+  ];
   /* Fisher-Yates shuffle so the six on-screen stills are random each load */
   for(var s=heroPool.length-1;s>0;s--){
     var rj=Math.floor(Math.random()*(s+1)), tmp=heroPool[s]; heroPool[s]=heroPool[rj]; heroPool[rj]=tmp;
