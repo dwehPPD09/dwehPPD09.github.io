@@ -30,6 +30,16 @@
   .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.04;mix-blend-mode:overlay;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
 
+  /* cinematic image stage (fixed background, behind ambient layers) */
+  #stage{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--bg);}
+  .frame{position:absolute;inset:0;background-size:cover;background-position:center;
+    filter:brightness(0.6) saturate(0.92) contrast(1.05);opacity:0;transition:opacity 1.8s ease-in-out;}
+  .frame.on{opacity:1;}
+  .scrim{position:absolute;inset:0;pointer-events:none;
+    background:
+      linear-gradient(90deg,rgba(7,10,14,0.84) 0%,rgba(7,10,14,0.66) 40%,rgba(7,10,14,0.26) 72%,rgba(7,10,14,0.50) 100%),
+      linear-gradient(0deg,rgba(7,10,14,0.82) 0%,rgba(7,10,14,0.13) 42%,transparent 70%);}
+
   .wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 36px;width:100%;}
 
   /* nav */
@@ -108,10 +118,19 @@
     .wrap{padding:0 20px;} .bar-right{gap:14px;} nav{gap:14px;} nav a{font-size:10.5px;letter-spacing:0.05em;} .mark{font-size:11px;} .toggle button{padding:6px 10px;font-size:10px;}
     .foot-inner{padding:30px 20px;}
   }
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.frame{transition:none;}}
 </style>
 </head>
 <body class="theme-amber">
+  <div id="stage" aria-hidden="true">
+    <div class="frame" data-i="0"></div>
+    <div class="frame" data-i="1"></div>
+    <div class="frame" data-i="2"></div>
+    <div class="frame" data-i="3"></div>
+    <div class="frame" data-i="4"></div>
+    <div class="frame" data-i="5"></div>
+    <div class="scrim"></div>
+  </div>
   <div class="bloom" aria-hidden="true"></div>
   <div class="vignette" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
@@ -207,6 +226,54 @@
   }
   bA.addEventListener("click", function(){ setTheme("amber"); });
   bC.addEventListener("click", function(){ setTheme("cool"); });
+
+  /* ---- hero crossfade background: same curated stills as index ---- */
+  var heroPool=[
+    "terminator_dark_fate_movie_2019_01.png",
+    "teenage_mutant_ninja_turtles_splinter_01.jpg",
+    "terminator_dark_fate_movie_2019_05.png",
+    "terminator_dark_fate_movie_2019_08.png",
+    "terminator_dark_fate_movie_2019_09.png",
+    "thor_ragnarok_2017_v01.jpg",
+    "terminator_dark_fate_movie_2019_16.png",
+    "warcraft_movie_2016_18.png",
+    "warcraft_movie_2016_07.png",
+    "warcraft_movie_2016_11.png",
+    "warcraft_movie_2016_09.png",
+    "warcraft_movie_2016_08.png",
+    "warcraft_movie_2016_05.png",
+    "terminator_dark_fate_movie_2019_14.png",
+    "terminator_dark_fate_movie_2019_07.png",
+    "warcraft_movie_2016_04.png",
+    "warcraft_movie_2016_13.png",
+    "aquaman_movie_2018_16.png",
+    "aquaman_movie_2018_13.png",
+    "aquaman_movie_2018_19.png",
+    "aquaman_movie_2018_20.png",
+    "aquaman_movie_2018_14.png",
+    "aquaman_movie_2018_06.png",
+    "rogue_one_movie_2016_03.png",
+    "rogue_one_movie_2016_14.png",
+    "rogue_one_movie_2016_20.png",
+    "rogue_one_movie_2016_16.png",
+    "rogue_one_movie_2016_17.png"
+  ];
+  for(var s=heroPool.length-1;s>0;s--){
+    var rj=Math.floor(Math.random()*(s+1)), tmp=heroPool[s]; heroPool[s]=heroPool[rj]; heroPool[rj]=tmp;
+  }
+  var frames=document.querySelectorAll(".frame");
+  frames.forEach(function(f,i){
+    var file=heroPool[i]; if(!file) return;
+    f.style.backgroundImage="url('images/"+file+"')";
+  });
+  var cur=0; frames[0] && frames[0].classList.add("on");
+  if(frames.length>1){
+    setInterval(function(){
+      frames[cur].classList.remove("on");
+      cur=(cur+1)%frames.length;
+      frames[cur].classList.add("on");
+    },6500);
+  }
 
   var cform=document.getElementById("cform");
   if(cform){
