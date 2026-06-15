@@ -34,7 +34,7 @@
   /* nav */
   header.top{position:sticky;top:0;z-index:30;background:rgba(7,10,14,0.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);}
   .bar{display:flex;align-items:center;justify-content:space-between;padding:22px 0;}
-  .mark{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;}
+  .mark{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:inline-block;padding:6px 2px;margin:-6px -2px;cursor:pointer;}
   .mark .dot{color:var(--accent);transition:color .4s;}
   .bar-right{display:flex;align-items:center;gap:24px;}
   nav{display:flex;gap:28px;align-items:center;}
@@ -73,7 +73,7 @@
   .skill-group h3{font-family:"Fraunces",serif;font-weight:600;font-size:1.34rem;letter-spacing:-0.01em;margin:0 0 6px;color:var(--ink);}
   .skill-group h3 + .skill-item{border-top:1px solid var(--line-soft);}
   .skill-item{padding:15px 0;border-bottom:1px solid var(--line-soft);}
-  .skill-item .k{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.06em;color:var(--ink);display:block;margin-bottom:6px;}
+  .skill-item .k{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.06em;color:var(--accent);display:block;margin-bottom:6px;transition:color .4s;}
   .skill-item .v{color:var(--read);line-height:1.66;font-size:1.04rem;}
 
   /* experience */
@@ -135,7 +135,7 @@
   <header class="top">
     <div class="wrap">
       <div class="bar">
-        <a class="mark" href="index.html">DARRIN WEHSER<span class="dot">.</span></a>
+        <a class="mark" href="index.html">DARRIN WEHSER</a>
         <div class="bar-right">
           <nav>
             <a href="portfolio.html">Portfolio</a>
@@ -238,12 +238,12 @@
             <p class="job-role">Groom Supervisor &middot; Senior Groom Artist &middot; Senior Lighting TD</p>
             <p class="subhead">Films</p>
             <div class="cred"><span class="ct">Terminator: Dark Fate <em>(2019)</em></span><span class="cr">Groom Supervisor &mdash; Sarah and John Connor, Terminator grooms, and background digital-double grooms.</span></div>
-            <div class="cred"><span class="ct">Aquaman <em>(2018)</em></span><span class="cr">Groom Supervisor / Lighting TD &mdash; Aquaman and background grooms.</span></div>
+            <div class="cred"><span class="ct">Aquaman <em>(2018)</em></span><span class="cr">Groom Supervisor &middot; Lighting TD &mdash; Aquaman and background grooms.</span></div>
             <div class="cred"><span class="ct">Thor: Ragnarok <em>(2017)</em></span><span class="cr">Sequence Lead Lighting TD.</span></div>
-            <div class="cred"><span class="ct">Rogue One: A Star Wars Story <em>(2016)</em></span><span class="cr">Lead Groom &mdash; Grand Moff Tarkin, Princess Leia, and background characters. LookDev / Lighting TD.</span></div>
-            <div class="cred"><span class="ct">Teenage Mutant Ninja Turtles: Out of the Shadows <em>(2016)</em></span><span class="cr">Lead Groom / LookDev TD &mdash; Splinter groom.</span></div>
-            <div class="cred"><span class="ct">Warcraft <em>(2016)</em></span><span class="cr">Groom / LookDev / Lighting TD &mdash; twenty-four grooms including Blackhand and Draka.</span></div>
-            <div class="cred"><span class="ct">The Revenant <em>(2015)</em></span><span class="cr">Groom / LookDev TD &mdash; bear cubs, deer, and wolf grooms.</span></div>
+            <div class="cred"><span class="ct">Rogue One: A Star Wars Story <em>(2016)</em></span><span class="cr">Lead Groom &mdash; Grand Moff Tarkin, Princess Leia, and background characters. LookDev &middot; Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Teenage Mutant Ninja Turtles: Out of the Shadows <em>(2016)</em></span><span class="cr">Lead Groom &middot; LookDev TD &mdash; Splinter groom.</span></div>
+            <div class="cred"><span class="ct">Warcraft <em>(2016)</em></span><span class="cr">Groom &middot; LookDev &middot; Lighting TD &mdash; twenty-four grooms including Blackhand and Draka.</span></div>
+            <div class="cred"><span class="ct">The Revenant <em>(2015)</em></span><span class="cr">Groom &middot; LookDev TD &mdash; bear cubs, deer, and wolf grooms.</span></div>
             <div class="cred"><span class="ct">Transformers: Age of Extinction <em>(2014)</em></span><span class="cr">Lighting TD.</span></div>
           </div>
 
@@ -254,27 +254,27 @@
             </div>
             <p class="job-role">Groom &amp; LookDev Supervisor &middot; Sequence Lighting Lead</p>
             <p class="subhead">Films</p>
-            <div class="cred"><span class="ct">Seventh Son <em>(2014)</em></span><span class="cr">LookDev / Groom Supervisor.</span></div>
+            <div class="cred"><span class="ct">Seventh Son <em>(2014)</em></span><span class="cr">LookDev &middot; Groom Supervisor.</span></div>
             <div class="cred"><span class="ct">Django Unchained <em>(2012)</em></span><span class="cr">LookDev Supervisor.</span></div>
-            <div class="cred"><span class="ct">Snow White and the Huntsman <em>(2012)</em></span><span class="cr">LookDev / Groom Supervisor.</span></div>
+            <div class="cred"><span class="ct">Snow White and the Huntsman <em>(2012)</em></span><span class="cr">LookDev &middot; Groom Supervisor.</span></div>
             <div class="cred"><span class="ct">The Cabin in the Woods <em>(2012)</em></span><span class="cr">Lead Lighting TD.</span></div>
-            <div class="cred"><span class="ct">Mr. Popper's Penguins <em>(2011)</em></span><span class="cr">LookDev / Groom Supervisor.</span></div>
+            <div class="cred"><span class="ct">Mr. Popper's Penguins <em>(2011)</em></span><span class="cr">LookDev &middot; Groom Supervisor.</span></div>
             <div class="cred"><span class="ct">Hop <em>(2011)</em></span><span class="cr">Environment Supervisor.</span></div>
-            <div class="cred"><span class="ct">Knight and Day <em>(2010)</em></span><span class="cr">Lead Look Development / Groom TD.</span></div>
+            <div class="cred"><span class="ct">Knight and Day <em>(2010)</em></span><span class="cr">Lead Look Development &middot; Groom TD.</span></div>
             <div class="cred"><span class="ct">Land of the Lost <em>(2009)</em></span><span class="cr">Environment Supervisor.</span></div>
-            <div class="cred"><span class="ct">Cirque du Freak <em>(2009)</em></span><span class="cr">Lead Groom / Lead Look Development / Lighting TD.</span></div>
-            <div class="cred"><span class="ct">The Incredible Hulk <em>(2008)</em></span><span class="cr">Lead Look Development / Groom TD.</span></div>
-            <div class="cred"><span class="ct">Night at the Museum <em>(2006)</em></span><span class="cr">Groom / Look Development / Lighting Lead / Sequence Lead.</span></div>
-            <div class="cred"><span class="ct">Garfield: A Tail of Two Kitties <em>(2006)</em></span><span class="cr">Groom / Look Development / Lighting Lead / Sequence Lead.</span></div>
-            <div class="cred"><span class="ct">The Chronicles of Narnia <em>(2005)</em></span><span class="cr">Lead Look Development / Groom TD.</span></div>
-            <div class="cred"><span class="ct">Elektra <em>(2005)</em></span><span class="cr">Look Development / Groom / Lighting TD.</span></div>
-            <div class="cred"><span class="ct">Garfield <em>(2004)</em></span><span class="cr">Lead Groom / Lead Look Development / Lighting TD.</span></div>
-            <div class="cred"><span class="ct">The Cat in the Hat <em>(2003)</em></span><span class="cr">Groom / Look Development / Lighting TD.</span></div>
-            <div class="cred"><span class="ct">Daredevil <em>(2003)</em></span><span class="cr">Look Development / Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Cirque du Freak <em>(2009)</em></span><span class="cr">Lead Groom &middot; Lead Look Development &middot; Lighting TD.</span></div>
+            <div class="cred"><span class="ct">The Incredible Hulk <em>(2008)</em></span><span class="cr">Lead Look Development &middot; Groom TD.</span></div>
+            <div class="cred"><span class="ct">Night at the Museum <em>(2006)</em></span><span class="cr">Groom &middot; Look Development &middot; Lighting Lead &middot; Sequence Lead.</span></div>
+            <div class="cred"><span class="ct">Garfield: A Tail of Two Kitties <em>(2006)</em></span><span class="cr">Groom &middot; Look Development &middot; Lighting Lead &middot; Sequence Lead.</span></div>
+            <div class="cred"><span class="ct">The Chronicles of Narnia <em>(2005)</em></span><span class="cr">Lead Look Development &middot; Groom TD.</span></div>
+            <div class="cred"><span class="ct">Elektra <em>(2005)</em></span><span class="cr">Look Development &middot; Groom &middot; Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Garfield <em>(2004)</em></span><span class="cr">Lead Groom &middot; Lead Look Development &middot; Lighting TD.</span></div>
+            <div class="cred"><span class="ct">The Cat in the Hat <em>(2003)</em></span><span class="cr">Groom &middot; Look Development &middot; Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Daredevil <em>(2003)</em></span><span class="cr">Look Development &middot; Lighting TD.</span></div>
             <div class="cred"><span class="ct">Scooby-Doo <em>(2002)</em></span><span class="cr">Lighting TD.</span></div>
             <div class="cred"><span class="ct">Harry Potter <em>(2001)</em></span><span class="cr">Lighting TD.</span></div>
-            <div class="cred"><span class="ct">Dr. Dolittle 2 <em>(2001)</em></span><span class="cr">Groom / Lighting TD.</span></div>
-            <div class="cred"><span class="ct">Cats &amp; Dogs <em>(2001)</em></span><span class="cr">Groom / Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Dr. Dolittle 2 <em>(2001)</em></span><span class="cr">Groom &middot; Lighting TD.</span></div>
+            <div class="cred"><span class="ct">Cats &amp; Dogs <em>(2001)</em></span><span class="cr">Groom &middot; Lighting TD.</span></div>
             <div class="cred"><span class="ct">Red Planet <em>(2000)</em></span><span class="cr">Matchmoving.</span></div>
             <div class="cred"><span class="ct">The 6th Day <em>(2000)</em></span><span class="cr">Matchmoving.</span></div>
           </div>
