@@ -34,7 +34,7 @@
   /* nav */
   header.top{position:sticky;top:0;z-index:30;background:rgba(7,10,14,0.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);}
   .bar{display:flex;align-items:center;justify-content:space-between;padding:22px 0;}
-  .mark{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;}
+  .mark{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:inline-block;padding:6px 2px;margin:-6px -2px;cursor:pointer;}
   .mark .dot{color:var(--accent);transition:color .4s;}
   .bar-right{display:flex;align-items:center;gap:24px;}
   nav{display:flex;gap:28px;align-items:center;}
@@ -65,6 +65,16 @@
   .video{position:relative;width:100%;padding-bottom:56.25%;height:0;margin:30px 0 0;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#000;box-shadow:0 24px 60px rgba(0,0,0,0.45);}
   .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
 
+  /* paired (smaller) videos */
+  .video-pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:26px 0 0;}
+  .vsmall{position:relative;width:100%;padding-bottom:56.25%;height:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#000;box-shadow:0 16px 40px rgba(0,0,0,0.4);}
+  .vsmall iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+
+  /* full-width clickable Fab still */
+  .fab-image{display:block;width:100%;margin:18px 0 0;border:1px solid var(--line);border-radius:3px;overflow:hidden;line-height:0;transition:border-color .25s;}
+  .fab-image img{display:block;width:100%;height:auto;}
+  .fab-image:hover{border-color:var(--accent);}
+
   /* link buttons */
   .links-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px;}
   .lbtn{display:inline-flex;align-items:center;gap:10px;font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
@@ -93,6 +103,7 @@
 
   @media (max-width:760px){
     .wrap{padding:0 20px;} .bar-right{gap:14px;} nav{gap:14px;} nav a{font-size:10.5px;letter-spacing:0.05em;} .mark{font-size:11px;} .toggle button{padding:6px 10px;font-size:10px;}
+    .video-pair{grid-template-columns:1fr;}
     .foot-inner{padding:40px 20px;}
   }
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
@@ -106,7 +117,7 @@
   <header class="top">
     <div class="wrap">
       <div class="bar">
-        <a class="mark" href="index.html">DARRIN WEHSER<span class="dot">.</span></a>
+        <a class="mark" href="index.html">DARRIN WEHSER</a>
         <div class="bar-right">
           <nav>
             <a href="portfolio.html">Portfolio</a>
@@ -139,9 +150,32 @@
           <h2>MetaHuman Groom Tools &amp; Documentation</h2>
           <p class="role">Technical Artist &middot; Sr. Groom Artist</p>
           <p class="blurb">These presentations were a collaborative effort with the groom team at Epic Games. While the tools were being developed, we authored the Unreal Engine documentation for the MetaHuman Groom tools alongside the Unreal Fest 2025 presentations. The advanced groom tutorial below was created during development of the MetaHuman Groom tools &mdash; released for UE 5.6 as part of the tool release and updated for 5.7.</p>
+
+          <div class="video-pair">
+            <div class="vsmall">
+              <iframe src="https://www.youtube.com/embed/WqWpwVaewEU?rel=0" title="MetaHuman Groom — Unreal Fest 2025 presentation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="vsmall">
+              <iframe src="https://www.youtube.com/embed/rfKzdI9X9Hg?rel=0" title="MetaHuman Groom — advanced groom tutorial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <a class="fab-image" href="https://www.fab.com/listings/165c4244-482f-4e37-9200-dd782972cdde" target="_blank" rel="noopener" title="MetaHuman Groom Advanced Kit for Houdini on Fab">
+            <img src="stills/metahuman_advanced_groom_v01.png" alt="MetaHuman Groom Advanced Kit for Houdini — available on Fab" loading="lazy">
+          </a>
+
           <div class="links-row">
             <a class="lbtn solid" href="https://dev.epicgames.com/documentation/metahuman/metahuman-for-houdini" target="_blank" rel="noopener">MetaHuman Groom Documentation <span class="arr">&rarr;</span></a>
-            <a class="lbtn" href="https://www.fab.com/listings/165c4244-482f-4e37-9200-dd782972cdde" target="_blank" rel="noopener">Advanced Groom Kit on Fab <span class="arr">&rarr;</span></a>
+          </div>
+        </section>
+
+        <!-- GENERATIVE AI -->
+        <section class="sec">
+          <p class="sec-kicker">2026 // Generative AI</p>
+          <h2>AI Showreel</h2>
+          <p class="blurb">Ongoing generative-AI work &mdash; visual development, AI video, and look exploration &mdash; lives on the Pixel Perfect Digital channel.</p>
+          <div class="links-row">
+            <a class="lbtn solid" href="https://www.youtube.com/@PixelPerfectDigital" target="_blank" rel="noopener">Pixel Perfect Digital on YouTube <span class="arr">&rarr;</span></a>
           </div>
         </section>
 
@@ -162,12 +196,12 @@
           <div class="breakdown">
             <div class="shot">
               <h3>Snow White and the Huntsman</h3>
-              <p class="sr">Groom / LookDev Supervisor</p>
+              <p class="sr">Groom &middot; LookDev Supervisor</p>
               <p>Supervised the groom and look development on the Academy Award&ndash;nominated feature. The reel highlights the creatures and environments I oversaw, along with the work I delivered on the show.</p>
             </div>
             <div class="shot">
               <h3>Mr. Popper's Penguins</h3>
-              <p class="sr">Groom / LookDev Supervisor</p>
+              <p class="sr">Groom &middot; LookDev Supervisor</p>
               <p>Another senior LookDev artist and I were tasked with completing an entire gentoo penguin in one month, so we split the work down the middle. I handled eyes, mouth, feet, skin, and the fur on the wings and tail feathers.</p>
             </div>
             <div class="shot">
@@ -177,29 +211,19 @@
             </div>
             <div class="shot">
               <h3>Knight and Day</h3>
-              <p class="sr">Senior Groom / LookDev Artist</p>
+              <p class="sr">Senior Groom &middot; LookDev Artist</p>
               <p>Groomed all of the bulls for the show &mdash; a main hero bull plus eight variations, four of which had entirely different grooms &mdash; completing them within a two-month period.</p>
             </div>
             <div class="shot">
               <h3>Cirque du Freak: The Vampire's Assistant</h3>
-              <p class="sr">Senior Groom / LookDev / Lighting Artist</p>
+              <p class="sr">Senior Groom &middot; LookDev &middot; Lighting Artist</p>
               <p>Set up the Skinny Man, four of the tiny zombies, and several character props, starting by developing the look of the Skinny Man. For the zombies I handled look development on the skin &mdash; heads, hands, and feet (a separate artist did the robes) &mdash; and helped develop the lighting for the Skinny Man sequence.</p>
             </div>
             <div class="shot">
               <h3>The Incredible Hulk</h3>
-              <p class="sr">Lead Groom / LookDev Artist</p>
+              <p class="sr">Lead Groom &middot; LookDev Artist</p>
               <p>Handled the initial setup on Hulk, including several months of skin R&amp;D, then groomed Hulk's hair and his torn clothing. I set up the Abomination and oversaw its development through the rest of the show. Hulk and the Abomination each had up to nine "flavors" for levels of dirtiness, each requiring different groom and texture stages for various parts of the film.</p>
             </div>
-          </div>
-        </section>
-
-        <!-- GENERATIVE AI -->
-        <section class="sec">
-          <p class="sec-kicker">2026 // Generative AI</p>
-          <h2>AI Showreel</h2>
-          <p class="blurb">Ongoing generative-AI work &mdash; visual development, AI video, and look exploration &mdash; lives on the Pixel Perfect Digital channel.</p>
-          <div class="links-row">
-            <a class="lbtn solid" href="https://www.youtube.com/@PixelPerfectDigital" target="_blank" rel="noopener">Pixel Perfect Digital on YouTube <span class="arr">&rarr;</span></a>
           </div>
         </section>
 
