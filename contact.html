@@ -35,7 +35,7 @@
   /* nav */
   header.top{position:sticky;top:0;z-index:30;background:rgba(7,10,14,0.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);}
   .bar{display:flex;align-items:center;justify-content:space-between;padding:22px 0;}
-  .mark{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;}
+  .mark{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:inline-block;padding:6px 2px;margin:-6px -2px;cursor:pointer;}
   .mark .dot{color:var(--accent);transition:color .4s;}
   .bar-right{display:flex;align-items:center;gap:24px;}
   nav{display:flex;gap:28px;align-items:center;}
@@ -119,7 +119,7 @@
   <header class="top">
     <div class="wrap">
       <div class="bar">
-        <a class="mark" href="index.html">DARRIN WEHSER<span class="dot">.</span></a>
+        <a class="mark" href="index.html">DARRIN WEHSER</a>
         <div class="bar-right">
           <nav>
             <a href="portfolio.html">Portfolio</a>
@@ -148,7 +148,7 @@
           <p class="email-label" style="margin-bottom:0;">Send a message</p>
           <form class="cform" id="cform">
             <!-- Free key from web3forms.com: tied to your inbox; this token is NOT your email address -->
-            <input type="hidden" name="access_key" value="YOUR-WEB3FORMS-ACCESS-KEY" />
+            <input type="hidden" name="access_key" value="740e680e-f5e3-4b24-8127-a77753737eac" />
             <input type="hidden" name="subject" value="New message from your portfolio site" />
             <input type="hidden" name="from_name" value="Darrin Wehser Portfolio" />
             <input type="text" name="name" placeholder="Your name" required autocomplete="name" />
